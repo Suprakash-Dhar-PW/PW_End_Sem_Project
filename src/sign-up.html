@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Physics Wallah - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../src/sign-up.css">
+</head>
+
+<body>
+
+    <!-- Background Video -->
+    <video autoplay muted loop class="bg-video">
+        <source src="../Public/videos/PW_LOGIN.mp4" type="video/mp4" />
+        Your browser does not support HTML5 video.
+    </video>
+
+    <div class="overlay"></div>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <!-- Toggle Switch -->
+        <div class="toggle-top-right">
+            <span>Sign In</span>
+            <label class="switch">
+                <input type="checkbox" id="authToggle" checked>
+                <span class="slider"></span>
+            </label>
+            <span>Sign Up</span>
+        </div>
+
+        <h2>Sign Up</h2>
+
+        <form>
+            <input type="text" placeholder="Mobile Number or Email" required />
+            <input type="password" placeholder="Password" required />
+            <input type="text" placeholder="Full Name" required />
+            <input type="text" placeholder="Username" required />
+
+            <div class="options-row">
+                <a href="#">Need help?</a>
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <div class="footer-text">© Physics Wallah Institute of Innovation</div>
+    </div>
+
+    <script>
+        document.getElementById("authToggle").addEventListener("change", function () {
+            const checked = this.checked;
+            if (!checked) {
+                window.location.href = "login.html"; // Path to login page
+            }
+        });
+    </script>
+</body>
+
+</html>

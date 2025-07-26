@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Physics Wallah - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../src/login.css">
+</head>
+
+<body>
+
+    <!-- Background Video -->
+    <video autoplay muted loop class="bg-video">
+        <source src="../Public/videos/PW_LOGIN.mp4" type="video/mp4" />
+        Your browser does not support HTML5 video.
+    </video>
+
+    <div class="overlay"></div>
+
+    <!-- Login Form -->
+    <div class="login-container">
+
+        <!-- Toggle Switch Top-Right -->
+        <div class="toggle-top-right">
+            <span>Sign In</span>
+            <label class="switch">
+                <input type="checkbox" id="authToggle">
+                <span class="slider"></span>
+            </label>
+            <span>Sign Up</span>
+        </div>
+
+        <h2>Physics Wallah Login</h2>
+        <form>
+            <input type="email" placeholder="Email ID" required />
+            <input type="password" placeholder="Password" required />
+
+            <div class="options-row">
+                <label><input type="checkbox" /> Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit">Login</button>
+
+            <div class="divider">OR</div>
+
+            <div class="social-btn">
+                <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
+                Sign in with Google
+            </div>
+
+            <div class="social-btn">
+                <img src="https://img.icons8.com/ios-glyphs/30/github.png" alt="GitHub" style="filter: invert(1);" />
+                Sign in with GitHub
+            </div>
+        </form>
+
+        <div class="footer-text">© Physics Wallah Institute of Innovation</div>
+    </div>
+    <script>
+        document.getElementById("authToggle").addEventListener("change", function () {
+            if (this.checked) {
+                window.location.href = "sign-up.html"; // Replace with your actual Sign Up page
+            } else {
+                window.location.href = "login.html"; // Replace with your actual Login page
+            }
+        });
+    </script>
+</body>
+
+</html>
