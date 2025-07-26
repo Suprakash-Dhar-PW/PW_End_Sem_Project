@@ -2,59 +2,136 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Physics Wallah - Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../src/sign-up.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Physics Wallah - Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="sign-up.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<link rel="stylesheet" href="sign-up.css">
 
 <body>
 
-    <!-- Background Video -->
-    <video autoplay muted loop class="bg-video">
-        <source src="videos/PW_LOGIN.mp4" type="video/mp4" />
-        Your browser does not support HTML5 video.
-    </video>
+  <!-- Background Video -->
+  <video autoplay muted loop class="bg-video">
+    <source src="videos/PW_LOGIN.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
 
-    <div class="overlay"></div>
+  <div class="overlay"></div>
 
-    <!-- Sign-Up Form -->
-    <div class="login-container">
-        <h2>Create Your Account</h2>
+  <!-- Sign-Up Form -->
+  <div class="login-container">
+    <h2>Create Your Account</h2>
 
-        <form>
-            <input type="text" placeholder="Mobile Number or Email" required />
-            <input type="password" placeholder="Password" required />
-            <input type="text" placeholder="Full Name" required />
-            <input type="text" placeholder="Username" required />
+    <form onsubmit="return validateSignUp(event)">
+      <input type="text" id="contact" placeholder="Mobile Number or Email" required />
+      <small id="contactError" class="error-msg"></small>
 
-            <div class="options-row">
-                <a href="#">Need help?</a>
-            </div>
+      <div class="password-field" style="position: relative;">
+        <input type="password" id="password" placeholder="Password" required />
+        <i class="fa-solid fa-eye" id="togglePwd" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #aaa;"></i>
+      </div>
+      <small id="passwordError" class="error-msg"></small>
 
-            <button type="submit">Sign Up</button>
-        </form>
+      <input type="text" id="fullName" placeholder="Full Name" required />
+      <input type="text" id="username" placeholder="Username" required />
 
-        <div class="footer-text">© Physics Wallah Institute of Innovation</div>
+      <div class="options-row">
+        <a href="#">Need help?</a>
+      </div>
 
-        <div class="signup-link">
-            Already have an account?
-            <a href="login.html">Sign in</a>
-        </div>
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <div class="footer-text">© Physics Wallah Institute of Innovation</div>
+
+    <div class="signup-link">
+      Already have an account?
+      <a href="login.html">Sign in</a>
     </div>
+  </div>
 
-</body>
+  <script>
+    const contactInput = document.getElementById("contact");
+    const passwordInput = document.getElementById("password");
+    const contactError = document.getElementById("contactError");
+    const passwordError = document.getElementById("passwordError");
+    const togglePwd = document.getElementById("togglePwd");
 
-    <script>
-        document.getElementById("authToggle").addEventListener("change", function () {
-            const checked = this.checked;
-            if (!checked) {
-                window.location.href = "login.html"; // Path to login page
-            }
-        });
-    </script>
+    function validateSignUp(event) {
+      let valid = true;
+
+      // Reset errors
+      contactError.textContent = "";
+      passwordError.textContent = "";
+      contactInput.classList.remove("input-error");
+      passwordInput.classList.remove("input-error");
+
+      const contactVal = contactInput.value.trim();
+      const passwordVal = passwordInput.value.trim();
+
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactVal);
+      const isPhone = /^[0-9]{10}$/.test(contactVal);
+
+      if (!isEmail && !isPhone) {
+        contactError.textContent = "Enter a valid email or 10-digit phone number.";
+        contactInput.classList.add("input-error");
+        valid = false;
+      }
+
+      const hasUpper = /[A-Z]/.test(passwordVal);
+      const hasNumber = /[0-9]/.test(passwordVal);
+      const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(passwordVal);
+
+      if (passwordVal.length < 8 || !hasUpper || !hasNumber || !hasSpecial) {
+        passwordError.textContent =
+          "Password must be at least 8 characters, include an uppercase letter, a number, and a special character.";
+        passwordInput.classList.add("input-error");
+        valid = false;
+      }
+
+      if (!valid && event) {
+        event.preventDefault(); // Prevent form submission if validation fails
+      }
+
+      return valid;
+    }
+
+    // Live validation for password
+    passwordInput.addEventListener("input", () => {
+      const pwd = passwordInput.value;
+      const valid = pwd.length >= 8 &&
+        /[A-Z]/.test(pwd) &&
+        /[0-9]/.test(pwd) &&
+        /[!@#$%^&*(),.?":{}|<>]/.test(pwd);
+
+      if (valid) {
+        passwordError.textContent = "";
+        passwordInput.classList.remove("input-error");
+      }
+    });
+
+    // Live validation for contact
+    contactInput.addEventListener("input", () => {
+      const val = contactInput.value.trim();
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      const isPhone = /^[0-9]{10}$/.test(val);
+
+      if (isEmail || isPhone) {
+        contactError.textContent = "";
+        contactInput.classList.remove("input-error");
+      }
+    });
+
+    // Toggle show/hide password
+    togglePwd.addEventListener("click", () => {
+      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+      passwordInput.setAttribute("type", type);
+      togglePwd.classList.toggle("fa-eye");
+      togglePwd.classList.toggle("fa-eye-slash");
+    });
+  </script>
 </body>
 
 </html>
