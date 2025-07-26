@@ -1,4 +1,16 @@
-* {
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Physics Wallah - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../src/login.css">
+</head>
+
+<style>
+    * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -37,23 +49,23 @@
     .login-container {
         position: relative;
         /* background: rgba(20, 24, 43, 0.9); */
-        /* backdrop-filter: blur(10px); */
+        backdrop-filter: blur(10px);
         padding: 30px 28px;
-        /* border-radius: 18px; */
+        border-radius: 18px;
         color: #fff;
         width: 360px;
-        max-height: 100vh;
+        max-height: 95vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
     .login-container h2 {
         text-align: center;
         color: #66aaff;
         font-size: 26px;
-        margin: 10px 0 20px;
+        margin: 40px 0 20px;
     }
 
     .login-container input[type="email"],
@@ -183,3 +195,54 @@
             padding: 25px 20px;
         }
     }
+</style>
+
+<body>
+
+    <!-- Background Video -->
+    <video autoplay muted loop class="bg-video">
+        <source src="videos/PW_LOGIN.mp4" type="video/mp4" />
+        Your browser does not support HTML5 video.
+    </video>
+
+    <div class="overlay"></div>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <h2>Physics Wallah Login</h2>
+        <form>
+            <input type="email" placeholder="Email ID" required />
+            <input type="password" placeholder="Password" required />
+
+            <div class="options-row">
+                <label><input type="checkbox" /> Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit">Login</button>
+
+            <div class="divider">OR</div>
+
+            <div class="social-btn">
+                <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
+                Sign in with Google
+            </div>
+
+            <div class="social-btn">
+                <img src="https://img.icons8.com/ios-glyphs/30/github.png" alt="GitHub" style="filter: invert(1);" />
+                Sign in with GitHub
+            </div>
+        </form>
+
+        <div class="footer-text">© Physics Wallah Institute of Innovation</div>
+
+        <div class="signup-link">
+            Don't have an account?
+            <a href="sign-up-test.html">Sign up</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

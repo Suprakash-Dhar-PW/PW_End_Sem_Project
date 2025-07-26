@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Physics Wallah - Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../src/sign-up.css">
+</head>
+<style>
 * {
     margin: 0;
     padding: 0;
@@ -37,16 +48,16 @@ body {
 .login-container {
         position: relative;
         /* background: rgba(20, 24, 43, 0.9); */
-        /* backdrop-filter: blur(10px); */
+        backdrop-filter: blur(10px);
         padding: 30px 28px;
-        /* border-radius: 18px; */
+        border-radius: 18px;
         color: #fff;
         width: 360px;
-        max-height: 100vh;
+        max-height: 92vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
 .login-container h2 {
@@ -150,3 +161,44 @@ body {
         font-size: 14px;
     }
 }
+
+</style>
+
+<body>
+
+    <!-- Background Video -->
+    <video autoplay muted loop class="bg-video">
+        <source src="videos/PW_LOGIN.mp4" type="video/mp4" />
+        Your browser does not support HTML5 video.
+    </video>
+
+    <div class="overlay"></div>
+
+    <!-- Sign-Up Form -->
+    <div class="login-container">
+        <h2>Create Your Account</h2>
+
+        <form>
+            <input type="text" placeholder="Mobile Number or Email" required />
+            <input type="password" placeholder="Password" required />
+            <input type="text" placeholder="Full Name" required />
+            <input type="text" placeholder="Username" required />
+
+            <div class="options-row">
+                <a href="#">Need help?</a>
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <div class="footer-text">© Physics Wallah Institute of Innovation</div>
+
+        <div class="signup-link">
+            Already have an account?
+            <a href="login-test.html">Sign in</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

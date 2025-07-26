@@ -20,19 +20,9 @@
 
     <div class="overlay"></div>
 
-    <!-- Login Form -->
+    <!-- Sign-Up Form -->
     <div class="login-container">
-        <!-- Toggle Switch -->
-        <div class="toggle-top-right">
-            <span>Sign In</span>
-            <label class="switch">
-                <input type="checkbox" id="authToggle" checked>
-                <span class="slider"></span>
-            </label>
-            <span>Sign Up</span>
-        </div>
-
-        <h2>Sign Up</h2>
+        <h2>Create Your Account</h2>
 
         <form>
             <input type="text" placeholder="Mobile Number or Email" required />
@@ -48,7 +38,14 @@
         </form>
 
         <div class="footer-text">© Physics Wallah Institute of Innovation</div>
+
+        <div class="signup-link">
+            Already have an account?
+            <a href="login.html">Sign in</a>
+        </div>
     </div>
+
+</body>
 
     <script>
         document.getElementById("authToggle").addEventListener("change", function () {

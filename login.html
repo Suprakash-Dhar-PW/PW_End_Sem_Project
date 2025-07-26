@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="../src/login.css">
 </head>
 <link rel="stylesheet" href="login.css">
-
+<style>
+</style>
 <body>
-
     <!-- Background Video -->
     <video autoplay muted loop class="bg-video">
         <source src="videos/PW_LOGIN.mp4" type="video/mp4" />
@@ -22,17 +22,6 @@
 
     <!-- Login Form -->
     <div class="login-container">
-
-        <!-- Toggle Switch Top-Right -->
-        <div class="toggle-top-right">
-            <span>Sign In</span>
-            <label class="switch">
-                <input type="checkbox" id="authToggle">
-                <span class="slider"></span>
-            </label>
-            <span>Sign Up</span>
-        </div>
-
         <h2>Physics Wallah Login</h2>
         <form>
             <input type="email" placeholder="Email ID" required />
@@ -59,7 +48,14 @@
         </form>
 
         <div class="footer-text">© Physics Wallah Institute of Innovation</div>
+
+        <div class="signup-link">
+            Don't have an account?
+            <a href="sign-up.html">Sign up</a>
+        </div>
+
     </div>
+  
     <script>
         document.getElementById("authToggle").addEventListener("change", function () {
             if (this.checked) {
@@ -72,3 +68,4 @@
 </body>
 
 </html>
+
