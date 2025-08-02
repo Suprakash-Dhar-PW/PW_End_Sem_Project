@@ -205,9 +205,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             padding-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
         }
 
         .logo {
@@ -243,6 +244,29 @@
 
         .nav-section {
             margin-top: 10px;
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+            padding-bottom: 20px;
+        }
+
+        /* Custom scrollbar for nav-section */
+        .nav-section::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .nav-section::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+        }
+
+        .nav-section::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .nav-section::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
         }
 
         .nav-section a {
@@ -304,10 +328,19 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
+            padding: 8px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .sidebar.collapsed .pinned-label {
             display: none;
+        }
+
+        /* Add a visual separator for collapsed sidebar */
+        .sidebar.collapsed .nav-section a[href="#portfolio"] {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 15px;
+            padding-top: 20px;
         }
 
         /* Main Content */
