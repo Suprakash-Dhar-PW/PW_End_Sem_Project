@@ -351,11 +351,13 @@
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
+            padding: 0 20px;
         }
 
         .student-card {
             display: flex;
-            width: 1000px;
+            width: 100%;
+            max-width: 1000px;
             height: 350px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-color);
@@ -395,11 +397,13 @@
             background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), 
                         url('images/Supra_image.jpg') no-repeat center center;
             background-size: cover;
+            background-position: center;
             display: flex;
             align-items: flex-end;
             justify-content: center;
             position: relative;
             z-index: 2;
+            min-height: 200px;
         }
 
         .image-section .name {
@@ -425,6 +429,7 @@
             text-shadow: 0 0 15px rgba(0, 255, 208, 0.8);
             position: relative;
             z-index: 2;
+            min-height: 200px;
         }
 
         .hover-section {
@@ -432,6 +437,10 @@
             padding: 25px;
             position: relative;
             z-index: 2;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .hover-content {
@@ -677,7 +686,6 @@
             .student-card {
                 width: 100%;
                 max-width: 900px;
-                margin: 0 20px;
             }
         }
 
@@ -701,9 +709,56 @@
             }
         }
 
+        @media (max-width: 600px) {
+            .student-card {
+                flex-direction: column;
+                height: auto;
+                max-width: 100%;
+            }
+
+            .image-section,
+            .semester-section,
+            .hover-section {
+                width: 100%;
+            }
+
+            .image-section {
+                min-height: 160px;
+            }
+
+            .semester-section {
+                min-height: 90px;
+                font-size: 28px;
+            }
+
+            .hover-section {
+                padding: 20px;
+            }
+
+            .hover-content {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .hover-default {
+                display: none;
+            }
+        }
+
         @media (max-width: 768px) {
             .mobile-menu-toggle {
                 display: block;
+            }
+
+            /* Hide the sidebar toggle button on mobile */
+            .toggle-btn {
+                display: none;
+            }
+
+            /* Adjust sidebar header for mobile */
+            .sidebar-header {
+                justify-content: center;
+                margin-bottom: 30px;
             }
 
             .sidebar {
@@ -733,8 +788,9 @@
                 flex-direction: column;
                 height: auto;
                 width: 100%;
-                margin: 0 10px;
+                margin: 0;
                 max-width: none;
+                border-radius: var(--border-radius);
             }
 
             .image-section,
@@ -746,29 +802,33 @@
             }
 
             .image-section {
-                min-height: 200px;
+                min-height: 180px;
+                background-size: cover;
+                background-position: center;
             }
 
             .semester-section {
-                padding: 30px 0;
-                min-height: 120px;
+                padding: 25px 0;
+                min-height: 100px;
+                font-size: 32px;
             }
 
             .hover-section {
                 min-height: auto;
-                padding: 20px;
+                padding: 25px 20px;
             }
 
             .hover-default {
                 position: static;
                 transform: none;
-                margin: 20px 0;
+                margin: 15px 0;
+                font-size: 14px;
             }
 
             .hover-content {
                 opacity: 1;
                 transform: translateY(0);
-                margin-top: 20px;
+                margin-top: 15px;
             }
             
             .welcome_tag {
@@ -840,6 +900,7 @@
 
             .card-container {
                 margin-bottom: 30px;
+                padding: 0 15px;
             }
 
             .site-footer {
@@ -849,21 +910,28 @@
 
         @media (max-width: 480px) {
             .main-content {
-                padding: 70px 15px 30px 15px;
+                padding: 70px 10px 30px 10px;
             }
 
             .student-card {
-                margin: 0 5px;
+                margin: 0;
                 border-radius: var(--border-radius);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             }
 
             .welcome_tag {
                 font-size: 20px;
             }
 
+            .main-heading {
+                margin-bottom: 20px;
+            }
+
             .top-right-controls {
                 padding: 4px 8px;
                 gap: 6px;
+                right: 8px;
+                top: 8px;
             }
 
             .auth-buttons button {
@@ -876,27 +944,38 @@
                 height: 32px;
             }
 
+            .image-section {
+                min-height: 150px;
+            }
+
             .image-section .name {
-                font-size: 18px;
-                padding: 12px;
+                font-size: 16px;
+                padding: 10px;
             }
 
             .semester-section {
-                font-size: 28px;
-                padding: 25px 0;
+                font-size: 24px;
+                padding: 20px 0;
+                min-height: 80px;
             }
 
             .hover-section {
-                padding: 15px;
+                padding: 20px 15px;
             }
 
             .hover-section p {
-                font-size: 13px;
-                margin-bottom: 10px;
+                font-size: 12px;
+                margin-bottom: 8px;
             }
 
             .bar-label {
-                font-size: 12px;
+                font-size: 11px;
+                margin: 6px 0 3px;
+            }
+
+            .progress-bar {
+                height: 6px;
+                margin-bottom: 10px;
             }
 
             .newsletter-form input[type="email"] {
@@ -922,6 +1001,11 @@
             .social-icons i {
                 font-size: 16px;
             }
+
+            .card-container {
+                padding: 0 10px;
+                margin-bottom: 25px;
+            }
         }
 
         /* Touch improvements for mobile */
@@ -945,6 +1029,27 @@
 
             .nav-section a:hover {
                 transform: none;
+            }
+
+            /* Better touch targets for mobile */
+            .nav-section a {
+                min-height: 48px;
+                padding: 16px;
+            }
+
+            .auth-buttons button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            .profile-icon {
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .back-to-top {
+                min-width: 48px;
+                min-height: 48px;
             }
         }
 
@@ -1015,6 +1120,67 @@
             input[type="tel"],
             input[type="color"] {
                 font-size: 16px;
+            }
+        }
+
+        /* Additional mobile optimizations */
+        @media (max-width: 360px) {
+            .main-content {
+                padding: 60px 8px 25px 8px;
+            }
+
+            .welcome_tag {
+                font-size: 18px;
+            }
+
+            .card-container {
+                padding: 0 5px;
+            }
+
+            .student-card {
+                border-radius: 8px;
+            }
+
+            .image-section {
+                min-height: 120px;
+            }
+
+            .semester-section {
+                min-height: 70px;
+                font-size: 20px;
+            }
+
+            .hover-section {
+                padding: 15px 12px;
+            }
+
+            .hover-section p {
+                font-size: 11px;
+                margin-bottom: 6px;
+            }
+
+            .bar-label {
+                font-size: 10px;
+            }
+
+            .progress-bar {
+                height: 5px;
+                margin-bottom: 8px;
+            }
+
+            .top-right-controls {
+                padding: 3px 6px;
+                gap: 4px;
+            }
+
+            .auth-buttons button {
+                padding: 5px 8px;
+                font-size: 10px;
+            }
+
+            .profile-icon {
+                width: 28px;
+                height: 28px;
             }
         }
     </style>
