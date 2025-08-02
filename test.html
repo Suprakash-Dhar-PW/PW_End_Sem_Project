@@ -1,266 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Physics Wallah - Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-</head>
-
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html,
-  body {
-    height: 100%;
-    overflow: hidden;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .bg-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -2;
-  }
-
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(5, 10, 30, 0.75);
-    z-index: -1;
-  }
-
-  .login-container {
-    position: relative;
-    padding: 30px 28px;
-    color: #fff;
-    width: 360px;
-    max-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .login-container h2 {
-    text-align: center;
-    color: #66aaff;
-    font-size: 26px;
-    margin: 10px 0 20px;
-  }
-
-  .form-group {
-    position: relative;
-    margin-top: 24px;
-  }
-
-  .form-group input {
-    width: 100%;
-    padding: 14px 10px 10px 10px;
-    background: #131a2f;
-    border: 1px solid #33445c;
-    border-radius: 6px;
-    color: #e0e0e0;
-    font-size: 14px;
-    transition: border 0.3s;
-  }
-
-  .form-group input:focus {
-    outline: none;
-    border-color: #66aaff;
-    background: #1a223b;
-  }
-
-  .form-group label {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    color: #aaa;
-    font-size: 14px;
-    pointer-events: none;
-    transition: 0.3s ease;
-    background-color: #131a2f;
-    padding: 0 6px;
-  }
-
-  .form-group input:focus + label,
-  .form-group input:not(:placeholder-shown) + label {
-    top: -8px;
-    left: 10px;
-    font-size: 12px;
-    color: #66aaff;
-  }
-
-  .options-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    margin-top: 12px;
-    color: #bbb;
-  }
-
-  .options-row a {
-    color: #66aaff;
-    text-decoration: none;
-  }
-
-  .options-row a:hover {
-    text-decoration: underline;
-  }
-
-  button {
-    width: 100%;
-    padding: 11px;
-    background: #347dff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    margin-top: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 15px;
-  }
-
-  button:hover {
-    background: #1e66e3;
-  }
-
-  .divider {
-    text-align: center;
-    margin: 18px 0 10px;
-    color: #aaa;
-    font-size: 14px;
-  }
-
-  .social-btn {
-    background: #131a2f;
-    border: 1px solid #2d384c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 6px;
-    margin-top: 10px;
-    color: #dcdcdc;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 14px;
-  }
-
-  .social-btn:hover {
-    background: #1a233b;
-    border-color: #66aaff;
-  }
-
-  .social-btn img {
-    width: 20px;
-    height: 20px;
-  }
-
-  .footer-text {
-    margin-top: 18px;
-    text-align: center;
-    font-size: 12px;
-    color: #7e8aa0;
-  }
-
-  .signup-link {
-    text-align: center;
-    margin-top: 12px;
-    font-size: 13.5px;
-    color: #aeb4c3;
-  }
-
-  .signup-link a {
-    color: #66aaff;
-    text-decoration: none;
-    font-weight: 500;
-    margin-left: 4px;
-    transition: color 0.3s ease;
-  }
-
-  .signup-link a:hover {
-    color: #99cfff;
-    text-decoration: underline;
-  }
-
-  @media screen and (max-width: 400px) {
-    .login-container {
-      width: 90%;
-      padding: 25px 20px;
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PW_IOI Style Layout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
-  }
-</style>
 
+    body {
+      display: flex;
+      height: 100vh;
+      background: linear-gradient(to right, #0a0a0a, #1a1a1a);
+      color: white;
+      overflow: hidden;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 250px;
+      background-color: #1a1a1a;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar .logo {
+      font-size: 26px;
+      font-weight: 700;
+      margin-left: 50px;
+      margin-bottom: 30px;
+      color: #00ffd0;
+      text-shadow: 0 0 5px #007bff;
+    }
+
+    .nav-section a {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      color: #ccc;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-section a:hover {
+      background-color: #2a2a2a;
+      color: #00ffd0;
+    }
+
+    .nav-section a i {
+      margin-right: 10px;
+    }
+
+    .pinned-label {
+      margin: 20px 0 10px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .main-content h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+      color: #00ffd0;
+      text-shadow: 0 0 6px #007bff;
+    }
+
+    .main-content p {
+      font-size: 17px;
+      color: #aaa;
+      margin-bottom: 30px;
+    }
+
+    .main-content img {
+      width: 400px;
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      margin-bottom: 30px;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* STUDENT CARD */
+    .student-card {
+      display: flex;
+      width: 960px;
+      height: 320px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .student-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(0, 255, 210, 0.15);
+    }
+
+    .image-section {
+      width: 33.33%;
+      background: url('/images/Supra_image.jpg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .image-section .name {
+      width: 100%;
+      padding: 14px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #00ffd0;
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .semester-section {
+      width: 33.33%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.02);
+      font-size: 36px;
+      font-weight: bold;
+      color: #c9f9ff;
+      text-shadow: 0 0 12px rgba(0, 255, 208, 0.6);
+    }
+
+    .hover-section {
+      width: 33.33%;
+      padding: 22px;
+      position: relative;
+    }
+
+    .hover-content {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    .student-card:hover .hover-content {
+      opacity: 1;
+    }
+
+    .hover-default {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #666;
+      font-size: 15px;
+      text-align: center;
+      transition: opacity 0.4s ease;
+    }
+
+    .student-card:hover .hover-default {
+      opacity: 0;
+    }
+
+    .hover-section p {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    .bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin: 6px 0;
+      color: #ccc;
+    }
+
+    .progress-bar {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      height: 10px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress {
+      height: 100%;
+      background: linear-gradient(90deg, #00ffd0, #0077ff);
+      transition: width 0.6s ease;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .main-content {
+        padding: 20px;
+      }
+
+      .student-card {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+      }
+
+      .image-section, .semester-section, .hover-section {
+        width: 100%;
+        height: auto;
+      }
+
+      .hover-default {
+        position: static;
+        transform: none;
+      }
+
+      .toggle-btn {
+  position: absolute;
+  top: 20px;
+  left: 260px;
+  cursor: pointer;
+  font-size: 22px;
+  color: #00ffd0;
+  z-index: 999;
+  transition: left 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.sidebar.collapsed .nav-section a span {
+  display: none;
+}
+
+.sidebar.collapsed .logo {
+  display: none;
+}
+
+.main-content.shifted {
+  margin-left: 60px;
+}
+
+#main-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #00ffd0;
+  text-shadow: 0 0 5px #007bff;
+  margin-bottom: 20px;
+  display: none;
+}
+
+#main-logo.active {
+  display: block;
+}
+
+.hidden-logo {
+  display: none;
+}
+
+    }
+  </style>
+</head>
 <body>
+  <div class="toggle-btn" onclick="toggleSidebar()">
+  <i class="fas fa-bars"></i>
+</div>
 
-  <!-- Background Video -->
-  <video autoplay muted loop class="bg-video">
-    <source src="videos/PW_LOGIN.mp4" type="video/mp4" />
-    Your browser does not support HTML5 video.
-  </video>
-
-  <div class="overlay"></div>
-
-  <!-- Login Form -->
-  <div class="login-container">
-    <h2>Physics Wallah Login</h2>
-    <form>
-      <div class="form-group">
-        <input type="email" required placeholder=" " />
-        <label>Email ID</label>
-      </div>
-
-      <div class="form-group">
-        <input type="password" required placeholder=" " />
-        <label>Password</label>
-      </div>
-
-      <div class="options-row">
-        <label><input type="checkbox" /> Remember me</label>
-        <a href="#">Forgot Password?</a>
-      </div>
-
-      <button type="submit">Login</button>
-
-      <div class="divider">OR</div>
-
-      <div class="social-btn">
-        <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
-        Sign in with Google
-      </div>
-
-      <div class="social-btn">
-        <img src="https://img.icons8.com/ios-glyphs/30/github.png" alt="GitHub" style="filter: invert(1);" />
-        Sign in with GitHub
-      </div>
-    </form>
-
-    <div class="footer-text">© Physics Wallah Institute of Innovation</div>
-
-    <div class="signup-link">
-      Don't have an account?
-      <a href="sign-up.html">Sign up</a>
+  <div class="sidebar">
+    <div class="logo">PW IOI</div>
+    <div class="nav-section">
+      <a href="#"><i>🏠</i> <span>Home</span></a>
+      <a href="#"><i>🌐</i> <span>Community</span></a>
+      <a href="#"><i>✨</i> <span>AI Suite</span></a>
+      <a href="#"><i>🔍</i> <span>Stock</span></a>
+      <a href="#"><i>📁</i> <span>My Creations</span></a>
+      <div class="pinned-label">Pinned</div>
+      <a href="#"><i>🖼️</i> Image Generator</a>
+      <a href="#"><i>🎥</i> Video Generator</a>
+      <a href="#"><i>🤖</i> Assistant</a>
     </div>
+  </div>
+
+  <div class="main-content">
+    <h1>Pick your way to create</h1>
+    <p>Explore founder-grade AI tools to build, design, and innovate faster.</p>
+    <img src="https://cdn.pixabay.com/photo/2022/02/01/15/49/technology-6989345_960_720.jpg" alt="AI Creative Design">
+
+    <div class="card-container">
+      <div class="student-card">
+        <div class="image-section">
+          <div class="name">Suprakash Dhar</div>
+        </div>
+        <div class="semester-section">
+          Semester 1
+        </div>
+        <div class="hover-section">
+          <div class="hover-default">Hover me to view your semester 1 details</div>
+          <div class="hover-content">
+            <p><strong>Student ID:</strong> PW2025_007</p>
+            <p><strong>Overall Grade:</strong> A</p>
+            <p><strong>Attendance:</strong> 92%</p>
+
+            <div class="bar-label"><span>HTML</span><span>95%</span></div>
+            <div class="progress-bar"><div class="progress" style="width: 95%"></div></div>
+
+            <div class="bar-label"><span>CSS</span><span>88%</span></div>
+            <div class="progress-bar"><div class="progress" style="width: 88%"></div></div>
+
+            <div class="bar-label"><span>C Language</span><span>76%</span></div>
+            <div class="progress-bar"><div class="progress" style="width: 76%"></div></div>
+
+            <div class="bar-label"><span>Technical Comm.</span><span>82%</span></div>
+            <div class="progress-bar"><div class="progress" style="width: 82%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="main-logo" class="hidden-logo">PW IOI</div>
 
   </div>
 </body>
-
 </html>

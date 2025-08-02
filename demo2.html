@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Report Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #121212;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .report-card {
+      position: relative;
+      background: url('Supra_image.jpg') no-repeat center center/cover;
+      width: 90%;
+      max-width: 1000px;
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .header {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .student-name {
+      font-size: 20px;
+      font-weight: 500;
+      color: #f5c518;
+    }
+
+    .hover-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .hover-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .hover-box:hover {
+      transform: scale(1.03);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .progress {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+      height: 20px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #f5c518;
+      width: 0;
+      transition: width 0.6s ease;
+    }
+
+    .subject {
+      margin-top: 15px;
+    }
+
+    .subject span {
+      display: block;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="report-card">
+    <div class="header">Student Report Card</div>
+    <div class="student-name">Suprakash Dhar</div>
+
+    <div class="hover-sections">
+      <div class="hover-box">Overall Grade: A</div>
+      <div class="hover-box">Overall Attendance: 92%</div>
+
+      <div class="hover-box">
+        <div><strong>Skill Set Progress</strong></div>
+        <div class="subject">
+          <span>HTML</span>
+          <div class="progress"><div class="progress-bar" style="width: 95%"></div></div>
+        </div>
+        <div class="subject">
+          <span>CSS</span>
+          <div class="progress"><div class="progress-bar" style="width: 88%"></div></div>
+        </div>
+        <div class="subject">
+          <span>C Language</span>
+          <div class="progress"><div class="progress-bar" style="width: 76%"></div></div>
+        </div>
+        <div class="subject">
+          <span>Technical Communication</span>
+          <div class="progress"><div class="progress-bar" style="width: 82%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

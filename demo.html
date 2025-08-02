@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PW_IOI Style Layout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background: linear-gradient(to right, #0a0a0a, #1a1a1a);
+            color: white;
+        }
+
+        .top-right-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 10;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #00ffd0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .auth-buttons button {
+            background: transparent;
+            border: 1px solid #00ffd0;
+            color: #00ffd0;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .auth-buttons button:hover {
+            background-color: #00ffd0;
+            color: #0a0a0a;
+        }
+
+        .floating-logo-sidebar {
+            position: absolute;
+            top: 25px;
+            left: 75px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #00ffd0;
+            text-shadow: 0 0 5px #007bff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.show-floating-logo .floating-logo-sidebar {
+            opacity: 1;
+        }
+
+        .main-heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .welcome_tag {
+            font-size: 34px;
+            color: #00ffd0;
+            text-shadow: 0 0 6px #007bff;
+            text-align: center;
+            margin-left: 0;
+        }
+
+        body.show-floating-logo .welcome_tag {
+            margin-left: 30px;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            /* overflow-y: auto; */
+            background-color: #1a1a1a;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .sidebar.collapsed {
+            width: 60px;
+            align-items: center;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: #00ffd0;
+            text-shadow: 0 0 5px #007bff;
+        }
+
+        .sidebar.collapsed .logo {
+            display: none;
+        }
+
+        .toggle-btn {
+            font-size: 22px;
+            cursor: pointer;
+            color: #00ffd0;
+            background: none;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar.collapsed .toggle-btn {
+            margin-left: auto;
+        }
+
+        .nav-section {
+            margin-top: -10px;
+        }
+
+        .nav-section a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            color: #ccc;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .sidebar.collapsed .nav-section a {
+            justify-content: center;
+        }
+
+        .sidebar.collapsed .nav-section a span {
+            display: none;
+        }
+
+        .nav-section a:hover {
+            background-color: #2a2a2a;
+            color: #00ffd0;
+        }
+
+        .nav-section a i {
+            margin-right: 10px;
+        }
+
+        .pinned-label {
+            margin: 20px 0 10px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .sidebar.collapsed .pinned-label {
+            display: none;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px 40px 40px 40px;
+            /* overflow-y: auto; */
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .student-card {
+            display: flex;
+            width: 960px;
+            height: 320px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .student-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(0, 255, 210, 0.15);
+        }
+
+        .image-section {
+            width: 33.33%;
+            background: url('/images/Supra_image.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .image-section .name {
+            width: 100%;
+            padding: 14px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #00ffd0;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .semester-section {
+            width: 33.33%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.02);
+            font-size: 36px;
+            font-weight: bold;
+            color: #c9f9ff;
+            text-shadow: 0 0 12px rgba(0, 255, 208, 0.6);
+        }
+
+        .hover-section {
+            width: 33.33%;
+            padding: 22px;
+            position: relative;
+        }
+
+        .hover-content {
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .student-card:hover .hover-content {
+            opacity: 1;
+        }
+
+        .hover-default {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #666;
+            font-size: 15px;
+            text-align: center;
+            transition: opacity 0.4s ease;
+        }
+
+        .student-card:hover .hover-default {
+            opacity: 0;
+        }
+
+        .hover-section p {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin: 6px 0;
+            color: #ccc;
+        }
+
+        .progress-bar {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00ffd0, #0077ff);
+            transition: width 0.6s ease;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .student-card {
+                flex-direction: column;
+                height: auto;
+                width: 100%;
+            }
+
+            .image-section,
+            .semester-section,
+            .hover-section {
+                width: 100%;
+                height: auto;
+            }
+
+            .hover-default {
+                position: static;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-right-controls">
+        <div class="auth-buttons">
+            <button class="login-btn">Login</button>
+            <button class="signup-btn">Sign Up</button>
+        </div>
+        <div class="profile-icon" onclick="goToProfile()">
+            <img src="/images/Supra_image.jpg" alt="Profile" />
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        </div>
+        <div class="nav-section">
+            <a href="#"><i>🏠</i> <span>Home</span></a>
+            <a href="#"><i>✨</i> <span>Task Manager</span></a>
+            <a href="#"><i>🔍</i> <span>Attendance</span></a>
+            <a href="#"><i>🎥</i> <span>Projects</span></a>
+            <a href="#"><i>🤖</i> <span>Job Portal</span></a>
+            <a href="#"><i>📁</i> <span>Announcements</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="#"><i>✨</i> <span>Portfolio</span></a>
+            <a href="#"><i>🌐</i> <span>Community</span></a>
+            <a href="#"><i>🖼️</i> <span>Events</span></a>
+            <a href="#"><i>🤖</i> <span>Leave form</span></a>
+            <a href="#"><i>🤖</i> <span>Gallery section</span></a>
+        </div>
+    </div>
+
+    <div class="floating-logo-sidebar">PW IOI</div>
+
+    <div class="main-content" id="main">
+        <div class="main-heading">
+            <h1 class="welcome_tag">Welcome Student</h1>
+        </div>
+
+        <div class="card-container">
+            <div class="student-card">
+                <div class="image-section">
+                    <div class="name">Suprakash Dhar</div>
+                </div>
+                <div class="semester-section">Semester 1</div>
+                <div class="hover-section">
+                    <div class="hover-default">Hover me to view your semester 1 details</div>
+                    <div class="hover-content">
+                        <p><strong>Student ID:</strong> PW2025_007</p>
+                        <p><strong>Overall Grade:</strong> A</p>
+                        <p><strong>Attendance:</strong> 92%</p>
+                        <div class="bar-label"><span>HTML</span><span>95%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 95%"></div>
+                        </div>
+                        <div class="bar-label"><span>CSS</span><span>88%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 88%"></div>
+                        </div>
+                        <div class="bar-label"><span>C Language</span><span>76%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 76%"></div>
+                        </div>
+                        <div class="bar-label"><span>Technical Comm.</span><span>82%</span></div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 82%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("collapsed");
+            document.body.classList.toggle("show-floating-logo");
+        }
+
+        function goToProfile() {
+            window.location.href = "#profile";
+        }
+    </script>
+</body>
+
+</html>
