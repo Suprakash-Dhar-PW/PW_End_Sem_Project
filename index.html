@@ -5,8 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PW IOI - Student Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -164,19 +163,13 @@
             /* text-shadow: 0 0 10px var(--primary-color); Stable glow */
             text-align: center;
             margin-left: 0;
-            background: none;
-            /* remove gradient if you want it solid */
+            background: none; /* remove gradient if you want it solid */
             -webkit-text-fill-color: unset;
         }
 
         @keyframes glow {
-            from {
-                filter: drop-shadow(0 0 5px var(--primary-color));
-            }
-
-            to {
-                filter: drop-shadow(0 0 20px var(--primary-color));
-            }
+            from { filter: drop-shadow(0 0 5px var(--primary-color)); }
+            to { filter: drop-shadow(0 0 20px var(--primary-color)); }
         }
 
         body.show-floating-logo .welcome_tag {
@@ -184,35 +177,31 @@
         }
 
         /* Sidebar */
-        .sidebar {
-            width: 280px;
-            height: 100vh;
-            background: linear-gradient(180deg, var(--card-bg), #151515);
-            padding: 25px 20px;
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
-            position: fixed;
-            left: 0;
-            top: 0;
-            border-right: 1px solid var(--border-color);
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
-            z-index: 100;
-            /* overflow-y: auto; ✨ Added this */
-        }
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(180deg, var(--card-bg), #151515);
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-right: 1px solid var(--border-color);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    /* overflow-y: auto; ✨ Added this */
+}
+.sidebar {
+    overflow-y: auto;
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE and Edge */
+}
 
-        .sidebar {
-            overflow-y: auto;
-            scrollbar-width: none;
-            /* Firefox */
-            -ms-overflow-style: none;
-            /* IE and Edge */
-        }
-
-        .sidebar::-webkit-scrollbar {
-            display: none;
-            /* Chrome, Safari, Opera */
-        }
+.sidebar::-webkit-scrollbar {
+    display: none;                /* Chrome, Safari, Opera */
+}
 
 
         .sidebar.collapsed {
@@ -338,7 +327,7 @@
             min-height: 100vh;
         }
 
-        .sidebar.collapsed~.main-content {
+        .sidebar.collapsed ~ .main-content {
             padding-left: 110px;
         }
 
@@ -388,8 +377,8 @@
 
         .image-section {
             width: 33.33%;
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)),
-                url('/images/Supra_image.jpg') no-repeat center center;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), 
+                        url('/images/Supra_image.jpg') no-repeat center center;
             background-size: cover;
             display: flex;
             align-items: flex-end;
@@ -503,13 +492,8 @@
         }
 
         @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-
-            100% {
-                transform: translateX(100%);
-            }
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         /* Footer */
@@ -661,11 +645,11 @@
                 padding-left: 40px;
                 padding-right: 20px;
             }
-
-            .sidebar.collapsed~.main-content {
+            
+            .sidebar.collapsed ~ .main-content {
                 padding-left: 40px;
             }
-
+            
             .student-card {
                 width: 100%;
                 max-width: 900px;
@@ -677,16 +661,16 @@
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
             }
-
+            
             .sidebar.open {
                 transform: translateX(0);
             }
-
+            
             .main-content {
                 padding: 100px 20px 40px 20px;
             }
-
-            .sidebar.collapsed~.main-content {
+            
+            .sidebar.collapsed ~ .main-content {
                 padding-left: 20px;
             }
 
@@ -708,27 +692,27 @@
                 position: static;
                 transform: none;
             }
-
+            
             .welcome_tag {
                 font-size: 28px;
             }
-
+            
             .top-right-controls {
                 right: 10px;
                 top: 10px;
                 padding: 6px 12px;
             }
-
+            
             .auth-buttons button {
                 padding: 8px 16px;
                 font-size: 12px;
             }
-
+            
             .newsletter-form {
                 flex-direction: column;
                 align-items: center;
             }
-
+            
             .newsletter-form input[type="email"] {
                 min-width: auto;
                 width: 100%;
@@ -767,13 +751,8 @@
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Smooth scroll */
@@ -796,20 +775,13 @@
         <div class="loader"></div>
     </div>
 
-
-
-
     <div class="top-right-controls">
         <div class="auth-buttons">
-            <button class="login-btn">
-                <a href=" login.html" class="login-btn">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </a>
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> Login
             </button>
             <button class="signup-btn" onclick="showSignupModal()">
-                <a href="signup.html" class="signup-btn">
-                    <i class="fas fa-user-plus"></i> Sign Up
-                </a>
+                <i class="fas fa-user-plus"></i> Sign Up
             </button>
         </div>
         <div class="profile-icon" onclick="goToProfile()" title="View Profile">
@@ -867,24 +839,23 @@
                         <p><i class="fas fa-id-card"></i> <strong>Student ID:</strong> PW2025_007</p>
                         <p><i class="fas fa-graduation-cap"></i> <strong>Overall Grade:</strong> A</p>
                         <p><i class="fas fa-chart-line"></i> <strong>Attendance:</strong> 92%</p>
-
+                        
                         <div class="bar-label"><span><i class="fab fa-html5"></i> HTML</span><span>95%</span></div>
                         <div class="progress-bar">
                             <div class="progress" style="width: 95%"></div>
                         </div>
-
+                        
                         <div class="bar-label"><span><i class="fab fa-css3-alt"></i> CSS</span><span>88%</span></div>
                         <div class="progress-bar">
                             <div class="progress" style="width: 88%"></div>
                         </div>
-
+                        
                         <div class="bar-label"><span><i class="fas fa-code"></i> C Language</span><span>76%</span></div>
                         <div class="progress-bar">
                             <div class="progress" style="width: 76%"></div>
                         </div>
-
-                        <div class="bar-label"><span><i class="fas fa-comments"></i> Tech Comm.</span><span>82%</span>
-                        </div>
+                        
+                        <div class="bar-label"><span><i class="fas fa-comments"></i> Tech Comm.</span><span>82%</span></div>
                         <div class="progress-bar">
                             <div class="progress" style="width: 82%"></div>
                         </div>
@@ -907,8 +878,7 @@
             </div>
 
             <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
-                <input type="email" placeholder="Enter your email for updates" required
-                    aria-label="Email for newsletter" />
+                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
                 <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
             </form>
 
@@ -938,7 +908,7 @@
             const sidebar = document.getElementById("sidebar");
             sidebar.classList.toggle("collapsed");
             document.body.classList.toggle("show-floating-logo");
-
+            
             // Store sidebar state
             localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
         }
@@ -973,13 +943,13 @@
         function handleNewsletterSubmit(event) {
             event.preventDefault();
             const email = event.target.querySelector('input[type="email"]').value;
-
+            
             // Simulate API call
             const button = event.target.querySelector('button');
             const originalContent = button.innerHTML;
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
             button.disabled = true;
-
+            
             setTimeout(() => {
                 alert(`Thank you for subscribing with ${email}!`);
                 button.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
@@ -1033,10 +1003,10 @@
         document.addEventListener('click', (e) => {
             const sidebar = document.getElementById('sidebar');
             const toggleBtn = document.querySelector('.toggle-btn');
-
-            if (window.innerWidth <= 768 &&
-                !sidebar.contains(e.target) &&
-                !toggleBtn.contains(e.target) &&
+            
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(e.target) && 
+                !toggleBtn.contains(e.target) && 
                 sidebar.classList.contains('open')) {
                 sidebar.classList.remove('open');
             }
@@ -1057,7 +1027,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const studentCard = document.querySelector('.student-card');
             const progressBars = document.querySelectorAll('.progress');
-
+            
             studentCard.addEventListener('mouseenter', () => {
                 progressBars.forEach((bar, index) => {
                     setTimeout(() => {
