@@ -145,38 +145,39 @@
             opacity: 1;
         }
 
-        /* Main Heading */
+        /* Main Heading - Fixed at top center */
         .main-heading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            transition: var(--transition);
-            position: relative;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: var(--border-radius);
+            padding: 12px 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .welcome_tag {
-            font-size: 36px;
+            font-size: 28px;
             font-weight: 600;
             color: var(--primary-color);
             text-shadow: 0 0 8px var(--secondary-color);
             text-align: center;
-            margin-left: 0;
+            margin: 0;
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: glow 2s ease-in-out infinite alternate;
+            white-space: nowrap;
         }
 
         @keyframes glow {
             from { filter: drop-shadow(0 0 5px var(--primary-color)); }
             to { filter: drop-shadow(0 0 20px var(--primary-color)); }
-        }
-
-        body.show-floating-logo .welcome_tag {
-            margin-left: 30px;
         }
 
         /* Sidebar */
@@ -346,7 +347,7 @@
         /* Main Content */
         .main-content {
             flex: 1;
-            padding: 100px 40px 40px 320px;
+            padding: 120px 40px 40px 320px;
             transition: var(--transition);
             position: relative;
             min-height: 100vh;
@@ -521,29 +522,267 @@
             100% { transform: translateX(100%); }
         }
 
-        /* Footer */
+        /* Dynamic Footer */
         .site-footer {
-            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a, #0a0a0a);
             color: var(--primary-color);
-            padding: 40px 0 20px;
+            padding: 50px 0 30px;
             text-align: center;
             border-top: 1px solid rgba(0, 255, 210, 0.2);
             font-family: 'Poppins', sans-serif;
             position: relative;
             margin-top: auto;
+            overflow: hidden;
+        }
+
+        /* Animated background particles */
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 210, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 123, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 255, 210, 0.05) 0%, transparent 50%);
+            animation: floatParticles 20s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes floatParticles {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
         }
 
         .footer-content {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Dynamic footer sections */
+        .footer-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .footer-section {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-section:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 255, 210, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 255, 210, 0.1);
+        }
+
+        .footer-section h3 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .footer-section ul li a i {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* Contact info */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            width: 16px;
+        }
+
+        /* Social icons with dynamic effects */
+        .social-icons {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 210, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 255, 210, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-icons a:hover::before {
+            left: 100%;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px) rotate(360deg);
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            box-shadow: 0 10px 25px rgba(0, 255, 210, 0.4);
+        }
+
+        .social-icons i {
+            font-size: 20px;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover i {
+            color: var(--dark-bg);
+        }
+
+        /* Enhanced newsletter form */
+        .newsletter-section {
+            background: rgba(0, 255, 210, 0.05);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(0, 255, 210, 0.2);
+        }
+
+        .newsletter-section h3 {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .newsletter-section p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            min-width: 300px;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .newsletter-form input[type="email"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 255, 210, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .newsletter-form button {
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 255, 210, 0.4);
+        }
+
+        /* Footer bottom */
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .footer-links {
-            margin: 20px 0;
             display: flex;
-            justify-content: center;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
         }
 
@@ -554,6 +793,23 @@
             transition: var(--transition);
             padding: 8px 16px;
             border-radius: var(--border-radius);
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .footer-links a:hover::after {
+            width: 80%;
         }
 
         .footer-links a:hover {
@@ -561,86 +817,41 @@
             background: rgba(0, 255, 210, 0.1);
         }
 
-        .social-icons {
-            margin: 25px 0;
+        /* Live stats */
+        .live-stats {
             display: flex;
             justify-content: center;
-            gap: 20px;
-        }
-
-        .social-icons a {
-            width: 45px;
-            height: 45px;
-            background: rgba(0, 255, 210, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            border: 1px solid rgba(0, 255, 210, 0.2);
-        }
-
-        .social-icons a:hover {
-            transform: translateY(-3px);
-            background: var(--primary-color);
-            color: var(--dark-bg);
-            box-shadow: 0 8px 20px rgba(0, 255, 210, 0.3);
-        }
-
-        .social-icons i {
-            font-size: 18px;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        .social-icons a:hover i {
-            color: var(--dark-bg);
-        }
-
-        .newsletter-form {
-            margin: 25px 0;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
+            gap: 30px;
+            margin: 20px 0;
             flex-wrap: wrap;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .newsletter-form input[type="email"] {
-            flex: 1;
-            min-width: 250px;
-            padding: 12px 16px;
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
             border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-            font-size: 14px;
-            outline: none;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: var(--transition);
         }
 
-        .newsletter-form input[type="email"]:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(0, 255, 210, 0.2);
+        .stat-item:hover {
+            transform: scale(1.05);
+            background: rgba(0, 255, 210, 0.1);
         }
 
-        .newsletter-form button {
-            padding: 12px 24px;
-            border-radius: var(--border-radius);
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: var(--dark-bg);
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            font-size: 14px;
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
         }
 
-        .newsletter-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 255, 210, 0.3);
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .back-to-top {
@@ -692,7 +903,7 @@
             }
             
             .main-content {
-                padding: 100px 20px 40px 20px;
+                padding: 140px 20px 40px 20px;
             }
             
             .sidebar.collapsed ~ .main-content {
@@ -718,19 +929,56 @@
                 transform: none;
             }
             
+            .main-heading {
+                top: 80px;
+                padding: 10px 20px;
+            }
+            
             .welcome_tag {
-                font-size: 28px;
+                font-size: 24px;
             }
             
             .top-right-controls {
                 right: 10px;
                 top: 10px;
                 padding: 6px 12px;
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .auth-buttons {
+                order: 2;
+            }
+            
+            .profile-icon {
+                order: 1;
+                width: 35px;
+                height: 35px;
             }
             
             .auth-buttons button {
-                padding: 8px 16px;
-                font-size: 12px;
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            /* Footer mobile responsiveness */
+            .footer-sections {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .live-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .stat-item {
+                padding: 10px;
+            }
+            
+            .stat-number {
+                font-size: 20px;
             }
             
             .newsletter-form {
@@ -742,6 +990,44 @@
                 min-width: auto;
                 width: 100%;
                 max-width: 300px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .social-icons {
+                gap: 10px;
+            }
+            
+            .social-icons a {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-heading {
+                top: 70px;
+                padding: 8px 15px;
+            }
+            
+            .welcome_tag {
+                font-size: 20px;
+            }
+            
+            .live-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-section {
+                padding: 20px 15px;
+            }
+            
+            .newsletter-section {
+                padding: 20px 15px;
             }
         }
 
@@ -892,26 +1178,115 @@
 
     <footer class="site-footer">
         <div class="footer-content">
-            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+            <!-- Live Stats Section -->
+            <div class="live-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="activeStudents">1,247</span>
+                    <span class="stat-label">Active Students</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="coursesCompleted">856</span>
+                    <span class="stat-label">Courses Completed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="projectsSubmitted">2,134</span>
+                    <span class="stat-label">Projects Submitted</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="successRate">94%</span>
+                    <span class="stat-label">Success Rate</span>
+                </div>
+            </div>
 
+            <!-- Dynamic Footer Sections -->
+            <div class="footer-sections">
+                <div class="footer-section">
+                    <h3><i class="fas fa-graduation-cap"></i> Academics</h3>
+                    <ul>
+                        <li><a href="#courses"><i class="fas fa-book"></i> Courses</a></li>
+                        <li><a href="#assignments"><i class="fas fa-tasks"></i> Assignments</a></li>
+                        <li><a href="#grades"><i class="fas fa-chart-line"></i> Grades</a></li>
+                        <li><a href="#schedule"><i class="fas fa-calendar"></i> Class Schedule</a></li>
+                        <li><a href="#resources"><i class="fas fa-file-alt"></i> Learning Resources</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3><i class="fas fa-users"></i> Community</h3>
+                    <ul>
+                        <li><a href="#forums"><i class="fas fa-comments"></i> Discussion Forums</a></li>
+                        <li><a href="#events"><i class="fas fa-calendar-alt"></i> Events & Workshops</a></li>
+                        <li><a href="#study-groups"><i class="fas fa-users"></i> Study Groups</a></li>
+                        <li><a href="#mentorship"><i class="fas fa-hands-helping"></i> Mentorship Program</a></li>
+                        <li><a href="#alumni"><i class="fas fa-graduation-cap"></i> Alumni Network</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3><i class="fas fa-briefcase"></i> Career Services</h3>
+                    <ul>
+                        <li><a href="#job-portal"><i class="fas fa-search"></i> Job Portal</a></li>
+                        <li><a href="#internships"><i class="fas fa-building"></i> Internships</a></li>
+                        <li><a href="#career-guidance"><i class="fas fa-compass"></i> Career Guidance</a></li>
+                        <li><a href="#resume-builder"><i class="fas fa-file-pdf"></i> Resume Builder</a></li>
+                        <li><a href="#interview-prep"><i class="fas fa-microphone"></i> Interview Prep</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3><i class="fas fa-phone"></i> Contact Us</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>support@pwioi.edu</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Education St, Learning City</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri: 9AM-6PM EST</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="newsletter-section">
+                <h3><i class="fas fa-envelope-open-text"></i> Stay Updated</h3>
+                <p>Get the latest updates about courses, events, and opportunities delivered to your inbox.</p>
+                <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                    <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                    <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                </form>
+            </div>
+
+            <!-- Social Media -->
             <div class="social-icons">
                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
             </div>
 
-            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
-                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
-                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
-            </form>
-
-            <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
-                <a href="#contact">Contact Support</a>
-                <a href="#about">About Us</a>
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#contact">Contact Support</a>
+                    <a href="#about">About Us</a>
+                    <a href="#accessibility">Accessibility</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -1060,6 +1435,217 @@
                     }, index * 100);
                 });
             });
+        });
+
+        // Dynamic footer stats animation
+        function animateStats() {
+            const stats = {
+                activeStudents: { element: document.getElementById('activeStudents'), target: 1247, current: 0 },
+                coursesCompleted: { element: document.getElementById('coursesCompleted'), target: 856, current: 0 },
+                projectsSubmitted: { element: document.getElementById('projectsSubmitted'), target: 2134, current: 0 },
+                successRate: { element: document.getElementById('successRate'), target: 94, current: 0, suffix: '%' }
+            };
+
+            Object.values(stats).forEach(stat => {
+                const increment = stat.target / 50; // Animation duration
+                const timer = setInterval(() => {
+                    stat.current += increment;
+                    if (stat.current >= stat.target) {
+                        stat.current = stat.target;
+                        clearInterval(timer);
+                    }
+                    stat.element.textContent = Math.floor(stat.current) + (stat.suffix || '');
+                }, 40);
+            });
+        }
+
+        // Live stats updater (simulates real-time data)
+        function updateLiveStats() {
+            const stats = {
+                activeStudents: Math.floor(1200 + Math.random() * 100),
+                coursesCompleted: Math.floor(850 + Math.random() * 50),
+                projectsSubmitted: Math.floor(2100 + Math.random() * 100),
+                successRate: Math.floor(92 + Math.random() * 6)
+            };
+
+            Object.entries(stats).forEach(([key, value]) => {
+                const element = document.getElementById(key);
+                if (element) {
+                    const suffix = key === 'successRate' ? '%' : '';
+                    element.textContent = value + suffix;
+                    
+                    // Add flash effect on update
+                    element.style.color = '#00ffd0';
+                    element.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        element.style.color = '';
+                        element.style.transform = 'scale(1)';
+                    }, 500);
+                }
+            });
+        }
+
+        // Intersection Observer for footer animations
+        function initFooterAnimations() {
+            const footerSections = document.querySelectorAll('.footer-section');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            footerSections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = `all 0.6s ease ${index * 0.1}s`;
+                observer.observe(section);
+            });
+        }
+
+        // Footer particle animation
+        function createFooterParticles() {
+            const footer = document.querySelector('.site-footer');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 2px;
+                    height: 2px;
+                    background: rgba(0, 255, 210, 0.3);
+                    border-radius: 50%;
+                    animation: floatUp ${5 + Math.random() * 5}s infinite linear;
+                    left: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() * 5}s;
+                `;
+                footer.appendChild(particle);
+            }
+
+            // Add CSS animation for particles
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes floatUp {
+                    0% {
+                        transform: translateY(100vh) rotate(0deg);
+                        opacity: 0;
+                    }
+                    10% {
+                        opacity: 1;
+                    }
+                    90% {
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translateY(-100px) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Real-time clock in footer
+        function updateFooterClock() {
+            const clockElement = document.querySelector('.contact-item:last-child span');
+            if (clockElement) {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('en-US', {
+                    hour12: true,
+                    hour: 'numeric',
+                    minute: '2-digit'
+                });
+                const dayString = now.toLocaleDateString('en-US', {
+                    weekday: 'short'
+                });
+                clockElement.textContent = `${dayString}: ${timeString} EST`;
+            }
+        }
+
+        // Enhanced footer interactions
+        function initFooterInteractions() {
+            // Add hover effects to footer links
+            const footerLinks = document.querySelectorAll('.footer-section ul li a');
+            footerLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.paddingLeft = '20px';
+                });
+                link.addEventListener('mouseleave', function() {
+                    this.style.paddingLeft = '0px';
+                });
+            });
+
+            // Add ripple effect to stat items
+            const statItems = document.querySelectorAll('.stat-item');
+            statItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: rgba(0, 255, 210, 0.3);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: rippleEffect 0.6s ease-out;
+                        pointer-events: none;
+                    `;
+                    
+                    this.style.position = 'relative';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Add ripple animation
+            const rippleStyle = document.createElement('style');
+            rippleStyle.textContent = `
+                @keyframes rippleEffect {
+                    0% { transform: scale(0); opacity: 1; }
+                    100% { transform: scale(2); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(rippleStyle);
+        }
+
+        // Initialize all footer features
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start stats animation after a delay
+            setTimeout(animateStats, 1000);
+            
+            // Initialize footer animations
+            initFooterAnimations();
+            
+            // Create footer particles
+            createFooterParticles();
+            
+            // Initialize footer interactions
+            initFooterInteractions();
+            
+            // Update clock every second
+            updateFooterClock();
+            setInterval(updateFooterClock, 1000);
+            
+            // Update live stats every 30 seconds
+            setInterval(updateLiveStats, 30000);
         });
     </script>
 </body>
