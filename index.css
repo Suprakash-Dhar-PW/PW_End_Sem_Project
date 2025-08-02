@@ -1113,6 +1113,190 @@
             }
         }
 
+        /* Toaster Notification */
+        .toaster-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .toaster {
+            background: linear-gradient(135deg, var(--card-bg), #151515);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 16px 20px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: auto;
+            max-width: 350px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .toaster::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .toaster.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toaster.show::before {
+            transform: scaleX(1);
+        }
+
+        .toaster.success {
+            border-color: rgba(0, 255, 210, 0.3);
+        }
+
+        .toaster.error {
+            border-color: rgba(255, 59, 48, 0.3);
+        }
+
+        .toaster.warning {
+            border-color: rgba(255, 204, 0, 0.3);
+        }
+
+        .toaster-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .toaster.success .toaster-icon {
+            color: var(--primary-color);
+        }
+
+        .toaster.error .toaster-icon {
+            color: #ff3b30;
+        }
+
+        .toaster.warning .toaster-icon {
+            color: #ffcc00;
+        }
+
+        .toaster-content {
+            flex: 1;
+        }
+
+        .toaster-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .toaster-message {
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .toaster-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .toaster-close:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Toaster animations */
+        @keyframes toasterSlideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes toasterSlideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile responsive toaster */
+        @media (max-width: 768px) {
+            .toaster-container {
+                top: 80px;
+                right: 15px;
+                left: 15px;
+            }
+
+            .toaster {
+                max-width: none;
+                transform: translateY(-100px);
+            }
+
+            .toaster.show {
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .toaster-container {
+                top: 70px;
+                right: 10px;
+                left: 10px;
+            }
+
+            .toaster {
+                padding: 14px 16px;
+                font-size: 13px;
+            }
+
+            .toaster-icon {
+                font-size: 16px;
+            }
+
+            .toaster-title {
+                font-size: 14px;
+            }
+
+            .toaster-message {
+                font-size: 12px;
+            }
+        }
+
         /* Additional mobile optimizations */
         @media (max-width: 360px) {
             .main-content {

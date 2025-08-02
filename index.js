@@ -45,7 +45,7 @@
 
         // Profile navigation
         function goToProfile() {
-            window.location.href = "#profile";
+            window.location.href = "profile.html";
         }
 
         // Auth functions
@@ -55,6 +55,56 @@
 
         function showSignupModal() {
             window.location.href = "sign-up.html";
+        }
+
+        // Toaster Notification System
+        function showToaster(type, title, message, duration = 4000) {
+            const container = document.getElementById('toasterContainer');
+            const toaster = document.createElement('div');
+            toaster.className = `toaster ${type}`;
+            
+            const iconMap = {
+                success: 'fas fa-check-circle',
+                error: 'fas fa-exclamation-circle',
+                warning: 'fas fa-exclamation-triangle',
+                info: 'fas fa-info-circle'
+            };
+            
+            toaster.innerHTML = `
+                <i class="toaster-icon ${iconMap[type] || iconMap.info}"></i>
+                <div class="toaster-content">
+                    <div class="toaster-title">${title}</div>
+                    <div class="toaster-message">${message}</div>
+                </div>
+                <button class="toaster-close" onclick="closeToaster(this.parentElement)">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(toaster);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toaster.classList.add('show');
+            }, 10);
+            
+            // Auto remove after duration
+            if (duration > 0) {
+                setTimeout(() => {
+                    closeToaster(toaster);
+                }, duration);
+            }
+            
+            return toaster;
+        }
+        
+        function closeToaster(toaster) {
+            toaster.classList.remove('show');
+            setTimeout(() => {
+                if (toaster.parentElement) {
+                    toaster.parentElement.removeChild(toaster);
+                }
+            }, 400);
         }
 
         // Newsletter subscription
@@ -69,7 +119,11 @@
             button.disabled = true;
             
             setTimeout(() => {
-                alert(`Thank you for subscribing with ${email}!`);
+                showToaster(
+                    'success',
+                    'Subscription Successful!',
+                    `Thank you for subscribing with ${email}! You'll receive updates soon.`
+                );
                 button.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
                 setTimeout(() => {
                     button.innerHTML = originalContent;
