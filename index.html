@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>PW IOI - Student Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -41,11 +41,33 @@
             display: block;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
         .page-layout {
             display: flex;
             min-height: calc(100vh - 200px);
+        }
+
+        /* Mobile menu toggle button */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 12px;
+            color: var(--primary-color);
+            font-size: 18px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .mobile-menu-toggle:hover {
+            background: var(--hover-bg);
         }
 
         /* Header Controls */
@@ -135,7 +157,6 @@
             font-size: 28px;
             font-weight: 700;
             color: var(--primary-color);
-            /* text-shadow: 0 0 10px var(--primary-color); */
             opacity: 0;
             transition: var(--transition);
             z-index: 999;
@@ -160,10 +181,9 @@
             font-size: 36px;
             font-weight: 600;
             color: var(--primary-color);
-            /* text-shadow: 0 0 10px var(--primary-color); Stable glow */
             text-align: center;
             margin-left: 0;
-            background: none; /* remove gradient if you want it solid */
+            background: none;
             -webkit-text-fill-color: unset;
         }
 
@@ -177,32 +197,28 @@
         }
 
         /* Sidebar */
-.sidebar {
-    width: 280px;
-    height: 100vh;
-    background: linear-gradient(180deg, var(--card-bg), #151515);
-    padding: 25px 20px;
-    display: flex;
-    flex-direction: column;
-    transition: var(--transition);
-    position: fixed;
-    left: 0;
-    top: 0;
-    border-right: 1px solid var(--border-color);
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
-    z-index: 100;
-    /* overflow-y: auto; ✨ Added this */
-}
-.sidebar {
-    overflow-y: auto;
-    scrollbar-width: none;        /* Firefox */
-    -ms-overflow-style: none;     /* IE and Edge */
-}
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--card-bg), #151515);
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            position: fixed;
+            left: 0;
+            top: 0;
+            border-right: 1px solid var(--border-color);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
 
-.sidebar::-webkit-scrollbar {
-    display: none;                /* Chrome, Safari, Opera */
-}
-
+        .sidebar::-webkit-scrollbar {
+            display: none;
+        }
 
         .sidebar.collapsed {
             width: 70px;
@@ -222,7 +238,6 @@
             font-size: 28px;
             font-weight: 700;
             color: var(--primary-color);
-            /* text-shadow: 0 0 10px var(--primary-color); */
         }
 
         .sidebar.collapsed .logo {
@@ -639,7 +654,33 @@
             box-shadow: 0 8px 20px rgba(0, 255, 210, 0.4);
         }
 
+        /* Mobile overlay for sidebar */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+        }
+
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .student-card {
+                width: 100%;
+                max-width: 900px;
+                margin: 0 20px;
+            }
+        }
+
         @media (max-width: 1024px) {
             .main-content {
                 padding-left: 40px;
@@ -652,22 +693,36 @@
             
             .student-card {
                 width: 100%;
-                max-width: 900px;
+                max-width: 800px;
+            }
+
+            .floating-logo-sidebar {
+                display: none;
             }
         }
 
         @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
+                width: 280px;
+                z-index: 1000;
             }
             
             .sidebar.open {
                 transform: translateX(0);
             }
+
+            .sidebar-overlay {
+                display: block;
+            }
             
             .main-content {
-                padding: 100px 20px 40px 20px;
+                padding: 80px 20px 40px 20px;
             }
             
             .sidebar.collapsed ~ .main-content {
@@ -678,6 +733,8 @@
                 flex-direction: column;
                 height: auto;
                 width: 100%;
+                margin: 0 10px;
+                max-width: none;
             }
 
             .image-section,
@@ -688,29 +745,66 @@
                 min-height: 120px;
             }
 
+            .image-section {
+                min-height: 200px;
+            }
+
+            .semester-section {
+                padding: 30px 0;
+                min-height: 120px;
+            }
+
+            .hover-section {
+                min-height: auto;
+                padding: 20px;
+            }
+
             .hover-default {
                 position: static;
                 transform: none;
+                margin: 20px 0;
+            }
+
+            .hover-content {
+                opacity: 1;
+                transform: translateY(0);
+                margin-top: 20px;
             }
             
             .welcome_tag {
-                font-size: 28px;
+                font-size: 24px;
+                margin-left: 0 !important;
+            }
+
+            .main-heading {
+                margin-top: 20px;
             }
             
             .top-right-controls {
                 right: 10px;
                 top: 10px;
                 padding: 6px 12px;
+                gap: 8px;
+            }
+
+            .profile-icon {
+                width: 36px;
+                height: 36px;
             }
             
             .auth-buttons button {
-                padding: 8px 16px;
+                padding: 8px 12px;
                 font-size: 12px;
+            }
+
+            .auth-buttons {
+                gap: 4px;
             }
             
             .newsletter-form {
                 flex-direction: column;
                 align-items: center;
+                gap: 10px;
             }
             
             .newsletter-form input[type="email"] {
@@ -718,9 +812,143 @@
                 width: 100%;
                 max-width: 300px;
             }
+
+            .footer-links {
+                gap: 15px;
+            }
+
+            .footer-links a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .social-icons {
+                gap: 15px;
+            }
+
+            .social-icons a {
+                width: 40px;
+                height: 40px;
+            }
+
+            .back-to-top {
+                right: 20px;
+                bottom: 20px;
+                padding: 10px 12px;
+                font-size: 16px;
+            }
+
+            .card-container {
+                margin-bottom: 30px;
+            }
+
+            .site-footer {
+                padding: 30px 0 15px;
+            }
         }
 
-        /* Loading Animation */
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 70px 15px 30px 15px;
+            }
+
+            .student-card {
+                margin: 0 5px;
+                border-radius: var(--border-radius);
+            }
+
+            .welcome_tag {
+                font-size: 20px;
+            }
+
+            .top-right-controls {
+                padding: 4px 8px;
+                gap: 6px;
+            }
+
+            .auth-buttons button {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+
+            .profile-icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .image-section .name {
+                font-size: 18px;
+                padding: 12px;
+            }
+
+            .semester-section {
+                font-size: 28px;
+                padding: 25px 0;
+            }
+
+            .hover-section {
+                padding: 15px;
+            }
+
+            .hover-section p {
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+
+            .bar-label {
+                font-size: 12px;
+            }
+
+            .newsletter-form input[type="email"] {
+                padding: 10px 14px;
+                font-size: 13px;
+            }
+
+            .newsletter-form button {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+
+            .footer-links a {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+
+            .social-icons a {
+                width: 36px;
+                height: 36px;
+            }
+
+            .social-icons i {
+                font-size: 16px;
+            }
+        }
+
+        /* Touch improvements for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .student-card:hover {
+                transform: none;
+            }
+
+            .student-card {
+                cursor: default;
+            }
+
+            .hover-content {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .hover-default {
+                display: none;
+            }
+
+            .nav-section a:hover {
+                transform: none;
+            }
+        }
+
+        /* Improved loading animation for mobile */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -767,6 +995,28 @@
             outline: 2px solid var(--primary-color);
             outline-offset: 2px;
         }
+
+        /* Prevent zoom on form inputs on iOS */
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            select,
+            textarea,
+            input[type="text"],
+            input[type="password"],
+            input[type="datetime"],
+            input[type="datetime-local"],
+            input[type="date"],
+            input[type="month"],
+            input[type="time"],
+            input[type="week"],
+            input[type="number"],
+            input[type="email"],
+            input[type="url"],
+            input[type="search"],
+            input[type="tel"],
+            input[type="color"] {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 
@@ -775,17 +1025,23 @@
         <div class="loader"></div>
     </div>
 
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
     <div class="top-right-controls">
         <div class="auth-buttons">
             <button class="login-btn" onclick="showLoginModal()">
-                <i class="fas fa-sign-in-alt"></i> Login
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
             </button>
             <button class="signup-btn" onclick="showSignupModal()">
-                <i class="fas fa-user-plus"></i> Sign Up
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
             </button>
         </div>
         <div class="profile-icon" onclick="goToProfile()" title="View Profile">
-            <img src="images/Supra_image.jpg" alt="Profile " />
+            <img src="images/Supra_image.jpg" alt="Profile" />
         </div>
     </div>
 
@@ -913,10 +1169,29 @@
             localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
         }
 
+        // Mobile sidebar functionality
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+        }
+
+        function closeMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
         // Restore sidebar state
         document.addEventListener('DOMContentLoaded', () => {
             const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
-            if (isCollapsed) {
+            if (isCollapsed && window.innerWidth > 768) {
                 document.getElementById("sidebar").classList.add("collapsed");
                 document.body.classList.add("show-floating-logo");
             }
@@ -925,16 +1200,15 @@
         // Profile navigation
         function goToProfile() {
             window.location.href = "#profile";
-            // Add smooth scroll or modal here
         }
 
         // Auth functions
         function showLoginModal() {
-             window.location.href = "login.html";
+            window.location.href = "login.html";
         }
 
         function showSignupModal() {
-             window.location.href = "sign-up.html";
+            window.location.href = "sign-up.html";
         }
 
         // Newsletter subscription
@@ -987,37 +1261,47 @@
                     e.preventDefault();
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
+                    
+                    // Close mobile sidebar when link is clicked
+                    if (window.innerWidth <= 768) {
+                        closeMobileSidebar();
+                    }
                 });
             });
         });
 
-        // Mobile sidebar toggle
-        function toggleMobileSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('open');
-        }
-
         // Close sidebar when clicking outside on mobile
         document.addEventListener('click', (e) => {
             const sidebar = document.getElementById('sidebar');
-            const toggleBtn = document.querySelector('.toggle-btn');
+            const toggleBtn = document.querySelector('.mobile-menu-toggle');
             
             if (window.innerWidth <= 768 && 
                 !sidebar.contains(e.target) && 
                 !toggleBtn.contains(e.target) && 
                 sidebar.classList.contains('open')) {
-                sidebar.classList.remove('open');
+                closeMobileSidebar();
             }
         });
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                // Close modals, sidebars, etc.
                 const sidebar = document.getElementById('sidebar');
                 if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
-                    sidebar.classList.remove('open');
+                    closeMobileSidebar();
                 }
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
 
@@ -1026,13 +1310,41 @@
             const studentCard = document.querySelector('.student-card');
             const progressBars = document.querySelectorAll('.progress');
             
-            studentCard.addEventListener('mouseenter', () => {
-                progressBars.forEach((bar, index) => {
-                    setTimeout(() => {
-                        bar.style.transform = 'scaleX(1)';
-                    }, index * 100);
+            if (studentCard && progressBars.length > 0) {
+                studentCard.addEventListener('mouseenter', () => {
+                    progressBars.forEach((bar, index) => {
+                        setTimeout(() => {
+                            bar.style.transform = 'scaleX(1)';
+                        }, index * 100);
+                    });
                 });
-            });
+            }
+        });
+
+        // Touch events for better mobile interaction
+        let startY = 0;
+        document.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            const currentY = e.touches[0].clientY;
+            const sidebar = document.getElementById('sidebar');
+            
+            // Prevent page scroll when sidebar is open on mobile
+            if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target)) {
+                    e.preventDefault();
+                }
+            }
+        });
+
+        // Smooth animations for mobile
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add touch-friendly classes for mobile devices
+            if ('ontouchstart' in window) {
+                document.body.classList.add('touch-device');
+            }
         });
     </script>
 </body>
