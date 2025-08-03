@@ -5,10 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Physics Wallah - Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 
 <body>
@@ -20,55 +19,197 @@
 
     <div class="overlay"></div>
 
-    <!-- Login Form -->
+    <!-- Loading Animation -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+        </div>
+        <p>Loading Physics Wallah...</p>
+    </div>
+
+    <!-- Enhanced Login Form -->
     <div class="login-container">
-        <h2>Physics Wallah Login</h2>
-        <form onsubmit="return validate()">
-            <input type="email" placeholder="Email ID" id="txtEmail" required />
-            <small id="emailError" class="error-msg"></small>
-            <div class="password-field" style="position: relative;">
-                <input type="password" placeholder="Password" id="pwd" required />
-                <i class="fa-solid fa-eye" id="togglePwd"
-                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #aaa;"></i>
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <div class="logo-icon">
+                <i class="fas fa-graduation-cap"></i>
             </div>
-            <small id="pwdError" class="error-msg"></small>
-
-
-            <div class="options-row">
-                <label><input type="checkbox" /> Remember me</label>
-                <a href="#">Forgot Password?</a>
-            </div>
-
-            <button type="submit"><a href="index.html">Login</a></button>
-
-            <div class="divider">OR</div>
-
-            <div class="social-btn">
-                <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
-                Sign in with Google
-            </div>
-
-            <div class="social-btn">
-                <img src="https://img.icons8.com/ios-glyphs/30/github.png" alt="GitHub" style="filter: invert(1);" />
-                Sign in with GitHub
-            </div>
-        </form>
-
-        <div class="footer-text">© Physics Wallah Institute of Innovation</div>
-
-        <div class="signup-link">
-            Don't have an account?
-            <a href="sign-up.html">Sign up</a>
+            <h1>Physics Wallah</h1>
+            <p class="tagline">Institute of Innovation</p>
         </div>
 
+        <div class="form-container">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Sign in to continue your learning journey</p>
+            
+            <form onsubmit="return validate()" class="login-form">
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" placeholder="Email Address" id="txtEmail" required />
+                        <div class="input-focus-border"></div>
+                    </div>
+                    <small id="emailError" class="error-msg"></small>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" placeholder="Password" id="pwd" required />
+                        <i class="fa-solid fa-eye toggle-password" id="togglePwd"></i>
+                        <div class="input-focus-border"></div>
+                    </div>
+                    <small id="pwdError" class="error-msg"></small>
+                </div>
+
+                <div class="password-strength" id="passwordStrength">
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <span class="strength-text" id="strengthText">Password strength</span>
+                </div>
+
+                <div class="options-row">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="rememberMe" />
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span class="btn-text">Sign In</span>
+                    <div class="btn-loader" id="btnLoader">
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                        <div class="loader-dot"></div>
+                    </div>
+                </button>
+            </form>
+
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-text">OR</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <div class="social-login">
+                <button class="social-btn google-btn">
+                    <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
+                    <span>Continue with Google</span>
+                </button>
+
+                <button class="social-btn github-btn">
+                    <img src="https://img.icons8.com/ios-glyphs/30/github.png" alt="GitHub" />
+                    <span>Continue with GitHub</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <div class="signup-link">
+                Don't have an account?
+                <a href="sign-up.html" class="signup-btn">Create Account</a>
+            </div>
+            <div class="footer-text">© 2024 Physics Wallah Institute of Innovation</div>
+        </div>
     </div>
+
+    <!-- Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
 </body>
+
 <script>
+    // Enhanced Login Page JavaScript
     const email = document.getElementById("txtEmail");
     const pwd = document.getElementById("pwd");
     const emailError = document.getElementById("emailError");
     const pwdError = document.getElementById("pwdError");
+    const loginBtn = document.getElementById("loginBtn");
+    const btnLoader = document.getElementById("btnLoader");
+    const btnText = document.querySelector(".btn-text");
+    const loadingOverlay = document.getElementById("loadingOverlay");
+    const notificationContainer = document.getElementById("notificationContainer");
 
+    // Loading Animation
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            loadingOverlay.style.opacity = '0';
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+            }, 500);
+        }, 1500);
+    });
+
+    // Password Strength Indicator
+    function updatePasswordStrength(password) {
+        const strengthFill = document.getElementById("strengthFill");
+        const strengthText = document.getElementById("strengthText");
+        const passwordStrength = document.getElementById("passwordStrength");
+        
+        let strength = 0;
+        let strengthLabel = "";
+        let strengthColor = "";
+
+        if (password.length >= 8) strength += 25;
+        if (/[A-Z]/.test(password)) strength += 25;
+        if (/[0-9]/.test(password)) strength += 25;
+        if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength += 25;
+
+        if (strength <= 25) {
+            strengthLabel = "Weak";
+            strengthColor = "#ff4d4d";
+        } else if (strength <= 50) {
+            strengthLabel = "Fair";
+            strengthColor = "#ffa500";
+        } else if (strength <= 75) {
+            strengthLabel = "Good";
+            strengthColor = "#ffff00";
+        } else {
+            strengthLabel = "Strong";
+            strengthColor = "#00ff00";
+        }
+
+        strengthFill.style.width = strength + "%";
+        strengthFill.style.backgroundColor = strengthColor;
+        strengthText.textContent = strengthLabel;
+        strengthText.style.color = strengthColor;
+        
+        if (password.length > 0) {
+            passwordStrength.style.display = "block";
+        } else {
+            passwordStrength.style.display = "none";
+        }
+    }
+
+    // Show Notification
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+            <span>${message}</span>
+            <button class="notification-close" onclick="this.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        notificationContainer.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 100);
+
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 4000);
+    }
+
+    // Enhanced Validation
     function validate() {
         let valid = true;
 
@@ -93,33 +234,48 @@
         const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
         if (!hasUppercase || !hasNumber || !hasSpecialChar || password.length < 8) {
-            pwdError.textContent =
-                "Password must be at least 8 characters and include an uppercase letter, a number, and a special character.";
+            pwdError.textContent = "Password must be at least 8 characters and include an uppercase letter, a number, and a special character.";
             pwd.classList.add("input-error");
             valid = false;
         }
 
         if (valid) {
-            window.location.href = "index.html";
-            return false; // prevent default form submission (optional)
+            // Show loading state
+            loginBtn.classList.add('loading');
+            btnText.style.opacity = '0';
+            btnLoader.style.display = 'flex';
+            
+            // Simulate login process
+            setTimeout(() => {
+                showNotification('Login successful! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1500);
+            }, 2000);
+            
+            return false;
+        } else {
+            showNotification('Please fix the errors above', 'error');
         }
         return valid;
     }
 
-    // Live password validation
+    // Live password validation and strength
     pwd.addEventListener("input", function () {
-        const password = pwd.value;
+        updatePasswordStrength(this.value);
+        
+        const password = this.value;
         const hasUppercase = /[A-Z]/.test(password);
         const hasNumber = /[0-9]/.test(password);
         const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
         if (hasUppercase && hasNumber && hasSpecialChar && password.length >= 8) {
             pwdError.textContent = "";
-            pwd.classList.remove("input-error");
+            this.classList.remove("input-error");
         }
     });
 
-
+    // Password toggle
     const pwdField = document.getElementById("pwd");
     const togglePwd = document.getElementById("togglePwd");
 
@@ -127,11 +283,43 @@
         const type = pwdField.getAttribute("type") === "password" ? "text" : "password";
         pwdField.setAttribute("type", type);
 
-        // Toggle eye / eye-slash icon
         this.classList.toggle("fa-eye");
         this.classList.toggle("fa-eye-slash");
     });
 
+    // Input focus effects
+    document.querySelectorAll('.input-wrapper input').forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+    });
+
+    // Social button interactions
+    document.querySelectorAll('.social-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showNotification('Social login feature coming soon!', 'info');
+        });
+    });
+
+    // Remember me functionality
+    document.getElementById('rememberMe').addEventListener('change', function() {
+        if (this.checked) {
+            showNotification('Login credentials will be remembered', 'info');
+        }
+    });
+
+    // Forgot password link
+    document.querySelector('.forgot-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        showNotification('Password reset feature coming soon!', 'info');
+    });
 </script>
 
 </html> 

@@ -392,10 +392,16 @@
             border-radius: 8px;
         }
 
-        .edit-profile-btn {
+                .profile-actions {
             position: absolute;
             top: 20px;
             right: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .edit-profile-btn {
             background: var(--primary-color);
             color: var(--dark-bg);
             border: none;
@@ -413,6 +419,46 @@
             background: var(--secondary-color);
             transform: translateY(-2px);
         }
+
+        .setup-details-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 12px 24px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .setup-details-btn:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .cancel-edit-btn {
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 12px 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+         
+         .cancel-edit-btn:hover {
+             background: var(--hover-bg);
+             color: var(--text-primary);
+             transform: translateY(-2px);
+         }
 
         .back-to-dashboard {
             position: fixed;
@@ -491,9 +537,21 @@
                 gap: 15px;
             }
 
-            .edit-profile-btn {
+                                     .profile-actions {
                 position: static;
                 margin-top: 20px;
+                width: 100%;
+                justify-content: center;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .edit-profile-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cancel-edit-btn {
                 width: 100%;
                 justify-content: center;
             }
@@ -558,9 +616,32 @@
                  min-height: 320px;
              }
 
-                         .achievement-header {
-                 padding: 20px 15px;
-             }
+                                     .achievement-header {
+                padding: 20px 15px;
+            }
+            
+            .profile-actions {
+                position: static;
+                margin-top: 15px;
+                width: 100%;
+                justify-content: center;
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .edit-profile-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .cancel-edit-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
 
             .achievement-icon {
                 font-size: 2rem;
@@ -595,11 +676,223 @@
                 align-items: flex-start;
             }
 
-            .achievement-date,
-            .achievement-level {
-                font-size: 0.75rem;
-            }
-        }
+                     .achievement-date,
+         .achievement-level {
+             font-size: 0.75rem;
+         }
+     }
+     
+     /* Edit Mode Styles */
+     .edit-mode .profile-section {
+         position: relative;
+     }
+     
+     .edit-mode .profile-section::before {
+         content: 'Editing Mode';
+         position: absolute;
+         top: -10px;
+         right: 20px;
+         background: var(--primary-color);
+         color: var(--dark-bg);
+         padding: 5px 15px;
+         border-radius: 20px;
+         font-size: 0.8rem;
+         font-weight: 600;
+         z-index: 10;
+     }
+     
+     .info-input {
+         background: rgba(255, 255, 255, 0.1);
+         border: 1px solid var(--border-color);
+         border-radius: var(--border-radius);
+         padding: 8px 12px;
+         color: var(--text-primary);
+         font-size: 0.9rem;
+         font-weight: 600;
+         width: 200px;
+         transition: var(--transition);
+     }
+     
+     .info-input:focus {
+         outline: none;
+         border-color: var(--primary-color);
+         background: rgba(255, 255, 255, 0.15);
+         box-shadow: 0 0 0 2px rgba(0, 255, 210, 0.2);
+     }
+     
+     .skill-input {
+         background: rgba(255, 255, 255, 0.1);
+         border: 1px solid var(--border-color);
+         border-radius: var(--border-radius);
+         padding: 4px 8px;
+         color: var(--primary-color);
+         font-size: 0.9rem;
+         font-weight: 600;
+         width: 60px;
+         text-align: center;
+         transition: var(--transition);
+     }
+     
+           .skill-input:focus {
+          outline: none;
+          border-color: var(--primary-color);
+          background: rgba(255, 255, 255, 0.15);
+          box-shadow: 0 0 0 2px rgba(0, 255, 210, 0.2);
+      }
+      
+      /* Profile Header Edit Inputs */
+      .profile-name-input {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid var(--border-color);
+          border-radius: var(--border-radius);
+          padding: 8px 12px;
+          color: var(--text-primary);
+          font-size: 2.5rem;
+          font-weight: 600;
+          width: 100%;
+          transition: var(--transition);
+      }
+      
+      .profile-name-input:focus {
+          outline: none;
+          border-color: var(--primary-color);
+          background: rgba(255, 255, 255, 0.15);
+          box-shadow: 0 0 0 2px rgba(0, 255, 210, 0.2);
+      }
+      
+      .profile-id-input {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid var(--border-color);
+          border-radius: var(--border-radius);
+          padding: 6px 10px;
+          color: var(--primary-color);
+          font-size: 1.1rem;
+          font-weight: 500;
+          width: 200px;
+          transition: var(--transition);
+      }
+      
+      .profile-id-input:focus {
+          outline: none;
+          border-color: var(--primary-color);
+          background: rgba(255, 255, 255, 0.15);
+          box-shadow: 0 0 0 2px rgba(0, 255, 210, 0.2);
+      }
+      
+      .profile-bio-input {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid var(--border-color);
+          border-radius: var(--border-radius);
+          padding: 8px 12px;
+          color: var(--text-secondary);
+          font-size: 1rem;
+          width: 100%;
+          resize: vertical;
+          min-height: 60px;
+          transition: var(--transition);
+          font-family: inherit;
+      }
+      
+      .profile-bio-input:focus {
+          outline: none;
+          border-color: var(--primary-color);
+          background: rgba(255, 255, 255, 0.15);
+          box-shadow: 0 0 0 2px rgba(0, 255, 210, 0.2);
+      }
+      
+      .stat-input {
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid var(--border-color);
+          border-radius: var(--border-radius);
+          padding: 4px 8px;
+          color: var(--primary-color);
+          font-size: 1.5rem;
+          font-weight: 600;
+          width: 60px;
+          text-align: center;
+          transition: var(--transition);
+      }
+      
+      .stat-input:focus {
+          outline: none;
+          border-color: var(--primary-color);
+          background: rgba(255, 255, 255, 0.15);
+          box-shadow: 0 0 0 2px rgba(0, 255, 210, 0.2);
+      }
+     
+     .edit-mode .info-item {
+         border-bottom: 1px solid rgba(0, 255, 210, 0.2);
+     }
+     
+     .edit-mode .skill-item {
+         border: 1px solid rgba(0, 255, 210, 0.2);
+         border-radius: var(--border-radius);
+         padding: 15px;
+         margin-bottom: 15px;
+         background: rgba(0, 255, 210, 0.05);
+     }
+     
+           @media (max-width: 768px) {
+          .info-input {
+              width: 150px;
+              font-size: 0.8rem;
+          }
+          
+          .skill-input {
+              width: 50px;
+              font-size: 0.8rem;
+          }
+          
+          .profile-name-input {
+              font-size: 2rem;
+          }
+          
+          .profile-id-input {
+              width: 150px;
+              font-size: 1rem;
+          }
+          
+          .profile-bio-input {
+              font-size: 0.9rem;
+              min-height: 50px;
+          }
+          
+          .stat-input {
+              width: 50px;
+              font-size: 1.2rem;
+          }
+      }
+     
+           @media (max-width: 480px) {
+          .info-input {
+              width: 120px;
+              font-size: 0.75rem;
+          }
+          
+          .skill-input {
+              width: 45px;
+              font-size: 0.75rem;
+          }
+          
+          .profile-name-input {
+              font-size: 1.5rem;
+          }
+          
+          .profile-id-input {
+              width: 120px;
+              font-size: 0.9rem;
+          }
+          
+          .profile-bio-input {
+              font-size: 0.85rem;
+              min-height: 40px;
+          }
+          
+          .stat-input {
+              width: 40px;
+              font-size: 1rem;
+          }
+      }
     </style>
 </head>
 
@@ -619,10 +912,20 @@
         <div class="profile-container">
             <div class="profile-header">
                 <div class="profile-cover"></div>
-                <button class="edit-profile-btn" onclick="editProfile()">
-                    <i class="fas fa-edit"></i>
-                    Edit Profile
-                </button>
+                                                 <div class="profile-actions">
+                    <button class="edit-profile-btn" onclick="editProfile()">
+                        <i class="fas fa-edit"></i>
+                        Edit Profile
+                    </button>
+                    <button class="setup-details-btn" onclick="goToDetails()" style="margin-left: 10px;">
+                        <i class="fas fa-cog"></i>
+                        Setup Details
+                    </button>
+                    <button class="cancel-edit-btn" onclick="cancelEdit()" style="display: none;">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </button>
+                </div>
 
                 <div class="profile-info">
                     <div class="profile-avatar">
@@ -997,12 +1300,401 @@
             window.location.href = 'index.html';
         }
 
-        function editProfile() {
-            showToaster(
-                'info',
-                'Edit Profile',
-                'Profile editing feature will be available soon!'
-            );
+                 function editProfile() {
+             if (document.body.classList.contains('edit-mode')) {
+                 // Save changes
+                 saveProfileChanges();
+             } else {
+                 // Enter edit mode
+                 enterEditMode();
+             }
+         }
+         
+         function enterEditMode() {
+             document.body.classList.add('edit-mode');
+             
+             // Update button text and icon
+             const editBtn = document.querySelector('.edit-profile-btn');
+             editBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+             editBtn.style.background = 'var(--secondary-color)';
+             
+             // Show cancel button
+             const cancelBtn = document.querySelector('.cancel-edit-btn');
+             cancelBtn.style.display = 'flex';
+             
+             // Make profile sections editable
+             makeSectionsEditable();
+             
+             showToaster('info', 'Edit Mode', 'You can now edit your profile information');
+         }
+         
+                 function saveProfileChanges() {
+            // Collect all edited values
+            const editedData = collectEditedData();
+            
+            // Save to localStorage
+            localStorage.setItem('profileData', JSON.stringify(editedData));
+            
+            // Update the display with new values
+            updateProfileDisplay(editedData);
+            
+            // Exit edit mode
+            exitEditMode();
+            
+            showToaster('success', 'Profile Updated', 'Your profile has been successfully updated and saved!');
+        }
+         
+         function exitEditMode() {
+             document.body.classList.remove('edit-mode');
+             
+             // Reset button
+             const editBtn = document.querySelector('.edit-profile-btn');
+             editBtn.innerHTML = '<i class="fas fa-edit"></i> Edit Profile';
+             editBtn.style.background = 'var(--primary-color)';
+             
+             // Hide cancel button
+             const cancelBtn = document.querySelector('.cancel-edit-btn');
+             cancelBtn.style.display = 'none';
+             
+             // Remove edit inputs
+             removeEditInputs();
+         }
+         
+         function cancelEdit() {
+             // Exit edit mode without saving
+             exitEditMode();
+             showToaster('warning', 'Edit Cancelled', 'Changes were not saved');
+         }
+         
+         function makeSectionsEditable() {
+             // Make profile header editable
+             makeProfileHeaderEditable();
+             
+             // Make personal info editable
+             const personalInfo = document.querySelector('.info-item');
+             const personalSection = personalInfo.closest('.profile-section');
+             
+             personalSection.querySelectorAll('.info-item').forEach(item => {
+                 const label = item.querySelector('.info-label').textContent;
+                 const value = item.querySelector('.info-value').textContent;
+                 
+                 item.innerHTML = `
+                     <span class="info-label">${label}</span>
+                     <input type="text" class="info-input" value="${value}" data-field="${label.toLowerCase().replace(/\s+/g, '_')}">
+                 `;
+             });
+             
+             // Make academic info editable
+             const academicSection = document.querySelector('.profile-section:nth-child(2)');
+             academicSection.querySelectorAll('.info-item').forEach(item => {
+                 const label = item.querySelector('.info-label').textContent;
+                 const value = item.querySelector('.info-value').textContent;
+                 
+                 item.innerHTML = `
+                     <span class="info-label">${label}</span>
+                     <input type="text" class="info-input" value="${value}" data-field="${label.toLowerCase().replace(/\s+/g, '_')}">
+                 `;
+             });
+             
+             // Make skills editable
+             const skillsSection = document.querySelector('.skills-section');
+             skillsSection.querySelectorAll('.skill-item').forEach(item => {
+                 const skillName = item.querySelector('.skill-name').textContent.trim();
+                 const percentage = item.querySelector('.skill-percentage').textContent;
+                 
+                 item.innerHTML = `
+                     <div class="skill-header">
+                         <span class="skill-name">${skillName}</span>
+                         <input type="number" class="skill-input" value="${percentage.replace('%', '')}" min="0" max="100" data-skill="${skillName.toLowerCase().replace(/\s+/g, '_')}">
+                     </div>
+                     <div class="skill-bar">
+                         <div class="skill-progress" style="width: ${percentage}"></div>
+                     </div>
+                 `;
+                 
+                 // Add event listener to update progress bar
+                 const input = item.querySelector('.skill-input');
+                 input.addEventListener('input', function() {
+                     const value = this.value;
+                     const progressBar = item.querySelector('.skill-progress');
+                     progressBar.style.width = value + '%';
+                     this.value = value;
+                 });
+             });
+         }
+         
+         function makeProfileHeaderEditable() {
+             const profileDetails = document.querySelector('.profile-details');
+             const name = profileDetails.querySelector('h1').textContent;
+             const studentId = profileDetails.querySelector('.student-id').textContent;
+             const bio = profileDetails.querySelector('p').textContent;
+             
+             // Make name editable
+             profileDetails.querySelector('h1').innerHTML = `
+                 <input type="text" class="profile-name-input" value="${name}" data-field="name">
+             `;
+             
+             // Make student ID editable
+             profileDetails.querySelector('.student-id').innerHTML = `
+                 <input type="text" class="profile-id-input" value="${studentId}" data-field="student_id">
+             `;
+             
+             // Make bio editable
+             profileDetails.querySelector('p').innerHTML = `
+                 <textarea class="profile-bio-input" data-field="bio" rows="2">${bio}</textarea>
+             `;
+             
+             // Make stats editable
+             const stats = document.querySelectorAll('.stat-value');
+             stats.forEach((stat, index) => {
+                 const value = stat.textContent;
+                 const label = stat.nextElementSibling.textContent;
+                 const fieldName = label.toLowerCase().replace(/\s+/g, '_');
+                 
+                 stat.innerHTML = `
+                     <input type="text" class="stat-input" value="${value}" data-field="${fieldName}">
+                 `;
+             });
+         }
+         
+         function removeEditInputs() {
+             // Restore profile header
+             restoreProfileHeader();
+             
+             // Remove all edit inputs and restore original display
+             document.querySelectorAll('.info-input').forEach(input => {
+                 const item = input.closest('.info-item');
+                 const label = item.querySelector('.info-label').textContent;
+                 const value = input.value;
+                 
+                 item.innerHTML = `
+                     <span class="info-label">${label}</span>
+                     <span class="info-value">${value}</span>
+                 `;
+             });
+             
+             // Restore skills display
+             document.querySelectorAll('.skill-input').forEach(input => {
+                 const item = input.closest('.skill-item');
+                 const skillName = item.querySelector('.skill-name').textContent.trim();
+                 const value = input.value;
+                 
+                 item.innerHTML = `
+                     <div class="skill-header">
+                         <span class="skill-name">${skillName}</span>
+                         <span class="skill-percentage">${value}%</span>
+                     </div>
+                     <div class="skill-bar">
+                         <div class="skill-progress" style="width: ${value}%"></div>
+                     </div>
+                 `;
+             });
+         }
+         
+         function restoreProfileHeader() {
+             const profileDetails = document.querySelector('.profile-details');
+             
+             // Restore name
+             const nameInput = profileDetails.querySelector('.profile-name-input');
+             if (nameInput) {
+                 profileDetails.querySelector('h1').textContent = nameInput.value;
+             }
+             
+             // Restore student ID
+             const idInput = profileDetails.querySelector('.profile-id-input');
+             if (idInput) {
+                 profileDetails.querySelector('.student-id').textContent = idInput.value;
+             }
+             
+             // Restore bio
+             const bioInput = profileDetails.querySelector('.profile-bio-input');
+             if (bioInput) {
+                 profileDetails.querySelector('p').textContent = bioInput.value;
+             }
+             
+             // Restore stats
+             document.querySelectorAll('.stat-input').forEach(input => {
+                 const statItem = input.closest('.stat-item');
+                 const label = statItem.querySelector('.stat-label').textContent;
+                 
+                 statItem.querySelector('.stat-value').textContent = input.value;
+             });
+         }
+         
+         function collectEditedData() {
+             const data = {};
+             
+             // Collect profile header data
+             document.querySelectorAll('.profile-name-input, .profile-id-input, .profile-bio-input, .stat-input').forEach(input => {
+                 data[input.dataset.field] = input.value;
+             });
+             
+             // Collect personal info
+             document.querySelectorAll('.info-input').forEach(input => {
+                 data[input.dataset.field] = input.value;
+             });
+             
+             // Collect skills data
+             document.querySelectorAll('.skill-input').forEach(input => {
+                 data[input.dataset.skill] = input.value;
+             });
+             
+             return data;
+         }
+         
+                 function updateProfileDisplay(data) {
+            // Update profile header display
+            updateProfileHeaderDisplay(data);
+            
+            // Update personal info display
+            Object.keys(data).forEach(key => {
+                // Find info items by their label text
+                const infoItems = document.querySelectorAll('.info-item');
+                infoItems.forEach(item => {
+                    const label = item.querySelector('.info-label');
+                    if (label && label.textContent.toLowerCase().replace(/\s+/g, '_') === key) {
+                        const valueSpan = item.querySelector('.info-value');
+                        if (valueSpan) {
+                            valueSpan.textContent = data[key];
+                        }
+                    }
+                });
+            });
+            
+            // Update skills display
+            Object.keys(data).forEach(key => {
+                const skillItems = document.querySelectorAll('.skill-item');
+                skillItems.forEach(item => {
+                    const skillName = item.querySelector('.skill-name');
+                    if (skillName && skillName.textContent.trim().toLowerCase().replace(/\s+/g, '_') === key) {
+                        const percentageSpan = item.querySelector('.skill-percentage');
+                        const progressBar = item.querySelector('.skill-progress');
+                        if (percentageSpan && progressBar) {
+                            percentageSpan.textContent = data[key] + '%';
+                            progressBar.style.width = data[key] + '%';
+                        }
+                    }
+                });
+            });
+        }
+         
+                 function updateProfileHeaderDisplay(data) {
+            const profileDetails = document.querySelector('.profile-details');
+            
+            // Update name
+            if (data.name) {
+                profileDetails.querySelector('h1').textContent = data.name;
+            }
+            
+            // Update student ID
+            if (data.student_id) {
+                profileDetails.querySelector('.student-id').textContent = data.student_id;
+            }
+            
+            // Update bio
+            if (data.bio) {
+                profileDetails.querySelector('p').textContent = data.bio;
+            }
+            
+            // Update stats
+            if (data.overall_grade) {
+                document.querySelector('.stat-item:nth-child(1) .stat-value').textContent = data.overall_grade;
+            }
+            if (data.attendance) {
+                document.querySelector('.stat-item:nth-child(2) .stat-value').textContent = data.attendance;
+            }
+            if (data.projects) {
+                document.querySelector('.stat-item:nth-child(3) .stat-value').textContent = data.projects;
+            }
+            if (data.achievements) {
+                document.querySelector('.stat-item:nth-child(4) .stat-value').textContent = data.achievements;
+            }
+        }
+        
+        function loadSavedProfileData() {
+            const savedData = localStorage.getItem('profileData');
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    updateProfileDisplay(data);
+                    console.log('Profile data loaded from localStorage');
+                } catch (error) {
+                    console.error('Error loading profile data:', error);
+                }
+            }
+            
+            // Load and display subject data from details page
+            loadSubjectDataFromDetails();
+        }
+
+        // Load subject data from details page and update technical skills
+        function loadSubjectDataFromDetails() {
+            const allSubjects = localStorage.getItem('allSubjects');
+            if (allSubjects) {
+                try {
+                    const subjects = JSON.parse(allSubjects);
+                    updateTechnicalSkillsWithSubjects(subjects);
+                    console.log('Subject data loaded from details page');
+                } catch (error) {
+                    console.error('Error loading subject data:', error);
+                }
+            }
+        }
+
+        // Update technical skills section with subject data
+        function updateTechnicalSkillsWithSubjects(subjects) {
+            const skillsSection = document.querySelector('.skills-section');
+            if (!skillsSection) return;
+
+            // Clear existing skills
+            const existingSkills = skillsSection.querySelectorAll('.skill-item');
+            existingSkills.forEach(skill => skill.remove());
+
+            // Add new skills based on subjects
+            subjects.forEach(subject => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                
+                // Get appropriate icon for subject
+                const icon = getSubjectIcon(subject.name);
+                
+                skillItem.innerHTML = `
+                    <div class="skill-header">
+                        <span class="skill-name">${icon} ${subject.name}</span>
+                        <span class="skill-percentage">${subject.score}%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: ${subject.score}%"></div>
+                    </div>
+                `;
+                
+                skillsSection.appendChild(skillItem);
+            });
+        }
+
+        // Get appropriate icon for subject
+        function getSubjectIcon(subjectName) {
+            const name = subjectName.toLowerCase();
+            if (name.includes('html') || name.includes('web')) return '<i class="fab fa-html5"></i>';
+            if (name.includes('css')) return '<i class="fab fa-css3-alt"></i>';
+            if (name.includes('javascript') || name.includes('js')) return '<i class="fab fa-js"></i>';
+            if (name.includes('react')) return '<i class="fab fa-react"></i>';
+            if (name.includes('node')) return '<i class="fab fa-node-js"></i>';
+            if (name.includes('python')) return '<i class="fab fa-python"></i>';
+            if (name.includes('java')) return '<i class="fab fa-java"></i>';
+            if (name.includes('database') || name.includes('sql')) return '<i class="fas fa-database"></i>';
+            if (name.includes('math') || name.includes('calculus')) return '<i class="fas fa-calculator"></i>';
+            if (name.includes('physics')) return '<i class="fas fa-atom"></i>';
+            if (name.includes('chemistry')) return '<i class="fas fa-flask"></i>';
+            if (name.includes('english') || name.includes('literature')) return '<i class="fas fa-book"></i>';
+            if (name.includes('history')) return '<i class="fas fa-landmark"></i>';
+            if (name.includes('economics')) return '<i class="fas fa-chart-line"></i>';
+            return '<i class="fas fa-book"></i>'; // Default icon
+        }
+
+        // Navigate to details page
+        function goToDetails() {
+            window.location.href = 'details.html';
         }
 
         // Animate skill bars on scroll
@@ -1021,6 +1713,9 @@
         // Initialize skill bar animations
         window.addEventListener('scroll', animateSkillBars);
         window.addEventListener('load', animateSkillBars);
+        
+        // Load saved profile data on page load
+        window.addEventListener('load', loadSavedProfileData);
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

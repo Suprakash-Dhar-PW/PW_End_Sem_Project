@@ -5,13 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Physics Wallah - Sign Up</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="sign-up.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-
   <!-- Background Video -->
   <video autoplay muted loop class="bg-video">
     <source src="videos/PW_LOGIN.mp4" type="video/mp4" />
@@ -20,118 +19,314 @@
 
   <div class="overlay"></div>
 
-  <!-- Sign-Up Form -->
+  <!-- Loading Animation -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner">
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+      <div class="spinner-ring"></div>
+    </div>
+    <p>Loading Physics Wallah...</p>
+  </div>
+
+  <!-- Enhanced Sign-Up Form -->
   <div class="login-container">
-    <h2>Create Your Account</h2>
-
-    <form onsubmit="return validateSignUp(event)">
-      <input type="text" id="contact" placeholder="Mobile Number or Email" required />
-      <small id="contactError" class="error-msg"></small>
-
-      <div class="password-field" style="position: relative;">
-        <input type="password" id="password" placeholder="Password" required />
-        <i class="fa-solid fa-eye" id="togglePwd" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #aaa;"></i>
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <div class="logo-icon">
+        <i class="fas fa-user-plus"></i>
       </div>
-      <small id="passwordError" class="error-msg"></small>
+      <h1>Physics Wallah</h1>
+      <p class="tagline">Institute of Innovation</p>
+    </div>
 
-      <input type="text" id="fullName" placeholder="Full Name" required />
-      <input type="text" id="username" placeholder="Username" required />
+    <div class="form-container">
+      <h2>Create Your Account</h2>
+      <p class="subtitle">Join us to start your learning journey</p>
 
-      <div class="options-row">
-        <a href="#">Need help?</a>
+      <form onsubmit="return validateSignUp(event)" class="signup-form">
+        <div class="input-group">
+          <div class="input-wrapper">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="fullName" placeholder="Full Name" required />
+            <div class="input-focus-border"></div>
+          </div>
+          <small id="fullNameError" class="error-msg"></small>
+        </div>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <i class="fas fa-at input-icon"></i>
+            <input type="text" id="username" placeholder="Username" required />
+            <div class="input-focus-border"></div>
+          </div>
+          <small id="usernameError" class="error-msg"></small>
+        </div>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="text" id="contact" placeholder="Email or Mobile Number" required />
+            <div class="input-focus-border"></div>
+          </div>
+          <small id="contactError" class="error-msg"></small>
+        </div>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="password" placeholder="Password" required />
+            <i class="fa-solid fa-eye toggle-password" id="togglePwd"></i>
+            <div class="input-focus-border"></div>
+          </div>
+          <small id="passwordError" class="error-msg"></small>
+        </div>
+
+        <div class="password-strength" id="passwordStrength">
+          <div class="strength-bar">
+            <div class="strength-fill" id="strengthFill"></div>
+          </div>
+          <span class="strength-text" id="strengthText">Password strength</span>
+        </div>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+            <i class="fa-solid fa-eye toggle-password" id="toggleConfirmPwd"></i>
+            <div class="input-focus-border"></div>
+          </div>
+          <small id="confirmPasswordError" class="error-msg"></small>
+        </div>
+
+        <div class="options-row">
+          <label class="checkbox-container">
+            <input type="checkbox" id="agreeTerms" required />
+            <span class="checkmark"></span>
+            I agree to the <a href="#" class="terms-link">Terms & Conditions</a>
+          </label>
+        </div>
+
+        <button type="submit" class="signup-btn" id="signupBtn">
+          <span class="btn-text">Create Account</span>
+          <div class="btn-loader" id="btnLoader">
+            <div class="loader-dot"></div>
+            <div class="loader-dot"></div>
+            <div class="loader-dot"></div>
+          </div>
+        </button>
+      </form>
+
+      <div class="social-login">
+        <p>Or continue with</p>
+        <div class="social-icons">
+          <div class="social-icon" onclick="showNotification('Google sign-up coming soon!', 'info')">
+            <i class="fab fa-google"></i>
+          </div>
+          <div class="social-icon" onclick="showNotification('GitHub sign-up coming soon!', 'info')">
+            <i class="fab fa-github"></i>
+          </div>
+        </div>
       </div>
-
-      <button type="submit">Sign Up</button>
-    </form>
-
-    <div class="footer-text">© Physics Wallah Institute of Innovation</div>
+    </div>
 
     <div class="signup-link">
       Already have an account?
-      <a href="login.html">Sign in</a>
+      <a href="login.html">Sign In</a>
     </div>
+    <div class="footer-text">© 2024 Physics Wallah Institute of Innovation</div>
   </div>
 
-  <script>
-    const contactInput = document.getElementById("contact");
-    const passwordInput = document.getElementById("password");
-    const contactError = document.getElementById("contactError");
-    const passwordError = document.getElementById("passwordError");
-    const togglePwd = document.getElementById("togglePwd");
-
-    function validateSignUp(event) {
-      let valid = true;
-
-      // Reset errors
-      contactError.textContent = "";
-      passwordError.textContent = "";
-      contactInput.classList.remove("input-error");
-      passwordInput.classList.remove("input-error");
-
-      const contactVal = contactInput.value.trim();
-      const passwordVal = passwordInput.value.trim();
-
-      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactVal);
-      const isPhone = /^[0-9]{10}$/.test(contactVal);
-
-      if (!isEmail && !isPhone) {
-        contactError.textContent = "Enter a valid email or 10-digit phone number.";
-        contactInput.classList.add("input-error");
-        valid = false;
-      }
-
-      const hasUpper = /[A-Z]/.test(passwordVal);
-      const hasNumber = /[0-9]/.test(passwordVal);
-      const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(passwordVal);
-
-      if (passwordVal.length < 8 || !hasUpper || !hasNumber || !hasSpecial) {
-        passwordError.textContent =
-          "Password must be at least 8 characters, include an uppercase letter, a number, and a special character.";
-        passwordInput.classList.add("input-error");
-        valid = false;
-      }
-
-      if (!valid && event) {
-        event.preventDefault(); // Prevent form submission if validation fails
-      }
-
-      return valid;
-    }
-
-    // Live validation for password
-    passwordInput.addEventListener("input", () => {
-      const pwd = passwordInput.value;
-      const valid = pwd.length >= 8 &&
-        /[A-Z]/.test(pwd) &&
-        /[0-9]/.test(pwd) &&
-        /[!@#$%^&*(),.?":{}|<>]/.test(pwd);
-
-      if (valid) {
-        passwordError.textContent = "";
-        passwordInput.classList.remove("input-error");
-      }
-    });
-
-    // Live validation for contact
-    contactInput.addEventListener("input", () => {
-      const val = contactInput.value.trim();
-      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-      const isPhone = /^[0-9]{10}$/.test(val);
-
-      if (isEmail || isPhone) {
-        contactError.textContent = "";
-        contactInput.classList.remove("input-error");
-      }
-    });
-
-    // Toggle show/hide password
-    togglePwd.addEventListener("click", () => {
-      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-      passwordInput.setAttribute("type", type);
-      togglePwd.classList.toggle("fa-eye");
-      togglePwd.classList.toggle("fa-eye-slash");
-    });
-  </script>
+  <!-- Notification Container -->
+  <div class="notification" id="notification">
+    <i class="fas fa-info-circle" id="notificationIcon"></i>
+    <div class="notification-content">
+      <div class="notification-title" id="notificationTitle">Notification</div>
+      <div class="notification-message" id="notificationMessage"></div>
+    </div>
+  </div>
 </body>
+
+<script>
+function togglePasswordVisibility(toggleId, inputId) {
+  const toggle = document.getElementById(toggleId);
+  const input = document.getElementById(inputId);
+
+  toggle.addEventListener("click", () => {
+    const type = input.getAttribute("type") === "password" ? "text" : "password";
+    input.setAttribute("type", type);
+    toggle.classList.toggle("fa-eye");
+    toggle.classList.toggle("fa-eye-slash");
+  });
+}
+
+togglePasswordVisibility("togglePwd", "password");
+togglePasswordVisibility("toggleConfirmPwd", "confirmPassword");
+
+// Password strength meter
+const passwordInput = document.getElementById("password");
+const strengthFill = document.getElementById("strengthFill");
+const strengthText = document.getElementById("strengthText");
+
+passwordInput.addEventListener("input", () => {
+  const val = passwordInput.value;
+  let strength = 0;
+  if (val.match(/[a-z]/)) strength++;
+  if (val.match(/[A-Z]/)) strength++;
+  if (val.match(/[0-9]/)) strength++;
+  if (val.match(/[^a-zA-Z0-9]/)) strength++;
+  if (val.length > 7) strength++;
+
+  strengthFill.style.width = `${(strength / 5) * 100}%`;
+
+  const strengthMap = ["Very Weak", "Weak", "Moderate", "Strong", "Very Strong"];
+  strengthText.textContent = strengthMap[strength - 1] || "Too Short";
+  strengthFill.style.backgroundColor = ["red", "orange", "gold", "#4caf50", "#2e7d32"][strength - 1] || "gray";
+});
+
+// Form validation
+function validateSignUp(event) {
+  event.preventDefault();
+
+  let isValid = true;
+
+  const fullName = document.getElementById("fullName");
+  const username = document.getElementById("username");
+  const contact = document.getElementById("contact");
+  const password = document.getElementById("password");
+  const confirmPassword = document.getElementById("confirmPassword");
+  const agreeTerms = document.getElementById("agreeTerms");
+
+  const fullNameError = document.getElementById("fullNameError");
+  const usernameError = document.getElementById("usernameError");
+  const contactError = document.getElementById("contactError");
+  const passwordError = document.getElementById("passwordError");
+  const confirmPasswordError = document.getElementById("confirmPasswordError");
+
+  // Reset errors
+  fullNameError.textContent = "";
+  usernameError.textContent = "";
+  contactError.textContent = "";
+  passwordError.textContent = "";
+  confirmPasswordError.textContent = "";
+
+  if (fullName.value.trim() === "") {
+    fullNameError.textContent = "Full name is required.";
+    isValid = false;
+  }
+
+  if (username.value.trim() === "") {
+    usernameError.textContent = "Username is required.";
+    isValid = false;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!emailRegex.test(contact.value.trim()) && !phoneRegex.test(contact.value.trim())) {
+    contactError.textContent = "Enter a valid email or 10-digit mobile number.";
+    isValid = false;
+  }
+
+  if (password.value.length < 6) {
+    passwordError.textContent = "Password must be at least 6 characters.";
+    isValid = false;
+  }
+
+  if (password.value !== confirmPassword.value) {
+    confirmPasswordError.textContent = "Passwords do not match.";
+    isValid = false;
+  }
+
+  if (!agreeTerms.checked) {
+    showNotification("Please agree to the terms and conditions.", "error");
+    isValid = false;
+  }
+
+  if (isValid) {
+    // Show button loader
+    const btnText = document.querySelector('.btn-text');
+    const btnLoader = document.getElementById("btnLoader");
+    btnText.style.opacity = '0';
+    btnLoader.style.display = "flex";
+    
+    // Simulate checking for existing user
+    setTimeout(() => {
+      // Check if username already exists (simulated)
+      const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+      const userExists = existingUsers.some(user => user.username === username.value);
+      
+      if (userExists) {
+        // User already exists
+        btnText.style.opacity = '1';
+        btnLoader.style.display = "none";
+        showNotification("Username already exists. Please choose another.", "error");
+      } else {
+        // Save user data
+        const userData = {
+          fullName: fullName.value,
+          username: username.value,
+          contact: contact.value,
+          password: password.value
+        };
+        
+        existingUsers.push(userData);
+        localStorage.setItem('users', JSON.stringify(existingUsers));
+        
+        // Show success notification
+        showNotification("Account created successfully!", "success");
+        
+        // Show loading overlay before redirecting
+        document.getElementById("loadingOverlay").style.display = "flex";
+        document.getElementById("loadingOverlay").style.opacity = "1";
+        
+        // Redirect to details page after delay
+        setTimeout(() => {
+          window.location.href = "details.html";
+        }, 1000);
+      }
+    }, 1500);
+  }
+
+  return false;
+}
+
+// Notification system
+function showNotification(message, type = 'info') {
+  const notification = document.getElementById('notification');
+  const notificationIcon = document.getElementById('notificationIcon');
+  const notificationTitle = document.getElementById('notificationTitle');
+  const notificationMessage = document.getElementById('notificationMessage');
+  
+  // Set icon and title based on type
+  if (type === 'success') {
+    notificationIcon.className = 'fas fa-check-circle';
+    notificationTitle.textContent = 'Success';
+    notification.className = 'notification success show';
+  } else if (type === 'error') {
+    notificationIcon.className = 'fas fa-exclamation-circle';
+    notificationTitle.textContent = 'Error';
+    notification.className = 'notification error show';
+  } else {
+    notificationIcon.className = 'fas fa-info-circle';
+    notificationTitle.textContent = 'Information';
+    notification.className = 'notification info show';
+  }
+  
+  notificationMessage.textContent = message;
+  
+  // Hide notification after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove('show');
+  }, 3000);
+}
+
+// Hide loading overlay after a short delay
+window.addEventListener("load", () => {
+  const overlay = document.getElementById("loadingOverlay");
+  overlay.style.opacity = 0;
+  setTimeout(() => overlay.style.display = "none", 500);
+});
+</script>
 
 </html>
