@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // If no students data, create sample data
     if (students.length === 0) {
         students = [
+            // 2025 Batch
             { id: 1, enrollmentNo: 'PW2025_001', name: 'Rahul Sharma', batch: '2025' },
             { id: 2, enrollmentNo: 'PW2025_002', name: 'Priya Patel', batch: '2025' },
             { id: 3, enrollmentNo: 'PW2025_003', name: 'Amit Singh', batch: '2025' },
@@ -54,11 +55,40 @@ document.addEventListener('DOMContentLoaded', function() {
             { id: 5, enrollmentNo: 'PW2025_005', name: 'Vikram Mehta', batch: '2025' },
             { id: 6, enrollmentNo: 'PW2025_006', name: 'Ananya Desai', batch: '2025' },
             { id: 7, enrollmentNo: 'PW2025_007', name: 'Suprakash Dhar', batch: '2025' },
-            { id: 8, enrollmentNo: 'PW2024_001', name: 'Kiran Rao', batch: '2024' },
-            { id: 9, enrollmentNo: 'PW2024_002', name: 'Sanjay Kumar', batch: '2024' },
-            { id: 10, enrollmentNo: 'PW2024_003', name: 'Meera Joshi', batch: '2024' },
-            { id: 11, enrollmentNo: 'PW2023_001', name: 'Rajat Verma', batch: '2023' },
-            { id: 12, enrollmentNo: 'PW2023_002', name: 'Sunita Sharma', batch: '2023' }
+            { id: 8, enrollmentNo: 'PW2025_008', name: 'Riya Kapoor', batch: '2025' },
+            { id: 9, enrollmentNo: 'PW2025_009', name: 'Arjun Malhotra', batch: '2025' },
+            { id: 10, enrollmentNo: 'PW2025_010', name: 'Divya Choudhary', batch: '2025' },
+            { id: 11, enrollmentNo: 'PW2025_011', name: 'Rohan Jain', batch: '2025' },
+            { id: 12, enrollmentNo: 'PW2025_012', name: 'Nisha Reddy', batch: '2025' },
+            { id: 13, enrollmentNo: 'PW2025_013', name: 'Varun Khanna', batch: '2025' },
+            { id: 14, enrollmentNo: 'PW2025_014', name: 'Pooja Sharma', batch: '2025' },
+            { id: 15, enrollmentNo: 'PW2025_015', name: 'Kunal Verma', batch: '2025' },
+            
+            // 2024 Batch
+            { id: 16, enrollmentNo: 'PW2024_001', name: 'Kiran Rao', batch: '2024' },
+            { id: 17, enrollmentNo: 'PW2024_002', name: 'Sanjay Kumar', batch: '2024' },
+            { id: 18, enrollmentNo: 'PW2024_003', name: 'Meera Joshi', batch: '2024' },
+            { id: 19, enrollmentNo: 'PW2024_004', name: 'Aditya Sharma', batch: '2024' },
+            { id: 20, enrollmentNo: 'PW2024_005', name: 'Sneha Gupta', batch: '2024' },
+            { id: 21, enrollmentNo: 'PW2024_006', name: 'Raj Malhotra', batch: '2024' },
+            { id: 22, enrollmentNo: 'PW2024_007', name: 'Kavita Singh', batch: '2024' },
+            { id: 23, enrollmentNo: 'PW2024_008', name: 'Deepak Patel', batch: '2024' },
+            { id: 24, enrollmentNo: 'PW2024_009', name: 'Anjali Desai', batch: '2024' },
+            { id: 25, enrollmentNo: 'PW2024_010', name: 'Vivek Reddy', batch: '2024' },
+            { id: 26, enrollmentNo: 'PW2024_011', name: 'Shweta Khanna', batch: '2024' },
+            { id: 27, enrollmentNo: 'PW2024_012', name: 'Nikhil Jain', batch: '2024' },
+            
+            // 2023 Batch
+            { id: 28, enrollmentNo: 'PW2023_001', name: 'Rajat Verma', batch: '2023' },
+            { id: 29, enrollmentNo: 'PW2023_002', name: 'Sunita Sharma', batch: '2023' },
+            { id: 30, enrollmentNo: 'PW2023_003', name: 'Mohit Agarwal', batch: '2023' },
+            { id: 31, enrollmentNo: 'PW2023_004', name: 'Preeti Singhania', batch: '2023' },
+            { id: 32, enrollmentNo: 'PW2023_005', name: 'Vikas Choudhary', batch: '2023' },
+            { id: 33, enrollmentNo: 'PW2023_006', name: 'Neetu Kapoor', batch: '2023' },
+            { id: 34, enrollmentNo: 'PW2023_007', name: 'Suresh Raina', batch: '2023' },
+            { id: 35, enrollmentNo: 'PW2023_008', name: 'Manisha Koirala', batch: '2023' },
+            { id: 36, enrollmentNo: 'PW2023_009', name: 'Prakash Jha', batch: '2023' },
+            { id: 37, enrollmentNo: 'PW2023_010', name: 'Ritika Saxena', batch: '2023' }
         ];
         localStorage.setItem('students', JSON.stringify(students));
     }
