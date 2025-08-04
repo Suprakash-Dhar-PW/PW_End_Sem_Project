@@ -9,18 +9,12 @@
 html,
 body {
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     font-family: 'Poppins', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-}
-
-body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
 }
 
 /* Background Video */

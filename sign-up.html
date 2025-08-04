@@ -244,47 +244,13 @@ function validateSignUp(event) {
   }
 
   if (isValid) {
-    // Show button loader
-    const btnText = document.querySelector('.btn-text');
-    const btnLoader = document.getElementById("btnLoader");
-    btnText.style.opacity = '0';
-    btnLoader.style.display = "flex";
-    
-    // Simulate checking for existing user
+    document.getElementById("btnLoader").style.display = "flex";
     setTimeout(() => {
-      // Check if username already exists (simulated)
-      const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-      const userExists = existingUsers.some(user => user.username === username.value);
-      
-      if (userExists) {
-        // User already exists
-        btnText.style.opacity = '1';
-        btnLoader.style.display = "none";
-        showNotification("Username already exists. Please choose another.", "error");
-      } else {
-        // Save user data
-        const userData = {
-          fullName: fullName.value,
-          username: username.value,
-          contact: contact.value,
-          password: password.value
-        };
-        
-        existingUsers.push(userData);
-        localStorage.setItem('users', JSON.stringify(existingUsers));
-        
-        // Show success notification
-        showNotification("Account created successfully!", "success");
-        
-        // Show loading overlay before redirecting
-        document.getElementById("loadingOverlay").style.display = "flex";
-        document.getElementById("loadingOverlay").style.opacity = "1";
-        
-        // Redirect to details page after delay
-        setTimeout(() => {
-          window.location.href = "details.html";
-        }, 1000);
-      }
+      document.getElementById("btnLoader").style.display = "none";
+      showNotification("Account created successfully!", "success");
+      document.querySelector("form").reset();
+      strengthFill.style.width = "0%";
+      strengthText.textContent = "Password strength";
     }, 1500);
   }
 

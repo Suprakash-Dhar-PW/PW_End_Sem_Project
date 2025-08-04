@@ -125,12 +125,6 @@ body::-webkit-scrollbar {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     animation: slideInUp 0.8s ease-out;
     overflow-y: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-}
-
-.login-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
 }
 
 @keyframes slideInUp {

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PW IOI - Mentor Attendance System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="attendance.css">
+    <link rel="stylesheet" href="mentor-attendance.css">
+    <style>
+        /* Remove underline from social icons in the footer */
+        .site-footer .social-icons a {
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+    <div class="top-right-controls">
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
+            </button>
+            <button class="signup-btn" onclick="showSignupModal()">
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
+            </button>
+        </div>
+        <div class="profile-icon" onclick="goToProfile()" title="View Profile">
+            <img src="images/Supra_image.jpg" alt="Profile" />
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="nav-section" role="navigation">
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="mentor-attendance.html" class="nav-link active" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
+            <a href="#projects" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="#announcements" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="#community" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="#events" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
+            <a href="#leave" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="#gallery" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+        </nav>
+    </div>
+
+    <main class="main-content" id="main">
+        <div class="main-heading">
+            <h1 class="welcome_tag">Mentor Attendance System</h1>
+            <p class="subtitle">Manage student attendance efficiently</p>
+        </div>
+
+        <div class="mentor-info">
+            <div class="mentor-profile">
+                <i class="fas fa-user-tie"></i>
+                <div class="mentor-details">
+                    <h3 id="mentorName">Dr. Rajesh Kumar</h3>
+                    <p id="mentorEmail">rajesh.kumar@pwioi.edu</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="attendance-container">
+            <div class="attendance-controls">
+                <div class="control-row">
+                    <div class="control-group">
+                        <label for="batchSelect">Batch</label>
+                        <select id="batchSelect" class="attendance-select">
+                            <option value="">Select Batch</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="subjectSelect">Subject</label>
+                        <div class="subject-select-container">
+                            <select id="subjectSelect" class="attendance-select">
+                                <option value="">Select Subject</option>
+                                <option value="html">HTML</option>
+                                <option value="css">CSS</option>
+                                <option value="js">JavaScript</option>
+                                <option value="c">C Language</option>
+                                <option value="comm">Tech Communication</option>
+                                <option value="add-new">+ Add New Subject</option>
+                            </select>
+                            <button id="deleteSubjectBtn" class="icon-btn" title="Delete Subject">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="dateSelect">Date</label>
+                        <input type="date" id="dateSelect" class="attendance-input">
+                    </div>
+                </div>
+            </div>
+
+            <div id="addSubjectModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Add New Subject</h2>
+                        <button class="close-modal" id="closeAddSubjectModal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="newSubjectName">Subject Name</label>
+                            <input type="text" id="newSubjectName" placeholder="Enter subject name">
+                        </div>
+                        <div class="form-group">
+                            <label for="newSubjectCode">Subject Code</label>
+                            <input type="text" id="newSubjectCode" placeholder="Enter subject code">
+                        </div>
+                        <div class="form-actions">
+                            <button class="save-btn" id="saveNewSubject">
+                                <i class="fas fa-save"></i> Save Subject
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="attendance-stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Present</h3>
+                        <p id="presentCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-times"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Absent</h3>
+                        <p id="absentCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total</h3>
+                        <p id="totalCount">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="attendance-table-container">
+                <table class="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Enrollment No.</th>
+                            <th>Student Name</th>
+                            <th>Attendance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody">
+                        <!-- Table rows will be dynamically generated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="attendance-actions-row">
+                <button class="save-btn" id="saveAttendanceBtn">
+                    <i class="fas fa-save"></i> Save Attendance
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+                <a href="#about">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toaster Container -->
+    <div class="toaster-container" id="toasterContainer"></div>
+    
+    <script src="index.js"></script>
+    <script src="mentor-attendance.js"></script>
+</body>
+
+</html>

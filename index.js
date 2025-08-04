@@ -9,7 +9,8 @@
         function toggleSidebar() {
             const sidebar = document.getElementById("sidebar");
             sidebar.classList.toggle("collapsed");
-            document.body.classList.toggle("show-floating-logo");
+            // Remove floating logo when sidebar is collapsed
+            // document.body.classList.toggle("show-floating-logo");
             
             // Store sidebar state
             localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
@@ -39,7 +40,8 @@
             const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
             if (isCollapsed && window.innerWidth > 768) {
                 document.getElementById("sidebar").classList.add("collapsed");
-                document.body.classList.add("show-floating-logo");
+                // Remove floating logo when sidebar is collapsed
+                // document.body.classList.add("show-floating-logo");
             }
         });
 
@@ -153,11 +155,17 @@
             }
         });
 
-        // Navigation link highlighting
+        // Navigation link highlighting and tooltips
         document.addEventListener('DOMContentLoaded', () => {
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
+                // Add click event
                 link.addEventListener('click', (e) => {
+                    // Don't prevent default for links to actual pages
+                    if (!link.getAttribute('href').startsWith('#')) {
+                        return;
+                    }
+                    
                     e.preventDefault();
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
@@ -167,6 +175,12 @@
                         closeMobileSidebar();
                     }
                 });
+                
+                // Ensure all links have tooltips
+                if (!link.hasAttribute('data-tooltip') && link.querySelector('span')) {
+                    const tooltipText = link.querySelector('span').textContent;
+                    link.setAttribute('data-tooltip', tooltipText);
+                }
             });
         });
 

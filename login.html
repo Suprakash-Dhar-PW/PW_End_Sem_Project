@@ -64,13 +64,6 @@
                     <small id="pwdError" class="error-msg"></small>
                 </div>
 
-                <div class="password-strength" id="passwordStrength">
-                    <div class="strength-bar">
-                        <div class="strength-fill" id="strengthFill"></div>
-                    </div>
-                    <span class="strength-text" id="strengthText">Password strength</span>
-                </div>
-
                 <div class="options-row">
                     <label class="checkbox-container">
                         <input type="checkbox" id="rememberMe" />
@@ -143,47 +136,6 @@
             }, 500);
         }, 1500);
     });
-
-    // Password Strength Indicator
-    function updatePasswordStrength(password) {
-        const strengthFill = document.getElementById("strengthFill");
-        const strengthText = document.getElementById("strengthText");
-        const passwordStrength = document.getElementById("passwordStrength");
-        
-        let strength = 0;
-        let strengthLabel = "";
-        let strengthColor = "";
-
-        if (password.length >= 8) strength += 25;
-        if (/[A-Z]/.test(password)) strength += 25;
-        if (/[0-9]/.test(password)) strength += 25;
-        if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength += 25;
-
-        if (strength <= 25) {
-            strengthLabel = "Weak";
-            strengthColor = "#ff4d4d";
-        } else if (strength <= 50) {
-            strengthLabel = "Fair";
-            strengthColor = "#ffa500";
-        } else if (strength <= 75) {
-            strengthLabel = "Good";
-            strengthColor = "#ffff00";
-        } else {
-            strengthLabel = "Strong";
-            strengthColor = "#00ff00";
-        }
-
-        strengthFill.style.width = strength + "%";
-        strengthFill.style.backgroundColor = strengthColor;
-        strengthText.textContent = strengthLabel;
-        strengthText.style.color = strengthColor;
-        
-        if (password.length > 0) {
-            passwordStrength.style.display = "block";
-        } else {
-            passwordStrength.style.display = "none";
-        }
-    }
 
     // Show Notification
     function showNotification(message, type = 'info') {
@@ -262,8 +214,6 @@
 
     // Live password validation and strength
     pwd.addEventListener("input", function () {
-        updatePasswordStrength(this.value);
-        
         const password = this.value;
         const hasUppercase = /[A-Z]/.test(password);
         const hasNumber = /[0-9]/.test(password);
@@ -322,4 +272,4 @@
     });
 </script>
 
-</html> 
+</html>

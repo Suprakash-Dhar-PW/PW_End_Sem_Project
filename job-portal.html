@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PW IOI - Job Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        /* Remove underline from social icons in the footer */
+        .site-footer .social-icons a {
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+    <div class="top-right-controls">
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
+            </button>
+            <button class="signup-btn" onclick="showSignupModal()">
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
+            </button>
+        </div>
+        <div class="profile-icon" onclick="goToProfile()" title="View Profile">
+            <img src="images/Supra_image.jpg" alt="Profile" />
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="nav-section" role="navigation">
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="#projects" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link active" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="#announcements" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="#community" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="#events" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
+            <a href="#leave" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="#gallery" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+        </nav>
+    </div>
+
+    <main class="main-content" id="main">
+        <div class="main-heading">
+            <h1 class="welcome_tag">Job Portal</h1>
+        </div>
+
+        <div class="job-portal-container">
+            <div class="job-portal-header">
+                <div class="job-portal-filters">
+                <button class="filter-btn active">All Jobs</button>
+                <button class="filter-btn">Internships</button>
+                <button class="filter-btn">Full-time</button>
+                <button class="filter-btn">Remote</button>
+                <button class="filter-btn">Tech</button>
+                <button class="filter-btn">Design</button>
+            </div>
+            <div class="job-portal-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Search jobs..." class="job-search-input">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <button class="job-portal-btn">
+                    <i class="fas fa-bell"></i> Set Job Alerts
+                </button>
+            </div>
+            </div>
+
+            <div class="job-portal-stats">
+                <div class="job-portal-card">
+                    <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                    <div class="card-content">
+                        <h3>Available Jobs</h3>
+                        <div class="card-value">1,248</div>
+                        <div class="card-subtitle">Updated today</div>
+                    </div>
+                </div>
+                <div class="job-portal-card">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <div class="card-content">
+                        <h3>Companies Hiring</h3>
+                        <div class="card-value">427</div>
+                        <div class="card-subtitle">Active recruiters</div>
+                    </div>
+                </div>
+                <div class="job-portal-card">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <div class="card-content">
+                        <h3>Tech Positions</h3>
+                        <div class="card-value">328</div>
+                        <div class="card-subtitle">Software & IT roles</div>
+                    </div>
+                </div>
+                <div class="job-portal-card">
+                    <div class="card-icon"><i class="fas fa-globe"></i></div>
+                    <div class="card-content">
+                        <h3>Remote Jobs</h3>
+                        <div class="card-value">76%</div>
+                        <div class="card-subtitle">Work from anywhere</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="job-listings">
+                <div class="job-card featured-job">
+                    <div class="job-card-header">
+                        <div class="job-title-container">
+                            <div class="company-logo">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div>
+                                <h3 class="job-title">Senior Frontend Developer</h3>
+                                <div class="job-company">TechCorp Solutions</div>
+                            </div>
+                            <span class="job-tag featured">Featured</span>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-detail"><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <span class="job-detail"><i class="fas fa-money-bill-wave"></i> $90k - $120k</span>
+                        <span class="job-detail"><i class="fas fa-clock"></i> Full-time</span>
+                        <span class="job-detail"><i class="fas fa-calendar-alt"></i> Posted 2 days ago</span>
+                    </div>
+                    <p class="job-description">We are looking for an experienced Frontend Developer with strong React skills to join our growing team. You'll be responsible for building user interfaces for our enterprise clients.</p>
+                    <div class="job-tags">
+                        <span class="job-skill-tag">React</span>
+                        <span class="job-skill-tag">TypeScript</span>
+                        <span class="job-skill-tag">Redux</span>
+                        <span class="job-skill-tag">CSS-in-JS</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="job-apply-btn"><i class="fas fa-paper-plane"></i> Apply Now</button>
+                        <button class="job-save-btn"><i class="far fa-bookmark"></i></button>
+                        <button class="job-share-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-card-header">
+                        <div class="job-title-container">
+                            <div class="company-logo">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div>
+                                <h3 class="job-title">Backend Engineer</h3>
+                                <div class="job-company">DataFlow Systems</div>
+                            </div>
+                            <span class="job-tag new">New</span>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-detail"><i class="fas fa-map-marker-alt"></i> New York, NY</span>
+                        <span class="job-detail"><i class="fas fa-money-bill-wave"></i> $100k - $130k</span>
+                        <span class="job-detail"><i class="fas fa-clock"></i> Full-time</span>
+                        <span class="job-detail"><i class="fas fa-calendar-alt"></i> Posted 1 week ago</span>
+                    </div>
+                    <p class="job-description">Join our backend team to develop scalable APIs and microservices. You'll work with our data science team to implement efficient data processing pipelines.</p>
+                    <div class="job-tags">
+                        <span class="job-skill-tag">Python</span>
+                        <span class="job-skill-tag">Django</span>
+                        <span class="job-skill-tag">PostgreSQL</span>
+                        <span class="job-skill-tag">Docker</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="job-apply-btn"><i class="fas fa-paper-plane"></i> Apply Now</button>
+                        <button class="job-save-btn"><i class="far fa-bookmark"></i></button>
+                        <button class="job-share-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="job-card-header">
+                        <div class="job-title-container">
+                            <div class="company-logo">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div>
+                                <h3 class="job-title">UX/UI Designer</h3>
+                                <div class="job-company">Creative Minds Agency</div>
+                            </div>
+                            <span class="job-tag hot">Hot</span>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="job-detail"><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <span class="job-detail"><i class="fas fa-money-bill-wave"></i> $80k - $110k</span>
+                        <span class="job-detail"><i class="fas fa-clock"></i> Full-time</span>
+                        <span class="job-detail"><i class="fas fa-calendar-alt"></i> Posted 3 days ago</span>
+                    </div>
+                    <p class="job-description">We're seeking a talented UX/UI Designer to create beautiful, intuitive interfaces for our clients. You'll work closely with our development and product teams.</p>
+                    <div class="job-tags">
+                        <span class="job-skill-tag">Figma</span>
+                        <span class="job-skill-tag">Adobe XD</span>
+                        <span class="job-skill-tag">Prototyping</span>
+                        <span class="job-skill-tag">User Research</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="job-apply-btn"><i class="fas fa-paper-plane"></i> Apply Now</button>
+                        <button class="job-save-btn"><i class="far fa-bookmark"></i></button>
+                        <button class="job-share-btn"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+                <a href="#about">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toaster Container -->
+    <div class="toaster-container" id="toasterContainer"></div>
+    
+    <script src="index.js"></script>
+</body>
+
+</html>

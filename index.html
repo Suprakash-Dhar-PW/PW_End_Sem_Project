@@ -8,6 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="index.css">
+    <style>
+        /* Remove underline from social icons in the footer */
+        .site-footer .social-icons a {
+            text-decoration: none !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -43,22 +49,20 @@
             </button>
         </div>
         <nav class="nav-section" role="navigation">
-            <a href="#dashboard" class="nav-link"><i class="fas fa-home"></i> <span>Dashboard</span></a>
-            <a href="#tasks" class="nav-link"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
-            <a href="#attendance" class="nav-link"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
-            <a href="#projects" class="nav-link"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
-            <a href="#jobs" class="nav-link"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
-            <a href="#announcements" class="nav-link"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="index.html" class="nav-link active" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="#projects" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="#announcements" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
             <div class="pinned-label">Pinned</div>
-            <a href="#portfolio" class="nav-link"><i class="fas fa-user"></i> <span>Portfolio</span></a>
-            <a href="#community" class="nav-link"><i class="fas fa-users"></i> <span>Community</span></a>
-            <a href="#events" class="nav-link"><i class="fas fa-calendar"></i> <span>Events</span></a>
-            <a href="#leave" class="nav-link"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
-            <a href="#gallery" class="nav-link"><i class="fas fa-images"></i> <span>Gallery</span></a>
+            <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="#community" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="#events" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
+            <a href="#leave" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="#gallery" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
         </nav>
     </div>
-
-    <div class="floating-logo-sidebar">PW IOI</div>
 
     <main class="main-content" id="main">
         <div class="main-heading">
