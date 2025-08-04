@@ -13,6 +13,24 @@
         .site-footer .social-icons a {
             text-decoration: none !important;
         }
+
+
+        @media (max-width: 768px) {
+  .loading-overlay,
+  #sidebarOverlay {
+    display: none;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .loading-overlay.active,
+  #sidebarOverlay.active {
+    display: flex; /* or block */
+    pointer-events: all;
+    z-index: 10000;
+  }
+
+        }
     </style>
 </head>
 
@@ -53,15 +71,16 @@
             <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
             <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
             <a href="mentor-attendance.html" class="nav-link" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
-            <a href="#projects" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="projects.html" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
             <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
-            <a href="#announcements" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
             <div class="pinned-label">Pinned</div>
             <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
-            <a href="#community" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
-            <a href="#events" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
-            <a href="#leave" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
-            <a href="#gallery" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
+            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
         </nav>
     </div>
 
@@ -116,7 +135,7 @@
         </div>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer footer">
         <div class="footer-content">
             <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
 

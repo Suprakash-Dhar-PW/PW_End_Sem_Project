@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PW IOI - Announcements</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="announcements.css">
+    <style>
+        /* Remove underline from social icons in the footer */
+        .site-footer .social-icons a {
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+    <div class="top-right-controls">
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
+            </button>
+            <button class="signup-btn" onclick="showSignupModal()">
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
+            </button>
+        </div>
+        <div class="profile-icon" onclick="goToProfile()" title="View Profile">
+            <img src="images/Supra_image.jpg" alt="Profile" />
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="nav-section" role="navigation">
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="mentor-attendance.html" class="nav-link" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
+            <a href="projects.html" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="announcements.html" class="nav-link active" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
+            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+        </nav>
+    </div>
+
+    <main class="main-content" id="main">
+        <div class="main-heading">
+            <h1 class="welcome_tag">Announcements</h1>
+        </div>
+
+        <div class="announcements-container">
+            <div class="announcements-header">
+                <div class="announcements-filters">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Academic</button>
+                    <button class="filter-btn">Events</button>
+                    <button class="filter-btn">Placements</button>
+                    <button class="filter-btn">Competitions</button>
+                </div>
+                <div class="announcements-actions">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search announcements..." class="announcement-search-input">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <button class="announcements-btn">
+                        <i class="fas fa-bell"></i> Notification Settings
+                    </button>
+                </div>
+            </div>
+
+            <div class="announcements-list">
+                <!-- Pinned Announcement -->
+                <div class="announcement-card pinned">
+                    <div class="announcement-pin"><i class="fas fa-thumbtack"></i></div>
+                    <div class="announcement-content">
+                        <div class="announcement-header">
+                            <div class="announcement-category academic">Academic</div>
+                            <div class="announcement-date">Today, 09:30 AM</div>
+                        </div>
+                        <h3 class="announcement-title">End Semester Examination Schedule Released</h3>
+                        <div class="announcement-text">
+                            The end semester examination schedule for all courses has been released. Please check your student portal for your personalized exam timetable. All exams will be conducted in-person at the designated examination centers.
+                        </div>
+                        <div class="announcement-footer">
+                            <div class="announcement-author">
+                                <img src="images/Supra_image.jpg" alt="Author">
+                                <span>Prof. Rajesh Kumar, Examination Controller</span>
+                            </div>
+                            <div class="announcement-actions">
+                                <button class="announcement-action-btn" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="announcement-action-btn" title="Share"><i class="fas fa-share-alt"></i></button>
+                                <button class="announcement-action-btn" title="Mark as Read"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regular Announcements -->
+                <div class="announcement-card">
+                    <div class="announcement-content">
+                        <div class="announcement-header">
+                            <div class="announcement-category events">Events</div>
+                            <div class="announcement-date">Yesterday, 14:15 PM</div>
+                        </div>
+                        <h3 class="announcement-title">Annual Tech Fest 'Innovate 2023' Registration Open</h3>
+                        <div class="announcement-text">
+                            Registration for the annual tech fest 'Innovate 2023' is now open. The event will feature coding competitions, hackathons, tech talks, and workshops. Early bird registration closes on October 15th. Don't miss this opportunity to showcase your skills and win exciting prizes!
+                        </div>
+                        <div class="announcement-footer">
+                            <div class="announcement-author">
+                                <img src="images/Supra_image.jpg" alt="Author">
+                                <span>Student Council, Tech Fest Committee</span>
+                            </div>
+                            <div class="announcement-actions">
+                                <button class="announcement-action-btn" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="announcement-action-btn" title="Share"><i class="fas fa-share-alt"></i></button>
+                                <button class="announcement-action-btn" title="Mark as Read"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="announcement-card">
+                    <div class="announcement-content">
+                        <div class="announcement-header">
+                            <div class="announcement-category placements">Placements</div>
+                            <div class="announcement-date">Oct 10, 2023</div>
+                        </div>
+                        <h3 class="announcement-title">Google Pre-Placement Talk - October 15th</h3>
+                        <div class="announcement-text">
+                            Google will be conducting a pre-placement talk on October 15th at 2:00 PM in the Main Auditorium. All final year students interested in applying for roles at Google are encouraged to attend. The session will cover job profiles, selection process, and preparation tips. Attendance is mandatory for students who wish to participate in the Google campus recruitment drive.
+                        </div>
+                        <div class="announcement-footer">
+                            <div class="announcement-author">
+                                <img src="images/Supra_image.jpg" alt="Author">
+                                <span>Placement Cell, Career Development Center</span>
+                            </div>
+                            <div class="announcement-actions">
+                                <button class="announcement-action-btn" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="announcement-action-btn" title="Share"><i class="fas fa-share-alt"></i></button>
+                                <button class="announcement-action-btn" title="Mark as Read"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="announcement-card">
+                    <div class="announcement-content">
+                        <div class="announcement-header">
+                            <div class="announcement-category competitions">Competitions</div>
+                            <div class="announcement-date">Oct 8, 2023</div>
+                        </div>
+                        <h3 class="announcement-title">ACM-ICPC Regional Contest Registration</h3>
+                        <div class="announcement-text">
+                            Registration for the ACM International Collegiate Programming Contest (ICPC) Regional Round is now open. Teams of three students can register through the official ICPC website. The department will sponsor the registration fee for up to 10 teams based on their performance in the internal selection round scheduled for October 20th.
+                        </div>
+                        <div class="announcement-footer">
+                            <div class="announcement-author">
+                                <img src="images/Supra_image.jpg" alt="Author">
+                                <span>Dr. Anand Sharma, Competitive Programming Club</span>
+                            </div>
+                            <div class="announcement-actions">
+                                <button class="announcement-action-btn" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="announcement-action-btn" title="Share"><i class="fas fa-share-alt"></i></button>
+                                <button class="announcement-action-btn" title="Mark as Read"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="announcement-card">
+                    <div class="announcement-content">
+                        <div class="announcement-header">
+                            <div class="announcement-category academic">Academic</div>
+                            <div class="announcement-date">Oct 5, 2023</div>
+                        </div>
+                        <h3 class="announcement-title">Mid-Semester Grades Published</h3>
+                        <div class="announcement-text">
+                            Mid-semester grades for all courses have been published on the student portal. Students are advised to review their grades and discuss any concerns with their respective course instructors during office hours. The last date to report any discrepancies is October 12th.
+                        </div>
+                        <div class="announcement-footer">
+                            <div class="announcement-author">
+                                <img src="images/Supra_image.jpg" alt="Author">
+                                <span>Academic Affairs Office</span>
+                            </div>
+                            <div class="announcement-actions">
+                                <button class="announcement-action-btn" title="Download"><i class="fas fa-download"></i></button>
+                                <button class="announcement-action-btn" title="Share"><i class="fas fa-share-alt"></i></button>
+                                <button class="announcement-action-btn" title="Mark as Read"><i class="fas fa-check"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-logo">PW IOI</div>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 PW IOI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Notification Settings Modal -->
+    <div class="modal" id="notificationSettingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Notification Settings</h2>
+                <button class="close-modal" onclick="closeModal('notificationSettingsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="notificationSettingsForm">
+                    <div class="notification-section">
+                        <h3>Email Notifications</h3>
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-option-text">
+                                <div class="notification-option-title">Academic Announcements</div>
+                                <div class="notification-option-desc">Receive emails for important academic updates</div>
+                            </div>
+                        </div>
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-option-text">
+                                <div class="notification-option-title">Event Announcements</div>
+                                <div class="notification-option-desc">Receive emails about upcoming events</div>
+                            </div>
+                        </div>
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-option-text">
+                                <div class="notification-option-title">Placement Announcements</div>
+                                <div class="notification-option-desc">Receive emails about placement opportunities</div>
+                            </div>
+                        </div>
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-option-text">
+                                <div class="notification-option-title">Competition Announcements</div>
+                                <div class="notification-option-desc">Receive emails about competitions and contests</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notification-section">
+                        <h3>Push Notifications</h3>
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-option-text">
+                                <div class="notification-option-title">Enable Push Notifications</div>
+                                <div class="notification-option-desc">Receive notifications on your device</div>
+                            </div>
+                        </div>
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-option-text">
+                                <div class="notification-option-title">Important Announcements</div>
+                                <div class="notification-option-desc">Receive push notifications for critical updates</div>
+                            </div>
+                        </div>
+                        <div class="notification-option">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <div class="notification-option-text">
+                                <div class="notification-option-title">Regular Updates</div>
+                                <div class="notification-option-desc">Receive push notifications for all updates</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notification-section">
+                        <h3>Notification Frequency</h3>
+                        <div class="form-group">
+                            <label for="emailFrequency">Email Digest Frequency</label>
+                            <select id="emailFrequency" name="emailFrequency">
+                                <option value="immediate">Immediate</option>
+                                <option value="daily" selected>Daily Digest</option>
+                                <option value="weekly">Weekly Digest</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" onclick="closeModal('notificationSettingsModal')">Cancel</button>
+                        <button type="submit" class="save-btn">Save Settings</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show loading overlay
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            // Simulate loading time
+            setTimeout(function() {
+                loadingOverlay.classList.add('hidden');
+            }, 800);
+        });
+
+        // Toggle sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('main');
+            sidebar.classList.toggle('collapsed');
+            main.classList.toggle('expanded');
+        }
+
+        // Mobile sidebar toggle
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('mobile-open');
+            sidebarOverlay.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        }
+
+        function closeMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.remove('mobile-open');
+            sidebarOverlay.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
+
+        // Modal functions
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('active');
+            document.body.classList.add('no-scroll');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
+
+        // Show Notification Settings Modal
+        document.querySelector('.announcements-btn').addEventListener('click', function() {
+            showModal('notificationSettingsModal');
+        });
+
+        // Filter buttons
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                // Add filter functionality here
+            });
+        });
+
+        // Pagination buttons
+        const paginationButtons = document.querySelectorAll('.pagination-btn');
+        paginationButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (!this.classList.contains('active') && !this.querySelector('i')) {
+                    paginationButtons.forEach(btn => {
+                        if (!btn.querySelector('i')) {
+                            btn.classList.remove('active');
+                        }
+                    });
+                    this.classList.add('active');
+                    // Add pagination functionality here
+                }
+            });
+        });
+
+        // Mark as read functionality
+        const markAsReadButtons = document.querySelectorAll('.announcement-action-btn[title="Mark as Read"]');
+        markAsReadButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const announcementCard = this.closest('.announcement-card');
+                announcementCard.classList.add('read');
+                this.innerHTML = '<i class="fas fa-check-double"></i>';
+                this.title = 'Marked as Read';
+            });
+        });
+
+        // Profile navigation
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        // Login/Signup Modal functions
+        function showLoginModal() {
+            window.location.href = 'login.html';
+        }
+
+        function showSignupModal() {
+            window.location.href = 'sign-up.html';
+        }
+    </script>
+</body>
+
+</html>

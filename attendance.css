@@ -1,5 +1,82 @@
 /* Attendance System Specific Styles */
 
+/* Attendance Records Table */
+.attendance-records {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.attendance-records:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(0, 255, 210, 0.3);
+}
+
+.records-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-primary);
+}
+
+.attendance-table th,
+.attendance-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.attendance-table th {
+    font-weight: 600;
+    color: var(--primary-color);
+    background: rgba(0, 255, 210, 0.05);
+}
+
+.attendance-table tr:last-child td {
+    border-bottom: none;
+}
+
+.attendance-table tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge.present {
+    background: rgba(0, 200, 83, 0.15);
+    color: #00c853;
+}
+
+.status-badge.absent {
+    background: rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
+}
+
+.status-badge.late {
+    background: rgba(255, 193, 7, 0.15);
+    color: #ffc107;
+}
+
 /* Attendance Form Styles */
 .attendance-form {
     background: var(--card-bg);
@@ -84,6 +161,14 @@
     align-items: center;
     gap: 8px;
     margin-left: auto;
+    width: 100%;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .save-btn {
+        width: auto;
+    }
 }
 
 .save-btn:hover {
@@ -131,4 +216,110 @@
 
 .attendance-card:nth-child(3) .attendance-value {
     color: var(--secondary-color);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .attendance-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .control-group {
+        width: 100%;
+    }
+    
+    .select-container {
+        display: flex;
+        width: 100%;
+    }
+    
+    .attendance-select,
+    .attendance-input {
+        height: 44px; /* Larger touch targets */
+        font-size: 16px; /* Prevent zoom on iOS */
+        width: 100%;
+        -webkit-appearance: menulist; /* Fix dropdown appearance on iOS */
+        appearance: menulist;
+    }
+    
+    .icon-btn {
+        width: 44px;
+        height: 44px;
+        min-width: 44px; /* Prevent shrinking */
+        touch-action: manipulation;
+    }
+    
+    .attendance-stats-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .attendance-card {
+        width: 100%;
+    }
+    
+    /* Fix footer position for mobile */
+    footer {
+        position: relative;
+        padding: 15px;
+        margin-top: auto;
+        text-align: center;
+        width: 100%;
+    }
+    
+    footer .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    footer .footer-links,
+    footer .footer-social,
+    footer .footer-newsletter {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    /* Ensure the page has minimum height to push footer down */
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Ensure all interactive elements have sufficient touch targets */
+    button, 
+    select,
+    input[type="date"],
+    .icon-btn {
+        min-height: 44px;
+        min-width: 44px;
+        touch-action: manipulation;
+    }
+    
+    /* Ensure footer is properly centered */
+    footer .footer-content {
+        padding: 0;
+    }
+    
+    footer .footer-social a {
+        margin: 0 5px;
+    }
+    
+    footer .footer-newsletter input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    footer .footer-newsletter button {
+        width: 100%;
+    }
 }

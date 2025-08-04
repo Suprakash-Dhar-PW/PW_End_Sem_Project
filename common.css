@@ -555,8 +555,8 @@
 }
 
 .job-save-btn, .job-share-btn {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border-color);
@@ -566,10 +566,92 @@
     justify-content: center;
     cursor: pointer;
     transition: var(--transition);
+    touch-action: manipulation;
 }
 
 .job-save-btn:hover, .job-share-btn:hover {
     background: rgba(0, 255, 210, 0.1);
     color: var(--primary-color);
     transform: translateY(-2px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    /* Ensure all interactive elements have sufficient touch targets */
+    button, 
+    select,
+    input,
+    a,
+    .icon-btn,
+    .nav-link,
+    .attendance-btn,
+    .job-apply-btn {
+        min-height: 44px;
+        min-width: 44px;
+        touch-action: manipulation;
+    }
+    
+    /* Fix footer position for mobile */
+    footer {
+        position: relative;
+        padding: 15px;
+        margin-top: auto;
+        text-align: center;
+        width: 100%;
+    }
+    
+    footer .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    footer .footer-links,
+    footer .footer-social,
+    footer .footer-newsletter {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    /* Ensure the page has minimum height to push footer down */
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Ensure footer is properly centered */
+    footer .footer-content {
+        padding: 0;
+    }
+    
+    footer .footer-social a {
+        margin: 0 5px;
+    }
+    
+    footer .footer-newsletter input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    footer .footer-newsletter button {
+        width: 100%;
+    }
+    
+    /* Improve form controls on mobile */
+    select,
+    input {
+        height: 44px; /* Larger touch targets */
+        font-size: 16px; /* Prevent zoom on iOS */
+        width: 100%;
+        -webkit-appearance: menulist; /* Fix dropdown appearance on iOS */
+        appearance: menulist;
+    }
 }

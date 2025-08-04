@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>PW IOI - Mentor Attendance System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="common.css">
@@ -15,6 +16,31 @@
         /* Remove underline from social icons in the footer */
         .site-footer .social-icons a {
             text-decoration: none !important;
+        }
+
+        .footer {
+            width: 100%;
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 1rem;
+            font-size: 14px;
+
+            display: flex;
+            justify-content: center;
+            /* ✅ Centers horizontally */
+            align-items: center;
+            /* ✅ Centers vertically */
+            text-align: center;
+            /* ✅ Ensures text is centered inside */
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                text-align: center !important;
+            }
         }
     </style>
 </head>
@@ -52,26 +78,39 @@
             </button>
         </div>
         <nav class="nav-section" role="navigation">
-            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
-            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
-            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
-            <a href="mentor-attendance.html" class="nav-link active" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
-            <a href="#projects" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
-            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
-            <a href="#announcements" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i>
+                <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i>
+                <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i>
+                <span>Attendance</span></a>
+            <a href="mentor-attendance.html" class="nav-link active" data-tooltip="Mentor Attendance"><i
+                    class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
+            <a href="projects.html" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i>
+                <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i>
+                <span>Job Portal</span></a>
+            <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i>
+                <span>Announcements</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i>
+                <span>Community Events</span></a>
             <div class="pinned-label">Pinned</div>
-            <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
-            <a href="#community" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
-            <a href="#events" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
-            <a href="#leave" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
-            <a href="#gallery" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+            <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i>
+                <span>Portfolio</span></a>
+            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i>
+                <span>Community</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i>
+                <span>Events</span></a>
+            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave
+                    Form</span></a>
+            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i>
+                <span>Gallery</span></a>
         </nav>
     </div>
 
     <main class="main-content" id="main">
         <div class="main-heading">
-            <h1 class="welcome_tag">Mentor Attendance System</h1>
-            <p class="subtitle">Manage student attendance efficiently</p>
+            <h1 class="welcome_tag" style="text-align: center;">Mentor Attendance System</h1>
         </div>
 
         <div class="mentor-info">
@@ -88,17 +127,38 @@
             <div class="attendance-controls">
                 <div class="control-row">
                     <div class="control-group">
+                        <label for="yearSelect">Year</label>
+                        <div class="select-container">
+                            <select id="yearSelect" class="attendance-select">
+                                <option value="">Select Year</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="add-new">+ Add New Year</option>
+                            </select>
+                            <button id="deleteYearBtn" class="icon-btn" title="Delete Year">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="control-group">
                         <label for="batchSelect">Batch</label>
-                        <select id="batchSelect" class="attendance-select">
-                            <option value="">Select Batch</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                        </select>
+                        <div class="select-container">
+                            <select id="batchSelect" class="attendance-select">
+                                <option value="">Select Batch</option>
+                                <option value="1">Batch 1</option>
+                                <option value="2">Batch 2</option>
+                                <option value="3">Batch 3</option>
+                                <option value="add-new">+ Add New Batch</option>
+                            </select>
+                            <button id="deleteBatchBtn" class="icon-btn" title="Delete Batch">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="control-group">
                         <label for="subjectSelect">Subject</label>
-                        <div class="subject-select-container">
+                        <div class="select-container">
                             <select id="subjectSelect" class="attendance-select">
                                 <option value="">Select Subject</option>
                                 <option value="html">HTML</option>
@@ -120,6 +180,46 @@
                 </div>
             </div>
 
+            <div id="addYearModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2><i class="fas fa-calendar-alt"></i> Add New Year</h2>
+                        <button class="close-modal" id="closeAddYearModal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="newYearValue"><i class="fas fa-calendar-day"></i> Year</label>
+                            <input type="text" id="newYearValue" placeholder="Enter year (e.g. 2026)">
+                        </div>
+                        <div class="form-actions">
+                            <button class="save-btn" id="saveNewYear">
+                                <i class="fas fa-save"></i> Save Year
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="addBatchModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2><i class="fas fa-users"></i> Add New Batch</h2>
+                        <button class="close-modal" id="closeAddBatchModal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="newBatchNumber"><i class="fas fa-hashtag"></i> Batch Number</label>
+                            <input type="text" id="newBatchNumber" placeholder="Enter batch number (e.g. 4)">
+                        </div>
+                        <div class="form-actions">
+                            <button class="save-btn" id="saveNewBatch">
+                                <i class="fas fa-save"></i> Save Batch
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="addSubjectModal" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -129,7 +229,8 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="newSubjectName"><i class="fas fa-font"></i> Subject Name</label>
-                            <input type="text" id="newSubjectName" placeholder="Enter subject name (e.g. Data Structures)">
+                            <input type="text" id="newSubjectName"
+                                placeholder="Enter subject name (e.g. Data Structures)">
                         </div>
                         <div class="form-group">
                             <label for="newSubjectCode"><i class="fas fa-code"></i> Subject Code</label>
@@ -198,7 +299,7 @@
         </div>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer footer">
         <div class="footer-content">
             <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
 
@@ -211,7 +312,8 @@
             </div>
 
             <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
-                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                <input type="email" placeholder="Enter your email for updates" required
+                    aria-label="Email for newsletter" />
                 <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
             </form>
 
@@ -230,7 +332,7 @@
 
     <!-- Toaster Container -->
     <div class="toaster-container" id="toasterContainer"></div>
-    
+
     <script src="index.js"></script>
     <script src="mentor-attendance.js"></script>
 </body>

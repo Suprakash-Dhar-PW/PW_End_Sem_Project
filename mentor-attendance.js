@@ -1,16 +1,34 @@
 // Mentor Attendance System JavaScript
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // DOM Elements
+    const yearSelect = document.getElementById('yearSelect');
     const batchSelect = document.getElementById('batchSelect');
     const subjectSelect = document.getElementById('subjectSelect');
     const dateSelect = document.getElementById('dateSelect');
+    const deleteYearBtn = document.getElementById('deleteYearBtn');
+    const deleteBatchBtn = document.getElementById('deleteBatchBtn');
     const deleteSubjectBtn = document.getElementById('deleteSubjectBtn');
+
+    // Year Modal Elements
+    const addYearModal = document.getElementById('addYearModal');
+    const closeAddYearModal = document.getElementById('closeAddYearModal');
+    const newYearValue = document.getElementById('newYearValue');
+    const saveNewYear = document.getElementById('saveNewYear');
+
+    // Batch Modal Elements
+    const addBatchModal = document.getElementById('addBatchModal');
+    const closeAddBatchModal = document.getElementById('closeAddBatchModal');
+    const newBatchNumber = document.getElementById('newBatchNumber');
+    const saveNewBatch = document.getElementById('saveNewBatch');
+
+    // Subject Modal Elements
     const addSubjectModal = document.getElementById('addSubjectModal');
     const closeAddSubjectModal = document.getElementById('closeAddSubjectModal');
     const newSubjectName = document.getElementById('newSubjectName');
     const newSubjectCode = document.getElementById('newSubjectCode');
     const saveNewSubject = document.getElementById('saveNewSubject');
+
     const attendanceTableBody = document.getElementById('attendanceTableBody');
     const saveAttendanceBtn = document.getElementById('saveAttendanceBtn');
     const presentCount = document.getElementById('presentCount');
@@ -18,13 +36,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalCount = document.getElementById('totalCount');
     const mentorName = document.getElementById('mentorName');
     const mentorEmail = document.getElementById('mentorEmail');
-    
+
     // Set default date to today
     const today = new Date();
     const formattedDate = today.toISOString().substr(0, 10);
     dateSelect.value = formattedDate;
-    
+
     // Initialize data from localStorage or set defaults
+    let years = JSON.parse(localStorage.getItem('mentorYears')) || [
+        { id: '2023', name: '2023' },
+        { id: '2024', name: '2024' },
+        { id: '2025', name: '2025' }
+    ];
+
+    let batches = JSON.parse(localStorage.getItem('mentorBatches')) || [
+        { id: '1', name: 'Batch 1' },
+        { id: '2', name: 'Batch 2' },
+        { id: '3', name: 'Batch 3' }
+    ];
+
     let subjects = JSON.parse(localStorage.getItem('mentorSubjects')) || [
         { id: 'html', name: 'HTML' },
         { id: 'css', name: 'CSS' },
@@ -32,18 +62,27 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 'c', name: 'C Language' },
         { id: 'comm', name: 'Tech Communication' }
     ];
-    
+
     let students = JSON.parse(localStorage.getItem('students')) || [];
     let attendanceRecords = JSON.parse(localStorage.getItem('mentorAttendanceRecords')) || [];
     let mentorInfo = JSON.parse(localStorage.getItem('mentorInfo')) || {
         name: 'Dr. Rajesh Kumar',
         email: 'rajesh.kumar@pwioi.edu'
     };
-    
+
+    // Save initial data to localStorage if not already there
+    if (!localStorage.getItem('mentorYears')) {
+        localStorage.setItem('mentorYears', JSON.stringify(years));
+    }
+
+    if (!localStorage.getItem('mentorBatches')) {
+        localStorage.setItem('mentorBatches', JSON.stringify(batches));
+    }
+
     // Initialize mentor info
     mentorName.textContent = mentorInfo.name;
     mentorEmail.textContent = mentorInfo.email;
-    
+
     // If no students data, create sample data
     if (students.length === 0) {
         students = [
@@ -63,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { id: 13, enrollmentNo: 'PW2025_013', name: 'Varun Khanna', batch: '2025' },
             { id: 14, enrollmentNo: 'PW2025_014', name: 'Pooja Sharma', batch: '2025' },
             { id: 15, enrollmentNo: 'PW2025_015', name: 'Kunal Verma', batch: '2025' },
-            
+
             // 2024 Batch
             { id: 16, enrollmentNo: 'PW2024_001', name: 'Kiran Rao', batch: '2024' },
             { id: 17, enrollmentNo: 'PW2024_002', name: 'Sanjay Kumar', batch: '2024' },
@@ -77,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { id: 25, enrollmentNo: 'PW2024_010', name: 'Vivek Reddy', batch: '2024' },
             { id: 26, enrollmentNo: 'PW2024_011', name: 'Shweta Khanna', batch: '2024' },
             { id: 27, enrollmentNo: 'PW2024_012', name: 'Nikhil Jain', batch: '2024' },
-            
+
             // 2023 Batch
             { id: 28, enrollmentNo: 'PW2023_001', name: 'Rajat Verma', batch: '2023' },
             { id: 29, enrollmentNo: 'PW2023_002', name: 'Sunita Sharma', batch: '2023' },
@@ -92,25 +131,116 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
         localStorage.setItem('students', JSON.stringify(students));
     }
-    
+
     // Event Listeners
-    batchSelect.addEventListener('change', loadStudentsForBatch);
+    yearSelect.addEventListener('change', function () {
+        if (yearSelect.value === 'add-new') {
+            // Show the add year modal
+            addYearModal.classList.add('active');
+            newYearValue.value = '';
+            newYearValue.focus();
+
+            // Reset the select to previous value
+            yearSelect.value = yearSelect.dataset.previousValue || '';
+        } else {
+            // Store the current value
+            yearSelect.dataset.previousValue = yearSelect.value;
+            // Load students when year changes
+            loadStudentsForBatch();
+        }
+    });
+
+    batchSelect.addEventListener('change', function () {
+        if (batchSelect.value === 'add-new') {
+            // Show the add batch modal
+            addBatchModal.classList.add('active');
+            newBatchNumber.value = '';
+            newBatchNumber.focus();
+
+            // Reset the select to previous value
+            batchSelect.value = batchSelect.dataset.previousValue || '';
+        } else {
+            // Store the current value
+            batchSelect.dataset.previousValue = batchSelect.value;
+            // Load students when batch changes
+            loadStudentsForBatch();
+        }
+    });
+
     subjectSelect.addEventListener('change', handleSubjectChange);
+
+    // Delete button event listeners
+    deleteYearBtn.addEventListener('click', handleDeleteYear);
+    deleteBatchBtn.addEventListener('click', handleDeleteBatch);
     deleteSubjectBtn.addEventListener('click', handleDeleteSubject);
+
+    // Modal close button event listeners
+    closeAddYearModal.addEventListener('click', () => addYearModal.classList.remove('active'));
+    closeAddBatchModal.addEventListener('click', () => addBatchModal.classList.remove('active'));
     closeAddSubjectModal.addEventListener('click', () => addSubjectModal.classList.remove('active'));
+
+    // Modal save button event listeners
+    saveNewYear.addEventListener('click', handleSaveNewYear);
+    saveNewBatch.addEventListener('click', handleSaveNewBatch);
     saveNewSubject.addEventListener('click', handleSaveNewSubject);
+
+    // Save attendance button event listener
     saveAttendanceBtn.addEventListener('click', handleSaveAttendance);
-    
-    // Initialize subjects dropdown
+
+    // Initialize dropdowns
+    populateYearsDropdown();
+    populateBatchesDropdown();
     populateSubjectsDropdown();
-    
+
     // Functions
+    function populateYearsDropdown() {
+        // Clear existing options except the default and add new
+        while (yearSelect.options.length > 1) {
+            yearSelect.remove(1);
+        }
+
+        // Add years
+        years.forEach(year => {
+            const option = document.createElement('option');
+            option.value = year.id;
+            option.textContent = year.name;
+            yearSelect.appendChild(option);
+        });
+
+        // Add the "Add New Year" option
+        const addNewOption = document.createElement('option');
+        addNewOption.value = 'add-new';
+        addNewOption.textContent = '+ Add New Year';
+        yearSelect.appendChild(addNewOption);
+    }
+
+    function populateBatchesDropdown() {
+        // Clear existing options except the default and add new
+        while (batchSelect.options.length > 1) {
+            batchSelect.remove(1);
+        }
+
+        // Add batches
+        batches.forEach(batch => {
+            const option = document.createElement('option');
+            option.value = batch.id;
+            option.textContent = batch.name;
+            batchSelect.appendChild(option);
+        });
+
+        // Add the "Add New Batch" option
+        const addNewOption = document.createElement('option');
+        addNewOption.value = 'add-new';
+        addNewOption.textContent = '+ Add New Batch';
+        batchSelect.appendChild(addNewOption);
+    }
+
     function populateSubjectsDropdown() {
         // Clear existing options except the default and add new
         while (subjectSelect.options.length > 1) {
             subjectSelect.remove(1);
         }
-        
+
         // Add subjects
         subjects.forEach(subject => {
             const option = document.createElement('option');
@@ -118,14 +248,96 @@ document.addEventListener('DOMContentLoaded', function() {
             option.textContent = subject.name;
             subjectSelect.appendChild(option);
         });
-        
+
         // Add the "Add New Subject" option
         const addNewOption = document.createElement('option');
         addNewOption.value = 'add-new';
         addNewOption.textContent = '+ Add New Subject';
         subjectSelect.appendChild(addNewOption);
     }
-    
+
+    function handleSaveNewYear() {
+        const yearValue = newYearValue.value.trim();
+
+        if (!yearValue) {
+            showToast('Please enter a year', 'error');
+            return;
+        }
+
+        // Validate year format (4 digits)
+        if (!/^\d{4}$/.test(yearValue)) {
+            showToast('Please enter a valid 4-digit year', 'error');
+            return;
+        }
+
+        // Check if year already exists
+        if (years.some(year => year.id === yearValue)) {
+            showToast('This year already exists', 'error');
+            return;
+        }
+
+        // Add the new year
+        const newYearObj = { id: yearValue, name: yearValue };
+        years.push(newYearObj);
+
+        // Save to localStorage
+        localStorage.setItem('mentorYears', JSON.stringify(years));
+
+        // Update the dropdown
+        populateYearsDropdown();
+
+        // Select the new year
+        yearSelect.value = yearValue;
+        yearSelect.dataset.previousValue = yearValue;
+
+        // Close the modal
+        addYearModal.classList.remove('active');
+
+        // Show success message
+        showToast('Year added successfully', 'success');
+    }
+
+    function handleSaveNewBatch() {
+        const batchNumber = newBatchNumber.value.trim();
+
+        if (!batchNumber) {
+            showToast('Please enter a batch number', 'error');
+            return;
+        }
+
+        // Validate batch number (numeric)
+        if (!/^\d+$/.test(batchNumber)) {
+            showToast('Please enter a valid batch number', 'error');
+            return;
+        }
+
+        // Check if batch already exists
+        if (batches.some(batch => batch.id === batchNumber)) {
+            showToast('This batch already exists', 'error');
+            return;
+        }
+
+        // Add the new batch
+        const newBatchObj = { id: batchNumber, name: `Batch ${batchNumber}` };
+        batches.push(newBatchObj);
+
+        // Save to localStorage
+        localStorage.setItem('mentorBatches', JSON.stringify(batches));
+
+        // Update the dropdown
+        populateBatchesDropdown();
+
+        // Select the new batch
+        batchSelect.value = batchNumber;
+        batchSelect.dataset.previousValue = batchNumber;
+
+        // Close the modal
+        addBatchModal.classList.remove('active');
+
+        // Show success message
+        showToast('Batch added successfully', 'success');
+    }
+
     function handleSubjectChange() {
         if (subjectSelect.value === 'add-new') {
             // Show the add subject modal
@@ -133,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
             newSubjectName.value = '';
             newSubjectCode.value = '';
             newSubjectName.focus();
-            
+
             // Reset the select to previous value
             subjectSelect.value = subjectSelect.dataset.previousValue || '';
         } else {
@@ -141,87 +353,196 @@ document.addEventListener('DOMContentLoaded', function() {
             subjectSelect.dataset.previousValue = subjectSelect.value;
         }
     }
-    
+
     function handleSaveNewSubject() {
         const name = newSubjectName.value.trim();
         const code = newSubjectCode.value.trim();
-        
+
         if (!name || !code) {
             showToast('Please enter both subject name and code', 'error');
             return;
         }
-        
+
         // Generate a unique ID
         const id = code.toLowerCase().replace(/\s+/g, '-');
-        
+
         // Check if subject with this ID already exists
         if (subjects.some(subject => subject.id === id)) {
             showToast('A subject with this code already exists', 'error');
             return;
         }
-        
+
         // Add the new subject
         subjects.push({ id, name });
-        
+
         // Save to localStorage
         localStorage.setItem('mentorSubjects', JSON.stringify(subjects));
-        
+
         // Update the dropdown
         populateSubjectsDropdown();
-        
+
         // Select the new subject
         subjectSelect.value = id;
         subjectSelect.dataset.previousValue = id;
-        
+
         // Close the modal
         addSubjectModal.classList.remove('active');
-        
+
         // Show success message
         showToast('Subject added successfully', 'success');
     }
-    
+
+    function handleDeleteYear() {
+        const selectedYear = yearSelect.value;
+
+        if (!selectedYear || selectedYear === '' || selectedYear === 'add-new') {
+            showToast('Please select a year to delete', 'error');
+            return;
+        }
+
+        // Confirm deletion
+        if (!confirm(`Are you sure you want to delete the year: ${yearSelect.options[yearSelect.selectedIndex].text}?`)) {
+            return;
+        }
+
+        // Check if there are attendance records for this year
+        const hasRecords = attendanceRecords.some(record => record.year === selectedYear);
+
+        if (hasRecords) {
+            if (!confirm(`Warning: There are attendance records for this year. Deleting it will also delete all associated records. Continue?`)) {
+                return;
+            }
+
+            // Remove associated attendance records
+            attendanceRecords = attendanceRecords.filter(record => record.year !== selectedYear);
+            localStorage.setItem('mentorAttendanceRecords', JSON.stringify(attendanceRecords));
+        }
+
+        // Remove the year
+        years = years.filter(year => year.id !== selectedYear);
+
+        // Save to localStorage
+        localStorage.setItem('mentorYears', JSON.stringify(years));
+
+        // Update the dropdown
+        populateYearsDropdown();
+
+        // Reset selection
+        yearSelect.value = '';
+        yearSelect.dataset.previousValue = '';
+
+        // Show success message
+        showToast('Year deleted successfully', 'success');
+    }
+
+    function handleDeleteBatch() {
+        const selectedBatch = batchSelect.value;
+
+        if (!selectedBatch || selectedBatch === '' || selectedBatch === 'add-new') {
+            showToast('Please select a batch to delete', 'error');
+            return;
+        }
+
+        // Confirm deletion
+        if (!confirm(`Are you sure you want to delete the batch: ${batchSelect.options[batchSelect.selectedIndex].text}?`)) {
+            return;
+        }
+
+        // Check if there are attendance records for this batch
+        const hasRecords = attendanceRecords.some(record => record.batch === selectedBatch);
+
+        if (hasRecords) {
+            if (!confirm(`Warning: There are attendance records for this batch. Deleting it will also delete all associated records. Continue?`)) {
+                return;
+            }
+
+            // Remove associated attendance records
+            attendanceRecords = attendanceRecords.filter(record => record.batch !== selectedBatch);
+            localStorage.setItem('mentorAttendanceRecords', JSON.stringify(attendanceRecords));
+        }
+
+        // Remove the batch
+        batches = batches.filter(batch => batch.id !== selectedBatch);
+
+        // Save to localStorage
+        localStorage.setItem('mentorBatches', JSON.stringify(batches));
+
+        // Update the dropdown
+        populateBatchesDropdown();
+
+        // Reset selection
+        batchSelect.value = '';
+        batchSelect.dataset.previousValue = '';
+
+        // Show success message
+        showToast('Batch deleted successfully', 'success');
+    }
+
     function handleDeleteSubject() {
         const selectedSubject = subjectSelect.value;
-        
+
         if (!selectedSubject || selectedSubject === '' || selectedSubject === 'add-new') {
             showToast('Please select a subject to delete', 'error');
             return;
         }
-        
+
         // Confirm deletion
         if (!confirm(`Are you sure you want to delete the subject: ${subjectSelect.options[subjectSelect.selectedIndex].text}?`)) {
             return;
         }
-        
+
+        // Check if there are attendance records for this subject
+        const hasRecords = attendanceRecords.some(record => record.subject === selectedSubject);
+
+        if (hasRecords) {
+            if (!confirm(`Warning: There are attendance records for this subject. Deleting it will also delete all associated records. Continue?`)) {
+                return;
+            }
+
+            // Remove associated attendance records
+            attendanceRecords = attendanceRecords.filter(record => record.subject !== selectedSubject);
+            localStorage.setItem('mentorAttendanceRecords', JSON.stringify(attendanceRecords));
+        }
+
         // Remove the subject
         subjects = subjects.filter(subject => subject.id !== selectedSubject);
-        
+
         // Save to localStorage
         localStorage.setItem('mentorSubjects', JSON.stringify(subjects));
-        
+
         // Update the dropdown
         populateSubjectsDropdown();
-        
+
         // Reset selection
         subjectSelect.value = '';
         subjectSelect.dataset.previousValue = '';
-        
+
         // Show success message
         showToast('Subject deleted successfully', 'success');
     }
-    
+
     function loadStudentsForBatch() {
+        const selectedYear = yearSelect.value;
         const selectedBatch = batchSelect.value;
-        
-        if (!selectedBatch) {
+
+        if (!selectedYear || !selectedBatch) {
             attendanceTableBody.innerHTML = '';
             updateAttendanceCounts();
             return;
         }
-        
-        // Filter students by batch
-        const batchStudents = students.filter(student => student.batch === selectedBatch);
-        
+
+        // Filter students by year and batch
+        // For backward compatibility, we'll check if students have a year property
+        // If not, we'll use the batch property which previously stored the year
+        const batchStudents = students.filter(student => {
+            if (student.year) {
+                return student.year === selectedYear && student.batch === selectedBatch;
+            } else {
+                // Legacy support - previously batch stored the year
+                return student.batch === selectedYear;
+            }
+        });
+
         // Generate table rows
         let tableHTML = '';
         batchStudents.forEach((student, index) => {
@@ -236,46 +557,48 @@ document.addEventListener('DOMContentLoaded', function() {
                 </tr>
             `;
         });
-        
+
         attendanceTableBody.innerHTML = tableHTML;
-        
+
         // Update counts
         updateAttendanceCounts();
     }
-    
+
     // Function to update attendance counts
-    window.updateAttendanceCounts = function() {
+    window.updateAttendanceCounts = function () {
         const checkboxes = document.querySelectorAll('.attendance-checkbox');
         const total = checkboxes.length;
         const present = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
         const absent = total - present;
-        
+
         totalCount.textContent = total;
         presentCount.textContent = present;
         absentCount.textContent = absent;
     };
-    
+
     function handleSaveAttendance() {
+        const selectedYear = yearSelect.value;
         const selectedBatch = batchSelect.value;
         const selectedSubject = subjectSelect.value;
         const selectedDate = dateSelect.value;
-        
-        if (!selectedBatch || !selectedSubject || !selectedDate) {
-            showToast('Please select batch, subject, and date', 'error');
+
+        if (!selectedYear || !selectedBatch || !selectedSubject || !selectedDate) {
+            showToast('Please select year, batch, subject, and date', 'error');
             return;
         }
-        
+
         // Get all checkboxes
         const checkboxes = document.querySelectorAll('.attendance-checkbox');
-        
+
         if (checkboxes.length === 0) {
             showToast('No students found for this batch', 'error');
             return;
         }
-        
+
         // Create attendance record
         const attendanceRecord = {
             id: generateId(),
+            year: selectedYear,
             batch: selectedBatch,
             subject: selectedSubject,
             subjectName: subjectSelect.options[subjectSelect.selectedIndex].text,
@@ -286,14 +609,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 present: checkbox.checked
             }))
         };
-        
-        // Check if a record for this batch, subject, and date already exists
-        const existingRecordIndex = attendanceRecords.findIndex(record => 
-            record.batch === selectedBatch && 
-            record.subject === selectedSubject && 
+
+        // Check if a record for this year, batch, subject, and date already exists
+        const existingRecordIndex = attendanceRecords.findIndex(record =>
+            record.year === selectedYear &&
+            record.batch === selectedBatch &&
+            record.subject === selectedSubject &&
             record.date === selectedDate
         );
-        
+
         if (existingRecordIndex !== -1) {
             // Update existing record
             attendanceRecords[existingRecordIndex] = attendanceRecord;
@@ -303,15 +627,15 @@ document.addEventListener('DOMContentLoaded', function() {
             attendanceRecords.push(attendanceRecord);
             showToast('Attendance record saved successfully', 'success');
         }
-        
+
         // Save to localStorage
         localStorage.setItem('mentorAttendanceRecords', JSON.stringify(attendanceRecords));
     }
-    
+
     function generateId() {
         return Math.random().toString(36).substr(2, 9);
     }
-    
+
     function showToast(message, type = 'info') {
         // Check if toaster function exists in index.js
         if (typeof showToaster === 'function') {
@@ -321,4 +645,22 @@ document.addEventListener('DOMContentLoaded', function() {
             alert(message);
         }
     }
+    function openSidebar() {
+  document.getElementById('sidebar').classList.add('active');
+  document.getElementById('sidebarOverlay').classList.add('active');
+}
+
+function closeMobileSidebar() {
+  document.getElementById('sidebar').classList.remove('active');
+  document.getElementById('sidebarOverlay').classList.remove('active');
+}
+
+// Similarly, for loading overlay:
+function showLoading() {
+  document.getElementById('loadingOverlay').classList.add('active');
+}
+function hideLoading() {
+  document.getElementById('loadingOverlay').classList.remove('active');
+}
+
 });

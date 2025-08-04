@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PW IOI - Community Events</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="community-events.css">
+    <style>
+        /* Remove underline from social icons in the footer */
+        .site-footer .social-icons a {
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+    <div class="top-right-controls">
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
+            </button>
+            <button class="signup-btn" onclick="showSignupModal()">
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
+            </button>
+        </div>
+        <div class="profile-icon" onclick="goToProfile()" title="View Profile">
+            <img src="images/Supra_image.jpg" alt="Profile" />
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="nav-section" role="navigation">
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="mentor-attendance.html" class="nav-link" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
+            <a href="projects.html" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="community-events.html" class="nav-link active" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
+            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="events-container">
+            <h1 class="page-title">Community Events</h1>
+            
+            <!-- Events Header with Filters and Search -->
+            <div class="events-header">
+                <div class="events-filters">
+                    <button class="filter-btn active">All Events</button>
+                    <button class="filter-btn">Workshops</button>
+                    <button class="filter-btn">Seminars</button>
+                    <button class="filter-btn">Competitions</button>
+                    <button class="filter-btn">Cultural</button>
+                    <button class="filter-btn">Tech</button>
+                </div>
+                
+                <div class="events-actions">
+                    <div class="view-toggle">
+                        <button class="view-toggle-btn active" title="Grid View">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-toggle-btn" title="Calendar View">
+                            <i class="fas fa-calendar-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="search-container">
+                        <input type="text" class="event-search-input" placeholder="Search events...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <button class="events-btn">
+                        <i class="fas fa-plus"></i> Add Event
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Grid View (Default) -->
+            <div class="events-grid">
+                <!-- Featured Event -->
+                <div class="event-card featured">
+                    <div class="event-image">
+                        <img src="assets/event-hackathon.jpg" alt="Annual Hackathon">
+                        <div class="event-date-badge">
+                            <span class="event-date-day">15</span>
+                            <span class="event-date-month">Jun</span>
+                        </div>
+                        <span class="event-category tech">Tech</span>
+                    </div>
+                    <div class="event-content">
+                        <h2 class="event-title">Annual Hackathon 2023: Code for Change</h2>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <i class="far fa-clock"></i>
+                                <span>9:00 AM - 9:00 PM (24 hours)</span>
+                            </div>
+                            <div class="event-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Main Campus, Innovation Hub</span>
+                            </div>
+                            <div class="event-detail">
+                                <i class="fas fa-user-friends"></i>
+                                <span>Teams of 2-4 participants</span>
+                            </div>
+                        </div>
+                        <p class="event-description">Join us for our annual 24-hour hackathon where you'll collaborate with fellow students to build innovative solutions addressing real-world problems. This year's theme is "Technology for Sustainable Development". Prizes worth ₹50,000 to be won!</p>
+                        <div class="event-footer">
+                            <span class="event-status open">Registration Open</span>
+                            <button class="event-action-btn">Register Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Regular Events -->
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="assets/event-workshop.jpg" alt="AI Workshop">
+                        <div class="event-date-badge">
+                            <span class="event-date-day">10</span>
+                            <span class="event-date-month">Jun</span>
+                        </div>
+                        <span class="event-category workshop">Workshop</span>
+                    </div>
+                    <div class="event-content">
+                        <h2 class="event-title">AI & Machine Learning Workshop</h2>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <i class="far fa-clock"></i>
+                                <span>2:00 PM - 5:00 PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Tech Lab, Building B</span>
+                            </div>
+                        </div>
+                        <p class="event-description">Learn the fundamentals of AI and ML in this hands-on workshop. Perfect for beginners looking to start their journey in artificial intelligence.</p>
+                        <div class="event-footer">
+                            <span class="event-status open">Registration Open</span>
+                            <button class="event-action-btn">Register Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="assets/event-seminar.jpg" alt="Industry Seminar">
+                        <div class="event-date-badge">
+                            <span class="event-date-day">12</span>
+                            <span class="event-date-month">Jun</span>
+                        </div>
+                        <span class="event-category seminar">Seminar</span>
+                    </div>
+                    <div class="event-content">
+                        <h2 class="event-title">Industry Insights: Future of Tech</h2>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <i class="far fa-clock"></i>
+                                <span>11:00 AM - 1:00 PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Auditorium, Main Building</span>
+                            </div>
+                        </div>
+                        <p class="event-description">Join industry leaders as they discuss emerging technologies and career opportunities in the tech industry. Networking session included.</p>
+                        <div class="event-footer">
+                            <span class="event-status open">Registration Open</span>
+                            <button class="event-action-btn">Register Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="assets/event-competition.jpg" alt="Coding Competition">
+                        <div class="event-date-badge">
+                            <span class="event-date-day">18</span>
+                            <span class="event-date-month">Jun</span>
+                        </div>
+                        <span class="event-category competition">Competition</span>
+                    </div>
+                    <div class="event-content">
+                        <h2 class="event-title">Code Sprint Challenge</h2>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <i class="far fa-clock"></i>
+                                <span>10:00 AM - 2:00 PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Computer Lab, Building C</span>
+                            </div>
+                        </div>
+                        <p class="event-description">Test your coding skills in this fast-paced competition. Solve algorithmic problems and compete for prizes and recognition.</p>
+                        <div class="event-footer">
+                            <span class="event-status open">Registration Open</span>
+                            <button class="event-action-btn">Register Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="assets/event-cultural.jpg" alt="Cultural Festival">
+                        <div class="event-date-badge">
+                            <span class="event-date-day">25</span>
+                            <span class="event-date-month">Jun</span>
+                        </div>
+                        <span class="event-category cultural">Cultural</span>
+                    </div>
+                    <div class="event-content">
+                        <h2 class="event-title">Annual Cultural Festival</h2>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <i class="far fa-clock"></i>
+                                <span>5:00 PM - 10:00 PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Campus Grounds</span>
+                            </div>
+                        </div>
+                        <p class="event-description">Celebrate diversity through music, dance, art, and food at our annual cultural festival. Showcase your talents or enjoy performances by fellow students.</p>
+                        <div class="event-footer">
+                            <span class="event-status open">Registration Open</span>
+                            <button class="event-action-btn">Register Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="assets/event-workshop2.jpg" alt="UI/UX Workshop">
+                        <div class="event-date-badge">
+                            <span class="event-date-day">20</span>
+                            <span class="event-date-month">Jun</span>
+                        </div>
+                        <span class="event-category workshop">Workshop</span>
+                    </div>
+                    <div class="event-content">
+                        <h2 class="event-title">UI/UX Design Masterclass</h2>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <i class="far fa-clock"></i>
+                                <span>3:00 PM - 6:00 PM</span>
+                            </div>
+                            <div class="event-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Design Studio, Building A</span>
+                            </div>
+                        </div>
+                        <p class="event-description">Learn the principles of effective UI/UX design from industry professionals. Hands-on exercises included to build your portfolio.</p>
+                        <div class="event-footer">
+                            <span class="event-status full">Limited Seats Left</span>
+                            <button class="event-action-btn">Join Waitlist</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Calendar View (Hidden by default) -->
+            <div class="calendar-view">
+                <div class="calendar-header">
+                    <h2 class="calendar-title">June 2023</h2>
+                    <div class="calendar-nav">
+                        <button class="calendar-nav-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="calendar-nav-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calendar-grid">
+                    <!-- Day Headers -->
+                    <div class="calendar-day-header">Sun</div>
+                    <div class="calendar-day-header">Mon</div>
+                    <div class="calendar-day-header">Tue</div>
+                    <div class="calendar-day-header">Wed</div>
+                    <div class="calendar-day-header">Thu</div>
+                    <div class="calendar-day-header">Fri</div>
+                    <div class="calendar-day-header">Sat</div>
+                    
+                    <!-- Days from previous month -->
+                    <div class="calendar-day other-month">
+                        <div class="day-number">28</div>
+                    </div>
+                    <div class="calendar-day other-month">
+                        <div class="day-number">29</div>
+                    </div>
+                    <div class="calendar-day other-month">
+                        <div class="day-number">30</div>
+                    </div>
+                    <div class="calendar-day other-month">
+                        <div class="day-number">31</div>
+                    </div>
+                    
+                    <!-- Days in current month -->
+                    <div class="calendar-day">
+                        <div class="day-number">1</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">2</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">3</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">4</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">5</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">6</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">7</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">8</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">9</div>
+                    </div>
+                    <div class="calendar-day has-event">
+                        <div class="day-number">10</div>
+                        <div class="day-events">
+                            <div class="day-event-indicator workshop"></div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">11</div>
+                    </div>
+                    <div class="calendar-day has-event">
+                        <div class="day-number">12</div>
+                        <div class="day-events">
+                            <div class="day-event-indicator seminar"></div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">13</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">14</div>
+                    </div>
+                    <div class="calendar-day has-event today">
+                        <div class="day-number">15</div>
+                        <div class="day-events">
+                            <div class="day-event-indicator tech"></div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">16</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">17</div>
+                    </div>
+                    <div class="calendar-day has-event">
+                        <div class="day-number">18</div>
+                        <div class="day-events">
+                            <div class="day-event-indicator competition"></div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">19</div>
+                    </div>
+                    <div class="calendar-day has-event">
+                        <div class="day-number">20</div>
+                        <div class="day-events">
+                            <div class="day-event-indicator workshop"></div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">21</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">22</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">23</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">24</div>
+                    </div>
+                    <div class="calendar-day has-event">
+                        <div class="day-number">25</div>
+                        <div class="day-events">
+                            <div class="day-event-indicator cultural"></div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">26</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">27</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">28</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">29</div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">30</div>
+                    </div>
+                    
+                    <!-- Days from next month -->
+                    <div class="calendar-day other-month">
+                        <div class="day-number">1</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+                <a href="#about">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toaster Container -->
+    <div class="toaster-container" id="toasterContainer"></div>
+
+    <!-- Add Event Modal -->
+    <div class="modal" id="addEventModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Event</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addEventForm">
+                    <div class="form-group">
+                        <label for="eventTitle">Event Title</label>
+                        <input type="text" id="eventTitle" class="form-control" placeholder="Enter event title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventCategory">Category</label>
+                        <select id="eventCategory" class="form-control" required>
+                            <option value="">Select category</option>
+                            <option value="workshop">Workshop</option>
+                            <option value="seminar">Seminar</option>
+                            <option value="competition">Competition</option>
+                            <option value="cultural">Cultural</option>
+                            <option value="tech">Tech</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventDate">Date</label>
+                        <input type="date" id="eventDate" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventStartTime">Start Time</label>
+                        <input type="time" id="eventStartTime" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventEndTime">End Time</label>
+                        <input type="time" id="eventEndTime" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventLocation">Location</label>
+                        <input type="text" id="eventLocation" class="form-control" placeholder="Enter event location" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventDescription">Description</label>
+                        <textarea id="eventDescription" class="form-control" placeholder="Enter event description" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventImage">Event Image</label>
+                        <input type="file" id="eventImage" class="form-control" accept="image/*">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Registration Options</label>
+                        <div class="form-check">
+                            <input type="checkbox" id="requireRegistration" class="form-check-input">
+                            <label for="requireRegistration" class="form-check-label">Require registration</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="limitAttendees" class="form-check-input">
+                            <label for="limitAttendees" class="form-check-label">Limit number of attendees</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="maxAttendeesGroup" style="display: none;">
+                        <label for="maxAttendees">Maximum Attendees</label>
+                        <input type="number" id="maxAttendees" class="form-control" min="1" placeholder="Enter maximum number of attendees">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Create Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div class="modal" id="eventDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Event Details</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="event-detail-header">
+                    <h1 class="event-detail-title">Annual Hackathon 2023: Code for Change</h1>
+                    <div class="event-detail-meta">
+                        <div class="event-detail-meta-item">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>June 15, 2023</span>
+                        </div>
+                        <div class="event-detail-meta-item">
+                            <i class="far fa-clock"></i>
+                            <span>9:00 AM - 9:00 PM (24 hours)</span>
+                        </div>
+                        <div class="event-detail-meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Main Campus, Innovation Hub</span>
+                        </div>
+                        <div class="event-detail-meta-item">
+                            <i class="fas fa-tag"></i>
+                            <span>Tech</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-detail-image">
+                    <img src="assets/event-hackathon.jpg" alt="Annual Hackathon">
+                </div>
+                
+                <div class="event-detail-description">
+                    <p>Join us for our annual 24-hour hackathon where you'll collaborate with fellow students to build innovative solutions addressing real-world problems. This year's theme is "Technology for Sustainable Development".</p>
+                    <p>Whether you're a coding expert or just starting out, this event welcomes participants of all skill levels. Form teams of 2-4 members and put your creativity and problem-solving skills to the test!</p>
+                </div>
+                
+                <div class="event-detail-section">
+                    <h3 class="event-detail-section-title">Event Highlights</h3>
+                    <div class="event-detail-list">
+                        <div class="event-detail-list-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>24-hour coding challenge with mentorship from industry professionals</span>
+                        </div>
+                        <div class="event-detail-list-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Prizes worth ₹50,000 to be won across multiple categories</span>
+                        </div>
+                        <div class="event-detail-list-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Free meals, snacks, and refreshments throughout the event</span>
+                        </div>
+                        <div class="event-detail-list-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Networking opportunities with industry recruiters</span>
+                        </div>
+                        <div class="event-detail-list-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Certificates for all participants</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-detail-section">
+                    <h3 class="event-detail-section-title">Requirements</h3>
+                    <div class="event-detail-list">
+                        <div class="event-detail-list-item">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Participants must bring their own laptops and necessary equipment</span>
+                        </div>
+                        <div class="event-detail-list-item">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Valid college ID is required for entry</span>
+                        </div>
+                        <div class="event-detail-list-item">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Teams must register before June 10, 2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-organizer">
+                    <div class="event-organizer-avatar">
+                        <img src="assets/organizer.jpg" alt="Event Organizer">
+                    </div>
+                    <div class="event-organizer-info">
+                        <h4 class="event-organizer-name">Tech Club</h4>
+                        <p class="event-organizer-role">Event Organizer</p>
+                    </div>
+                </div>
+                
+                <div class="event-detail-actions">
+                    <button class="event-detail-action-btn">
+                        <i class="fas fa-user-plus"></i> Register Now
+                    </button>
+                    <button class="event-detail-action-btn secondary">
+                        <i class="fas fa-share-alt"></i> Share Event
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show loading overlay
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            // Simulate loading time
+            setTimeout(function() {
+                loadingOverlay.classList.add('hidden');
+            }, 800);
+        });
+
+        // Toggle sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('main');
+            sidebar.classList.toggle('collapsed');
+            main.classList.toggle('expanded');
+        }
+
+        // Mobile sidebar toggle
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('mobile-open');
+            sidebarOverlay.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        }
+
+        function closeMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.remove('mobile-open');
+            sidebarOverlay.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
+
+        // Toggle view (Grid/Calendar)
+        const viewToggleBtns = document.querySelectorAll('.view-toggle-btn');
+        const eventsGrid = document.querySelector('.events-grid');
+        const calendarView = document.querySelector('.calendar-view');
+
+        viewToggleBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                viewToggleBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                if (this.querySelector('.fa-th')) {
+                    eventsGrid.style.display = 'grid';
+                    calendarView.style.display = 'none';
+                } else {
+                    eventsGrid.style.display = 'none';
+                    calendarView.style.display = 'block';
+                }
+            });
+        });
+
+        // Filter buttons
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // Filter logic would go here
+            });
+        });
+
+        // Modal functionality
+        const addEventBtn = document.querySelector('.events-btn');
+        const addEventModal = document.getElementById('addEventModal');
+        const eventCards = document.querySelectorAll('.event-card');
+        const eventDetailsModal = document.getElementById('eventDetailsModal');
+        const closeModalBtns = document.querySelectorAll('.close-modal');
+        const cancelBtns = document.querySelectorAll('.cancel-btn');
+
+        // Open Add Event modal
+        addEventBtn.addEventListener('click', function() {
+            addEventModal.classList.add('active');
+        });
+
+        // Open Event Details modal when clicking on event cards
+        eventCards.forEach(card => {
+            card.addEventListener('click', function() {
+                eventDetailsModal.classList.add('active');
+            });
+        });
+
+        // Close modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                addEventModal.classList.remove('active');
+                eventDetailsModal.classList.remove('active');
+            });
+        });
+
+        cancelBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                addEventModal.classList.remove('active');
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === addEventModal) {
+                addEventModal.classList.remove('active');
+            }
+            if (event.target === eventDetailsModal) {
+                eventDetailsModal.classList.remove('active');
+            }
+        });
+
+        // Toggle max attendees input based on checkbox
+        const limitAttendeesCheckbox = document.getElementById('limitAttendees');
+        const maxAttendeesGroup = document.getElementById('maxAttendeesGroup');
+
+        limitAttendeesCheckbox.addEventListener('change', function() {
+            maxAttendeesGroup.style.display = this.checked ? 'block' : 'none';
+        });
+
+        // Form submission (prevent default for demo)
+        const addEventForm = document.getElementById('addEventForm');
+        addEventForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Form submission logic would go here
+            addEventModal.classList.remove('active');
+            // Show success message or refresh events list
+        });
+        
+        // Profile navigation
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        // Login/Signup Modal functions
+        function showLoginModal() {
+            window.location.href = 'login.html';
+        }
+
+        function showSignupModal() {
+            window.location.href = 'sign-up.html';
+        }
+        
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Handle newsletter submission
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            // Here you would typically send the email to your server
+            alert(`Thank you for subscribing with ${email}!`);
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>

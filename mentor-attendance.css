@@ -70,7 +70,7 @@
     font-weight: 500;
 }
 
-.subject-select-container {
+.select-container {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -95,7 +95,7 @@
     padding-right: 30px;
 }
 
-.subject-select-container .attendance-select {
+.select-container .attendance-select {
     flex: 1;
 }
 
@@ -124,6 +124,51 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     margin-bottom: 24px;
+    position: sticky;
+    top: 20px;
+    z-index: 10;
+    justify-content: center;
+    background-color: var(--dark-bg);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.stat-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.stat-info p {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
 /* Attendance Table */
@@ -205,16 +250,64 @@
     margin-bottom: 24px;
 }
 
-/* Add Subject Modal */
-#addSubjectModal .modal-content {
+/* Main Heading */
+.main-heading {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.welcome_tag {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+/* Modal Styles - Common for all modals */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
     max-width: 500px;
+    width: 90%;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(0, 255, 210, 0.2);
     overflow: hidden;
+    background: var(--card-bg);
+    animation: modalFadeIn 0.3s ease;
 }
 
-#addSubjectModal .modal-header {
+@keyframes modalFadeIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
     background: linear-gradient(135deg, rgba(0, 255, 210, 0.1), rgba(0, 255, 210, 0.05));
     padding: 20px;
     display: flex;
@@ -223,14 +316,14 @@
     border-bottom: 1px solid rgba(0, 255, 210, 0.1);
 }
 
-#addSubjectModal .modal-header h2 {
+.modal-header h2 {
     margin: 0;
     color: var(--primary-color);
     font-size: 20px;
     font-weight: 600;
 }
 
-#addSubjectModal .close-modal {
+.close-modal {
     background: none;
     border: none;
     color: var(--text-secondary);
@@ -239,19 +332,19 @@
     transition: var(--transition);
 }
 
-#addSubjectModal .close-modal:hover {
+.close-modal:hover {
     color: var(--primary-color);
 }
 
-#addSubjectModal .modal-body {
+.modal-body {
     padding: 20px;
 }
 
-#addSubjectModal .form-group {
+.form-group {
     margin-bottom: 20px;
 }
 
-#addSubjectModal .form-group label {
+.form-group label {
     display: block;
     margin-bottom: 8px;
     font-size: 14px;
@@ -259,7 +352,7 @@
     font-weight: 500;
 }
 
-#addSubjectModal .form-group input {
+.form-group input {
     width: 100%;
     padding: 12px 15px;
     border-radius: var(--border-radius);
@@ -270,19 +363,19 @@
     transition: var(--transition);
 }
 
-#addSubjectModal .form-group input:focus {
+.form-group input:focus {
     border-color: var(--primary-color);
     outline: none;
     box-shadow: 0 0 0 2px rgba(0, 255, 210, 0.2);
 }
 
-#addSubjectModal .form-actions {
+.form-actions {
     display: flex;
     justify-content: flex-end;
     margin-top: 30px;
 }
 
-#addSubjectModal .save-btn {
+.save-btn {
     background: var(--primary-color);
     color: var(--dark-bg);
     border: none;
@@ -297,23 +390,196 @@
     gap: 8px;
 }
 
-#addSubjectModal .save-btn:hover {
+.save-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 255, 210, 0.3);
 }
 
+/* Hide scrollbars but keep functionality */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: none;
+}
+
+/* For IE and Edge */
+* {
+    -ms-overflow-style: none;
+}
+
+.sidebar-backdrop,
+.mobile-overlay,
+.hidden-sidebar {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+.modal,
+.modal-overlay {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+
+
+/* * {
+  outline: 1px dashed red !important;
+}
+
+body * {
+  pointer-events: all !important;
+  position: relative !important;
+  z-index: auto !important;
+} */
+
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    .control-row {
-        flex-direction: column;
-        gap: 15px;
+    body {
+        font-size: 14px;
+        overflow-x: hidden;
     }
-    
-    .control-group {
+
+    .main-container {
+        flex-direction: column;
+        padding: 10px;
+        overflow-y: auto;
+    }
+
+    .mentor-attendance-container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+        overflow-x: hidden;
         width: 100%;
     }
-    
-    .attendance-stats-row {
-        grid-template-columns: 1fr;
+
+    .mentor-attendance-header,
+    .mentor-attendance-controls,
+    .mentor-attendance-stats,
+    .mentor-attendance-table,
+    .calendar {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .calendar {
+        grid-template-columns: repeat(7, 1fr);
+        font-size: 12px;
+    }
+
+    .day,
+    .header-day {
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .mentor-attendance-controls input[type="text"],
+    .mentor-attendance-controls select {
+        width: 100%;
+        margin: 6px 0;
+    }
+
+    .mentor-attendance-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .mentor-attendance-table th,
+    .mentor-attendance-table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .present-label,
+    .absent-label {
+        flex: 1;
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .custom-checkbox input:checked+.checkmark::after {
+        left: 4px;
+        top: 0px;
+        width: 4px;
+        height: 8px;
+    }
+
+    .modal-content {
+        width: 90%;
+        max-height: 80%;
+        padding: 15px;
+    }
+
+    .modal {
+        padding: 10px;
+    }
+
+    /* Hide overlays by default and allow click-through */
+    .loading-overlay,
+    #sidebarOverlay {
+        display: none !important;
+        pointer-events: none !important;
+        z-index: -1 !important;
+    }
+
+    /* If you do use them, make sure to toggle these classes in JS */
+    .loading-overlay.active,
+    #sidebarOverlay.active {
+        display: flex;
+        /* or block */
+        pointer-events: all;
+        z-index: 10000;
+    }
+
+}
+
+/* Additional mobile optimizations for very small screens */
+@media (max-width: 480px) {
+    .header-left h1 {
+        font-size: 18px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .mentor-attendance-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mentor-attendance-controls input[type="text"],
+    .mentor-attendance-controls select {
+        font-size: 13px;
+    }
+
+    .today-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Hide overlays by default and allow click-through */
+    .loading-overlay,
+    #sidebarOverlay {
+        display: none !important;
+        pointer-events: none !important;
+        z-index: -1 !important;
+    }
+
+    /* If you do use them, make sure to toggle these classes in JS */
+    .loading-overlay.active,
+    #sidebarOverlay.active {
+        display: flex;
+        /* or block */
+        pointer-events: all;
+        z-index: 10000;
     }
 }

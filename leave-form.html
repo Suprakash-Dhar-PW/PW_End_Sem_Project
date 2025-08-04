@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PW IOI - Leave Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="leave-form.css">
+    <style>
+        /* Remove underline from social icons in the footer */
+        .site-footer .social-icons a {
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+    <div class="top-right-controls">
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
+            </button>
+            <button class="signup-btn" onclick="showSignupModal()">
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
+            </button>
+        </div>
+        <div class="profile-icon" onclick="goToProfile()" title="View Profile">
+            <img src="images/Supra_image.jpg" alt="Profile" />
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="nav-section" role="navigation">
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="mentor-attendance.html" class="nav-link" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
+            <a href="projects.html" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
+            <a href="leave-form.html" class="nav-link active" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main">
+        <div class="leave-container">
+            <h1 class="page-title">Leave Management</h1>
+            
+            <!-- Leave Header with Request Button -->
+            <div class="leave-header">
+                <h2>My Leave Balance</h2>
+                <button class="leave-btn" id="requestLeaveBtn">
+                    <i class="fas fa-plus"></i> Request Leave
+                </button>
+            </div>
+            
+            <!-- Leave Balance Cards -->
+            <div class="leave-balance-container">
+                <div class="leave-balance-card">
+                    <div class="leave-type">Casual Leave</div>
+                    <div class="leave-balance">8 <span>/ 12 days</span></div>
+                    <div class="leave-progress">
+                        <div class="leave-progress-bar casual" style="width: 66.67%"></div>
+                    </div>
+                </div>
+                
+                <div class="leave-balance-card">
+                    <div class="leave-type">Sick Leave</div>
+                    <div class="leave-balance">5 <span>/ 7 days</span></div>
+                    <div class="leave-progress">
+                        <div class="leave-progress-bar sick" style="width: 71.43%"></div>
+                    </div>
+                </div>
+                
+                <div class="leave-balance-card">
+                    <div class="leave-type">Vacation Leave</div>
+                    <div class="leave-balance">15 <span>/ 15 days</span></div>
+                    <div class="leave-progress">
+                        <div class="leave-progress-bar vacation" style="width: 100%"></div>
+                    </div>
+                </div>
+                
+                <div class="leave-balance-card">
+                    <div class="leave-type">Unpaid Leave</div>
+                    <div class="leave-balance">Unlimited</div>
+                    <div class="leave-progress">
+                        <div class="leave-progress-bar unpaid" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Leave History Section -->
+            <div class="leave-history">
+                <div class="leave-history-header">
+                    <h2 class="leave-history-title">Leave History</h2>
+                    <div class="leave-history-filters">
+                        <button class="leave-history-filter active">All</button>
+                        <button class="leave-history-filter">Approved</button>
+                        <button class="leave-history-filter">Pending</button>
+                        <button class="leave-history-filter">Rejected</button>
+                    </div>
+                </div>
+                
+                <!-- Leave History Table -->
+                <table class="leave-history-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Days</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Casual Leave</td>
+                            <td>15 Jun 2023</td>
+                            <td>16 Jun 2023</td>
+                            <td>2</td>
+                            <td>Personal work</td>
+                            <td><span class="leave-status pending">Pending</span></td>
+                            <td>
+                                <div class="leave-actions">
+                                    <button class="leave-action-btn view-leave" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="leave-action-btn edit-leave" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="leave-action-btn cancel-leave" title="Cancel">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sick Leave</td>
+                            <td>05 May 2023</td>
+                            <td>07 May 2023</td>
+                            <td>3</td>
+                            <td>Fever and cold</td>
+                            <td><span class="leave-status approved">Approved</span></td>
+                            <td>
+                                <div class="leave-actions">
+                                    <button class="leave-action-btn view-leave" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vacation Leave</td>
+                            <td>10 Apr 2023</td>
+                            <td>20 Apr 2023</td>
+                            <td>11</td>
+                            <td>Family vacation</td>
+                            <td><span class="leave-status approved">Approved</span></td>
+                            <td>
+                                <div class="leave-actions">
+                                    <button class="leave-action-btn view-leave" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Casual Leave</td>
+                            <td>15 Mar 2023</td>
+                            <td>15 Mar 2023</td>
+                            <td>1</td>
+                            <td>Personal work</td>
+                            <td><span class="leave-status rejected">Rejected</span></td>
+                            <td>
+                                <div class="leave-actions">
+                                    <button class="leave-action-btn view-leave" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sick Leave</td>
+                            <td>02 Feb 2023</td>
+                            <td>03 Feb 2023</td>
+                            <td>2</td>
+                            <td>Stomach infection</td>
+                            <td><span class="leave-status approved">Approved</span></td>
+                            <td>
+                                <div class="leave-actions">
+                                    <button class="leave-action-btn view-leave" title="View Details">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Empty State (Hidden by default) -->
+                <div class="leave-empty-state" style="display: none;">
+                    <div class="leave-empty-icon">
+                        <i class="far fa-calendar-times"></i>
+                    </div>
+                    <div class="leave-empty-text">You haven't applied for any leave yet.</div>
+                    <button class="leave-btn">
+                        <i class="fas fa-plus"></i> Request Your First Leave
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2023 PW Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Request Leave Modal -->
+    <div class="modal" id="requestLeaveModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Request Leave</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="leaveRequestForm">
+                    <div class="form-group">
+                        <label for="leaveType">Leave Type</label>
+                        <select id="leaveType" class="form-control" required>
+                            <option value="">Select leave type</option>
+                            <option value="casual">Casual Leave</option>
+                            <option value="sick">Sick Leave</option>
+                            <option value="vacation">Vacation Leave</option>
+                            <option value="unpaid">Unpaid Leave</option>
+                        </select>
+                    </div>
+                    
+                    <div class="date-range-group">
+                        <div class="form-group">
+                            <label for="startDate">From Date</label>
+                            <input type="date" id="startDate" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="endDate">To Date</label>
+                            <input type="date" id="endDate" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="leaveDuration">Duration</label>
+                        <select id="leaveDuration" class="form-control" required>
+                            <option value="full_day">Full Day</option>
+                            <option value="first_half">First Half</option>
+                            <option value="second_half">Second Half</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="leaveReason">Reason for Leave</label>
+                        <textarea id="leaveReason" class="form-control" placeholder="Please provide a reason for your leave request" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactDetails">Contact Details During Leave</label>
+                        <input type="text" id="contactDetails" class="form-control" placeholder="Phone number or email">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Submit Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leave Details Modal -->
+    <div class="modal" id="leaveDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Leave Details</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="leave-detail-section">
+                    <h3>Leave Information</h3>
+                    <div class="leave-detail-item">
+                        <div class="leave-detail-label">Leave Type</div>
+                        <div class="leave-detail-value">Sick Leave</div>
+                    </div>
+                    <div class="leave-detail-item">
+                        <div class="leave-detail-label">From Date</div>
+                        <div class="leave-detail-value">05 May 2023</div>
+                    </div>
+                    <div class="leave-detail-item">
+                        <div class="leave-detail-label">To Date</div>
+                        <div class="leave-detail-value">07 May 2023</div>
+                    </div>
+                    <div class="leave-detail-item">
+                        <div class="leave-detail-label">Duration</div>
+                        <div class="leave-detail-value">3 days (Full day)</div>
+                    </div>
+                    <div class="leave-detail-item">
+                        <div class="leave-detail-label">Applied On</div>
+                        <div class="leave-detail-value">02 May 2023</div>
+                    </div>
+                </div>
+                
+                <div class="leave-detail-section">
+                    <h3>Reason for Leave</h3>
+                    <div class="leave-detail-reason">
+                        I'm suffering from fever and cold. Doctor has advised rest for 3 days. Medical certificate attached.
+                    </div>
+                </div>
+                
+                <div class="leave-detail-section">
+                    <h3>Contact Details</h3>
+                    <div class="leave-detail-item">
+                        <div class="leave-detail-label">Phone</div>
+                        <div class="leave-detail-value">+91 9876543210</div>
+                    </div>
+                </div>
+                
+                <div class="leave-detail-status approved">
+                    <div class="leave-detail-status-header">
+                        <i class="fas fa-check-circle leave-detail-status-icon"></i>
+                        <div class="leave-detail-status-text">Approved</div>
+                    </div>
+                    <div class="leave-detail-status-message">
+                        Your leave request has been approved by the admin on 03 May 2023.
+                    </div>
+                </div>
+                
+                <div class="leave-detail-actions">
+                    <button class="leave-detail-action-btn secondary">
+                        <i class="fas fa-print"></i> Print Details
+                    </button>
+                    <button class="leave-detail-action-btn danger">
+                        <i class="fas fa-undo"></i> Request Cancellation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Loading overlay
+        window.addEventListener('load', function() {
+            document.getElementById('loadingOverlay').classList.add('hidden');
+        });
+
+        // Toggle mobile menu
+        function toggleMobileSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+
+        function closeMobileSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('main').classList.toggle('expanded');
+        }
+
+        // Leave history filters
+        const leaveHistoryFilters = document.querySelectorAll('.leave-history-filter');
+        leaveHistoryFilters.forEach(filter => {
+            filter.addEventListener('click', function() {
+                leaveHistoryFilters.forEach(f => f.classList.remove('active'));
+                this.classList.add('active');
+                // Filter logic would go here
+            });
+        });
+
+        // Modal functionality
+        const requestLeaveBtn = document.getElementById('requestLeaveBtn');
+        const requestLeaveModal = document.getElementById('requestLeaveModal');
+        const leaveDetailsModal = document.getElementById('leaveDetailsModal');
+        const viewLeaveButtons = document.querySelectorAll('.view-leave');
+        const closeModalBtns = document.querySelectorAll('.close-modal');
+        const cancelBtns = document.querySelectorAll('.cancel-btn');
+
+        // Open Request Leave modal
+        requestLeaveBtn.addEventListener('click', function() {
+            requestLeaveModal.classList.add('active');
+        });
+
+        // Open Leave Details modal
+        viewLeaveButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                leaveDetailsModal.classList.add('active');
+            });
+        });
+
+        // Close modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                requestLeaveModal.classList.remove('active');
+                leaveDetailsModal.classList.remove('active');
+            });
+        });
+
+        cancelBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                requestLeaveModal.classList.remove('active');
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === requestLeaveModal) {
+                requestLeaveModal.classList.remove('active');
+            }
+            if (event.target === leaveDetailsModal) {
+                leaveDetailsModal.classList.remove('active');
+            }
+        });
+
+        // Form submission (prevent default for demo)
+        const leaveRequestForm = document.getElementById('leaveRequestForm');
+        leaveRequestForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Form submission logic would go here
+            requestLeaveModal.classList.remove('active');
+            // Show success message or refresh leave history
+        });
+
+        // Date validation
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+
+        startDateInput.addEventListener('change', function() {
+            endDateInput.min = this.value;
+            if (endDateInput.value && endDateInput.value < this.value) {
+                endDateInput.value = this.value;
+            }
+        });
+
+        // Calculate leave days (simplified for demo)
+        function calculateLeaveDays() {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+            if (startDate && endDate) {
+                const diffTime = Math.abs(endDate - startDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                return diffDays;
+            }
+            return 0;
+        }
+
+        // Update leave days when dates change
+        [startDateInput, endDateInput].forEach(input => {
+            input.addEventListener('change', function() {
+                if (startDateInput.value && endDateInput.value) {
+                    const days = calculateLeaveDays();
+                    // Update UI with calculated days
+                    console.log(`Leave days: ${days}`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

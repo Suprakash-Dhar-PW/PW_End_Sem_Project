@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - PW Pro</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="gallery.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+    <!-- Top Right Controls -->
+    <div class="top-right-controls">
+        <div class="auth-controls">
+            <button class="login-btn">Login</button>
+            <button class="signup-btn">Sign Up</button>
+        </div>
+        <div class="profile-icon">
+            <img src="assets/profile-placeholder.jpg" alt="Profile">
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="nav-section" role="navigation">
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="mentor-attendance.html" class="nav-link" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
+            <a href="projects.html" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
+            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="gallery.html" class="nav-link active" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="gallery-container">
+            <h1 class="page-title">Gallery</h1>
+            
+            <!-- Gallery Header with Upload Button -->
+            <div class="gallery-header">
+                <div class="gallery-filters">
+                    <button class="gallery-filter active" data-filter="all">All</button>
+                    <button class="gallery-filter" data-filter="events">Events</button>
+                    <button class="gallery-filter" data-filter="workshops">Workshops</button>
+                    <button class="gallery-filter" data-filter="campus">Campus</button>
+                    <button class="gallery-filter" data-filter="projects">Projects</button>
+                </div>
+                <button class="gallery-btn" id="uploadPhotoBtn">
+                    <i class="fas fa-upload"></i> Upload Photos
+                </button>
+            </div>
+            
+            <!-- Search and View Controls -->
+            <div class="gallery-controls">
+                <div class="gallery-search">
+                    <input type="text" placeholder="Search gallery..." class="search-input">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="gallery-view-controls">
+                    <button class="view-control active" data-view="grid">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-control" data-view="masonry">
+                        <i class="fas fa-columns"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Featured Album -->
+            <div class="featured-album">
+                <div class="featured-album-image">
+                    <img src="assets/gallery/featured-album.jpg" alt="Annual Tech Fest 2023">
+                    <div class="featured-album-overlay">
+                        <h3>Annual Tech Fest 2023</h3>
+                        <p>42 photos · June 15, 2023</p>
+                        <button class="view-album-btn">View Album</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Album 1 -->
+                <div class="gallery-item" data-category="events">
+                    <div class="gallery-item-image">
+                        <img src="assets/gallery/event-1.jpg" alt="Orientation Day">
+                        <div class="gallery-item-overlay">
+                            <div class="gallery-item-actions">
+                                <button class="gallery-action-btn" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-info">
+                        <h3>Orientation Day</h3>
+                        <p>24 photos · May 5, 2023</p>
+                    </div>
+                </div>
+                
+                <!-- Album 2 -->
+                <div class="gallery-item" data-category="workshops">
+                    <div class="gallery-item-image">
+                        <img src="assets/gallery/workshop-1.jpg" alt="AI Workshop Series">
+                        <div class="gallery-item-overlay">
+                            <div class="gallery-item-actions">
+                                <button class="gallery-action-btn" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-info">
+                        <h3>AI Workshop Series</h3>
+                        <p>18 photos · April 20, 2023</p>
+                    </div>
+                </div>
+                
+                <!-- Album 3 -->
+                <div class="gallery-item" data-category="campus">
+                    <div class="gallery-item-image">
+                        <img src="assets/gallery/campus-1.jpg" alt="Campus Tour 2023">
+                        <div class="gallery-item-overlay">
+                            <div class="gallery-item-actions">
+                                <button class="gallery-action-btn" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-info">
+                        <h3>Campus Tour 2023</h3>
+                        <p>36 photos · March 15, 2023</p>
+                    </div>
+                </div>
+                
+                <!-- Album 4 -->
+                <div class="gallery-item" data-category="projects">
+                    <div class="gallery-item-image">
+                        <img src="assets/gallery/project-1.jpg" alt="Final Year Projects Exhibition">
+                        <div class="gallery-item-overlay">
+                            <div class="gallery-item-actions">
+                                <button class="gallery-action-btn" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-info">
+                        <h3>Final Year Projects Exhibition</h3>
+                        <p>42 photos · February 28, 2023</p>
+                    </div>
+                </div>
+                
+                <!-- Album 5 -->
+                <div class="gallery-item" data-category="events">
+                    <div class="gallery-item-image">
+                        <img src="assets/gallery/event-2.jpg" alt="Cultural Fest 2023">
+                        <div class="gallery-item-overlay">
+                            <div class="gallery-item-actions">
+                                <button class="gallery-action-btn" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-info">
+                        <h3>Cultural Fest 2023</h3>
+                        <p>56 photos · February 10, 2023</p>
+                    </div>
+                </div>
+                
+                <!-- Album 6 -->
+                <div class="gallery-item" data-category="workshops">
+                    <div class="gallery-item-image">
+                        <img src="assets/gallery/workshop-2.jpg" alt="Web Development Bootcamp">
+                        <div class="gallery-item-overlay">
+                            <div class="gallery-item-actions">
+                                <button class="gallery-action-btn" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-info">
+                        <h3>Web Development Bootcamp</h3>
+                        <p>22 photos · January 25, 2023</p>
+                    </div>
+                </div>
+                
+                <!-- Album 7 -->
+                <div class="gallery-item" data-category="campus">
+                    <div class="gallery-item-image">
+                        <img src="assets/gallery/campus-2.jpg" alt="New Library Opening">
+                        <div class="gallery-item-overlay">
+                            <div class="gallery-item-actions">
+                                <button class="gallery-action-btn" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-info">
+                        <h3>New Library Opening</h3>
+                        <p>15 photos · January 10, 2023</p>
+                    </div>
+                </div>
+                
+                <!-- Album 8 -->
+                <div class="gallery-item" data-category="projects">
+                    <div class="gallery-item-image">
+                        <img src="assets/gallery/project-2.jpg" alt="Hackathon 2023">
+                        <div class="gallery-item-overlay">
+                            <div class="gallery-item-actions">
+                                <button class="gallery-action-btn" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="gallery-action-btn" title="Share">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-info">
+                        <h3>Hackathon 2023</h3>
+                        <p>32 photos · December 15, 2022</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="load-more">
+                <button class="load-more-btn">
+                    <i class="fas fa-sync"></i> Load More
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2023 PW Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Upload Photos Modal -->
+    <div class="modal" id="uploadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Upload Photos</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label for="albumName">Album Name</label>
+                        <input type="text" id="albumName" class="form-control" placeholder="Enter album name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="albumCategory">Category</label>
+                        <select id="albumCategory" class="form-control" required>
+                            <option value="">Select category</option>
+                            <option value="events">Events</option>
+                            <option value="workshops">Workshops</option>
+                            <option value="campus">Campus</option>
+                            <option value="projects">Projects</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="albumDescription">Description</label>
+                        <textarea id="albumDescription" class="form-control" placeholder="Enter album description"></textarea>
+                    </div>
+                    
+                    <div class="upload-area">
+                        <div class="upload-dropzone" id="uploadDropzone">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop photos here or click to browse</p>
+                            <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+                        </div>
+                        <div class="upload-preview" id="uploadPreview">
+                            <!-- Preview thumbnails will be added here -->
+                        </div>
+                    </div>
+                    
+                    <div class="upload-progress">
+                        <div class="upload-progress-bar" style="width: 0%"></div>
+                        <div class="upload-progress-text">0%</div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Upload Photos</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Viewer Modal -->
+    <div class="modal" id="photoViewerModal">
+        <div class="modal-content photo-viewer-content">
+            <button class="close-modal photo-viewer-close">&times;</button>
+            <div class="photo-viewer-container">
+                <button class="photo-nav-btn prev-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="photo-viewer-image">
+                    <img src="assets/gallery/event-1.jpg" alt="Photo">
+                </div>
+                <button class="photo-nav-btn next-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="photo-viewer-info">
+                <div class="photo-viewer-details">
+                    <h3>Orientation Day</h3>
+                    <p>Photo 1 of 24 · May 5, 2023</p>
+                </div>
+                <div class="photo-viewer-actions">
+                    <button class="photo-action-btn" title="Download">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="photo-action-btn" title="Share">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                    <button class="photo-action-btn" title="Favorite">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle mobile menu
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Gallery filters
+        const galleryFilters = document.querySelectorAll('.gallery-filter');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        galleryFilters.forEach(filter => {
+            filter.addEventListener('click', function() {
+                // Update active filter
+                galleryFilters.forEach(f => f.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter gallery items
+                const filterValue = this.getAttribute('data-filter');
+                
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // View controls
+        const viewControls = document.querySelectorAll('.view-control');
+        const galleryGrid = document.getElementById('galleryGrid');
+        
+        viewControls.forEach(control => {
+            control.addEventListener('click', function() {
+                // Update active control
+                viewControls.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Change view
+                const viewType = this.getAttribute('data-view');
+                galleryGrid.className = 'gallery-grid';
+                
+                if (viewType === 'masonry') {
+                    galleryGrid.classList.add('masonry-view');
+                } else {
+                    galleryGrid.classList.add('grid-view');
+                }
+            });
+        });
+
+        // Modal functionality
+        const uploadBtn = document.getElementById('uploadPhotoBtn');
+        const uploadModal = document.getElementById('uploadModal');
+        const photoViewerModal = document.getElementById('photoViewerModal');
+        const closeModalBtns = document.querySelectorAll('.close-modal');
+        const cancelBtns = document.querySelectorAll('.cancel-btn');
+        const viewBtns = document.querySelectorAll('.gallery-action-btn[title="View"]');
+        const viewAlbumBtn = document.querySelector('.view-album-btn');
+
+        // Open Upload modal
+        uploadBtn.addEventListener('click', function() {
+            uploadModal.classList.add('active');
+        });
+
+        // Open Photo Viewer modal
+        viewBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                photoViewerModal.classList.add('active');
+            });
+        });
+
+        viewAlbumBtn.addEventListener('click', function() {
+            photoViewerModal.classList.add('active');
+        });
+
+        // Close modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                uploadModal.classList.remove('active');
+                photoViewerModal.classList.remove('active');
+            });
+        });
+
+        cancelBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                uploadModal.classList.remove('active');
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === uploadModal) {
+                uploadModal.classList.remove('active');
+            }
+            if (event.target === photoViewerModal) {
+                photoViewerModal.classList.remove('active');
+            }
+        });
+
+        // Upload dropzone functionality
+        const uploadDropzone = document.getElementById('uploadDropzone');
+        const fileInput = document.getElementById('fileInput');
+        const uploadPreview = document.getElementById('uploadPreview');
+
+        uploadDropzone.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        uploadDropzone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        uploadDropzone.addEventListener('dragleave', function() {
+            this.classList.remove('dragover');
+        });
+
+        uploadDropzone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                updatePreview(e.dataTransfer.files);
+            }
+        });
+
+        fileInput.addEventListener('change', function() {
+            updatePreview(this.files);
+        });
+
+        function updatePreview(files) {
+            uploadPreview.innerHTML = '';
+            
+            for (let i = 0; i < files.length; i++) {
+                if (i >= 6) {
+                    const remainingCount = files.length - 6;
+                    const remainingItem = document.createElement('div');
+                    remainingItem.className = 'preview-item remaining';
+                    remainingItem.innerHTML = `<span>+${remainingCount} more</span>`;
+                    uploadPreview.appendChild(remainingItem);
+                    break;
+                }
+                
+                const file = files[i];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'preview-item';
+                    previewItem.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview">
+                        <button class="remove-preview" data-index="${i}">&times;</button>
+                    `;
+                    uploadPreview.appendChild(previewItem);
+                    
+                    // Add remove functionality
+                    previewItem.querySelector('.remove-preview').addEventListener('click', function() {
+                        previewItem.remove();
+                    });
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            uploadPreview.style.display = files.length ? 'grid' : 'none';
+        }
+
+        // Form submission (prevent default for demo)
+        const uploadForm = document.getElementById('uploadForm');
+        uploadForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Simulate upload progress
+            const progressBar = document.querySelector('.upload-progress-bar');
+            const progressText = document.querySelector('.upload-progress-text');
+            let progress = 0;
+            
+            const interval = setInterval(function() {
+                progress += 5;
+                progressBar.style.width = progress + '%';
+                progressText.textContent = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(function() {
+                        uploadModal.classList.remove('active');
+                        // Reset form and progress
+                        uploadForm.reset();
+                        uploadPreview.innerHTML = '';
+                        uploadPreview.style.display = 'none';
+                        progressBar.style.width = '0%';
+                        progressText.textContent = '0%';
+                    }, 500);
+                }
+            }, 100);
+        });
+
+        // Photo viewer navigation
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        
+        prevBtn.addEventListener('click', function() {
+            // Navigate to previous photo
+            console.log('Previous photo');
+        });
+        
+        nextBtn.addEventListener('click', function() {
+            // Navigate to next photo
+            console.log('Next photo');
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
+        
+        searchBtn.addEventListener('click', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            galleryItems.forEach(item => {
+                const title = item.querySelector('h3').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+        
+        searchInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                searchBtn.click();
+            }
+        });
+
+        // Load more functionality
+        const loadMoreBtn = document.querySelector('.load-more-btn');
+        
+        loadMoreBtn.addEventListener('click', function() {
+            // Simulate loading more items
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-sync"></i> Load More';
+                // In a real application, you would load more items here
+            }, 1500);
+        });
+    </script>
+
+    <script>
+        // Loading overlay
+        window.addEventListener('load', function() {
+            document.getElementById('loadingOverlay').classList.add('hidden');
+        });
+
+        // Sidebar toggle functions
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('main').classList.toggle('expanded');
+        }
+
+        function toggleMobileSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+
+        function closeMobileSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+
+        // Profile navigation
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        // Login/Signup modals
+        function showLoginModal() {
+            // Implement login modal functionality
+            console.log('Show login modal');
+        }
+
+        function showSignupModal() {
+            // Implement signup modal functionality
+            console.log('Show signup modal');
+        }
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

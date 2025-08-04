@@ -398,6 +398,12 @@
     padding: 25px;
     max-height: calc(90vh - 80px); /* Subtract header height */
     overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.modal-body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 /* Form Styles */
@@ -440,7 +446,9 @@ textarea {
 }
 
 select {
-    appearance: menulist;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     background-color: var(--card-bg);
     background-image: linear-gradient(45deg, transparent 50%, var(--primary-color) 50%),
                       linear-gradient(135deg, var(--primary-color) 50%, transparent 50%);
@@ -575,6 +583,7 @@ textarea:focus {
     .add-task-btn {
         width: 100%;
         justify-content: center;
+        min-height: 44px; /* Ensure good touch target */
     }
     
     .form-row {
@@ -591,9 +600,78 @@ textarea:focus {
         width: 100%;
         order: 3;
         margin-top: 10px;
+        min-height: 44px; /* Ensure good touch target */
     }
     
     .cancel-btn, .save-btn {
         flex: 1;
+        min-height: 44px; /* Ensure good touch target */
+    }
+    
+    /* Fix footer position for mobile */
+    footer {
+        position: relative;
+        padding: 15px;
+        margin-top: auto;
+        text-align: center;
+        width: 100%;
+    }
+    
+    footer .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    footer .footer-links,
+    footer .footer-social,
+    footer .footer-newsletter {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    /* Ensure the page has minimum height to push footer down */
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Ensure all interactive elements have sufficient touch targets */
+    button, 
+    select,
+    input,
+    .filter-btn,
+    .task-item,
+    .task-checkbox,
+    .task-actions button {
+        min-height: 44px;
+        min-width: 44px;
+        touch-action: manipulation;
+    }
+    
+    /* Ensure footer is properly centered */
+    footer .footer-content {
+        padding: 0;
+    }
+    
+    footer .footer-social a {
+        margin: 0 5px;
+    }
+    
+    footer .footer-newsletter input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    footer .footer-newsletter button {
+        width: 100%;
     }
 }
