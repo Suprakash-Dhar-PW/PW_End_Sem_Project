@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function showToast(message, type = 'info') {
         // Check if toaster function exists in index.js
         if (typeof showToaster === 'function') {
-            showToaster(message, type);
+            showToaster(type, 'Attendance Update', message);
         } else {
             // Fallback alert
             alert(message);

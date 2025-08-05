@@ -126,13 +126,13 @@
 }
 
 .attendance-select {
-    appearance: menulist;
+    appearance: none;
     background-color: var(--card-bg);
-    background-image: linear-gradient(45deg, transparent 50%, var(--primary-color) 50%),
-                      linear-gradient(135deg, var(--primary-color) 50%, transparent 50%);
-    background-position: calc(100% - 20px) center, calc(100% - 15px) center;
-    background-size: 5px 5px, 5px 5px;
+    background-image: linear-gradient(135deg, var(--primary-color) 50%, transparent 50%);
+    background-position: calc(100% - 15px) center;
+    background-size: 8px 8px;
     background-repeat: no-repeat;
+    padding-right: 30px;
 }
 
 .attendance-select option {
@@ -198,6 +198,16 @@
     color: var(--primary-color);
 }
 
+/* Date Information Styles */
+.date-info {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-top: 3px;
+    opacity: 0.8;
+}
+
 .attendance-icon i.fa-exclamation-triangle {
     color: #ffaa00;
 }
@@ -216,6 +226,140 @@
 
 .attendance-card:nth-child(3) .attendance-value {
     color: var(--secondary-color);
+}
+
+/* Attendance Graph Styles */
+.attendance-graph-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.attendance-graph-container:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(0, 255, 210, 0.3);
+}
+
+.graph-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.graph-filters {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.graph-filter-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: var(--transition);
+    color: var(--text-primary);
+}
+
+.graph-filter-btn.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--dark-bg);
+    border-color: transparent;
+}
+
+.attendance-graph {
+    height: 300px;
+    width: 100%;
+}
+
+/* Course-wise Attendance Table Styles */
+.course-attendance-table {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.course-attendance-table:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(0, 255, 210, 0.3);
+}
+
+.view-selector {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.view-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: var(--transition);
+    color: var(--text-primary);
+}
+
+.view-btn.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--dark-bg);
+    border-color: transparent;
+}
+
+.course-attendance-detail {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-primary);
+}
+
+.course-attendance-detail th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--primary-color);
+    background: rgba(0, 255, 210, 0.05);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.course-attendance-detail td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.status-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.status-icon.present {
+    background-color: rgba(0, 200, 83, 0.15);
+    color: #00c853;
+}
+
+.status-icon.absent {
+    background-color: rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
+}
+
+/* Semester Select Container */
+.semester-select-container {
+    margin-right: 15px;
 }
 
 /* Mobile Responsiveness */
@@ -257,6 +401,44 @@
     
     .attendance-card {
         width: 100%;
+    }
+    
+    /* Mobile styles for attendance graph */
+    .attendance-graph {
+        height: 250px;
+    }
+    
+    .graph-filters {
+        flex-wrap: wrap;
+    }
+    
+    .graph-filter-btn {
+        margin-bottom: 10px;
+    }
+    
+    /* Mobile styles for course attendance table */
+    .view-selector {
+        flex-wrap: wrap;
+    }
+    
+    .view-btn {
+        margin-bottom: 10px;
+    }
+    
+    .course-attendance-detail th,
+    .course-attendance-detail td {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+    
+    /* Hide some columns on very small screens */
+    @media (max-width: 480px) {
+        .course-attendance-detail th:nth-child(4),
+        .course-attendance-detail th:nth-child(5),
+        .course-attendance-detail td:nth-child(4),
+        .course-attendance-detail td:nth-child(5) {
+            display: none;
+        }
     }
     
     /* Fix footer position for mobile */

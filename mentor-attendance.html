@@ -94,6 +94,8 @@
                 <span>Announcements</span></a>
             <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i>
                 <span>Community Events</span></a>
+            <a href="notes.html" class="nav-link" data-tooltip="Notes"><i class="fas fa-book"></i>
+                <span>Notes</span></a>
             <div class="pinned-label">Pinned</div>
             <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i>
                 <span>Portfolio</span></a>
@@ -174,8 +176,8 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="dateSelect">Date</label>
-                        <input type="date" id="dateSelect" class="attendance-input">
+                        <label for="dateSelect">Date (dd/mm/yyyy)</label>
+                        <input type="text" id="dateSelect" class="attendance-input" placeholder="DD/MM/YYYY">
                     </div>
                 </div>
             </div>
@@ -335,6 +337,28 @@
 
     <script src="index.js"></script>
     <script src="mentor-attendance.js"></script>
+    <script>
+        // Date format validation for dd/mm/yyyy
+        function validateDateFormat(input) {
+            input.addEventListener('blur', function() {
+                const value = this.value.trim();
+                if (value) {
+                    // Check if the date matches dd/mm/yyyy format
+                    const regex = /^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\d\d$/;
+                    if (!regex.test(value)) {
+                        alert('Please enter date in DD/MM/YYYY format');
+                        this.value = '';
+                    }
+                }
+            });
+        }
+        
+        // Apply validation to date input
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateSelectInput = document.getElementById('dateSelect');
+            if (dateSelectInput) validateDateFormat(dateSelectInput);
+        });
+    </script>
 </body>
 
 </html>

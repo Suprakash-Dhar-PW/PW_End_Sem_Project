@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PW IOI - DSA Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="dsa-tracker.css">
+    <style>
+        /* Remove underline from social icons in the footer */
+        .site-footer .social-icons a {
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+    <div class="top-right-controls">
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
+            </button>
+            <button class="signup-btn" onclick="showSignupModal()">
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
+            </button>
+        </div>
+        <div class="profile-icon" onclick="goToProfile()" title="View Profile">
+            <img src="images/Supra_image.jpg" alt="Profile" />
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="nav-section" role="navigation">
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="mentor-attendance.html" class="nav-link" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
+            <a href="projects.html" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
+            <a href="notes.html" class="nav-link" data-tooltip="Notes"><i class="fas fa-book"></i> <span>Notes</span></a>
+            <a href="dsa-tracker.html" class="nav-link active" data-tooltip="DSA Tracker"><i class="fas fa-code"></i> <span>DSA Tracker</span></a>
+            <a href="dsa-leaderboard.html" class="nav-link" data-tooltip="DSA Leaderboard"><i class="fas fa-trophy"></i> <span>DSA Leaderboard</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="portfolio.html" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+            <a href="need-help.html" class="nav-link" data-tooltip="Need Help"><i class="fas fa-question-circle"></i> <span>Need Help</span></a>
+            <a href="settings.html" class="nav-link" data-tooltip="Settings"><i class="fas fa-cog"></i> <span>Settings</span></a>
+            <a href="#" class="nav-link" data-tooltip="Logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main">
+        <div class="dsa-container">
+            <h1 class="page-title">DSA Tracker</h1>
+            
+            <!-- Platform Stats -->
+            <div class="platform-stats">
+                <div class="platform-card leetcode">
+                    <div class="platform-logo">
+                        <i class="fas fa-code"></i>
+                        <span>LeetCode</span>
+                    </div>
+                    <div class="platform-progress">
+                        <div class="progress-circle" data-progress="35">
+                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                <path class="circle-bg" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path class="circle" stroke-dasharray="35, 100" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <text x="18" y="20.35" class="percentage">35%</text>
+                            </svg>
+                        </div>
+                        <div class="progress-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">70</span>
+                                <span class="stat-label">Solved</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">200</span>
+                                <span class="stat-label">Total</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="platform-card gfg">
+                    <div class="platform-logo">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>GeeksForGeeks</span>
+                    </div>
+                    <div class="platform-progress">
+                        <div class="progress-circle" data-progress="42">
+                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                <path class="circle-bg" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path class="circle" stroke-dasharray="42, 100" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <text x="18" y="20.35" class="percentage">42%</text>
+                            </svg>
+                        </div>
+                        <div class="progress-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">85</span>
+                                <span class="stat-label">Solved</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">200</span>
+                                <span class="stat-label">Total</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="platform-card codechef">
+                    <div class="platform-logo">
+                        <i class="fas fa-terminal"></i>
+                        <span>CodeChef</span>
+                    </div>
+                    <div class="platform-progress">
+                        <div class="progress-circle" data-progress="28">
+                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                <path class="circle-bg" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path class="circle" stroke-dasharray="28, 100" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <text x="18" y="20.35" class="percentage">28%</text>
+                            </svg>
+                        </div>
+                        <div class="progress-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">42</span>
+                                <span class="stat-label">Solved</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">150</span>
+                                <span class="stat-label">Total</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="platform-card codeforces">
+                    <div class="platform-logo">
+                        <i class="fas fa-code-branch"></i>
+                        <span>CodeForces</span>
+                    </div>
+                    <div class="platform-progress">
+                        <div class="progress-circle" data-progress="20">
+                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                <path class="circle-bg" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <path class="circle" stroke-dasharray="20, 100" d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                <text x="18" y="20.35" class="percentage">20%</text>
+                            </svg>
+                        </div>
+                        <div class="progress-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">30</span>
+                                <span class="stat-label">Solved</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">150</span>
+                                <span class="stat-label">Total</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- DSA Problem Tracking -->
+            <div class="dsa-tracking-section">
+                <div class="section-header">
+                    <h2>Problem Tracking</h2>
+                    <div class="filter-controls">
+                        <a href="dsa-problem-import.html" class="import-btn">
+                            <i class="fas fa-file-import"></i> Import Problems
+                        </a>
+                        <div class="search-box">
+                            <input type="text" id="problemSearch" placeholder="Search problems...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="filter-dropdown">
+                            <button class="filter-btn">
+                                <i class="fas fa-filter"></i> Filter
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="filter-menu">
+                                <label><input type="checkbox" value="all" checked> All</label>
+                                <label><input type="checkbox" value="array"> Arrays</label>
+                                <label><input type="checkbox" value="string"> Strings</label>
+                                <label><input type="checkbox" value="linkedlist"> Linked Lists</label>
+                                <label><input type="checkbox" value="tree"> Trees</label>
+                                <label><input type="checkbox" value="graph"> Graphs</label>
+                                <label><input type="checkbox" value="dp"> Dynamic Programming</label>
+                            </div>
+                        </div>
+                        <div class="status-dropdown">
+                            <button class="status-btn">
+                                <i class="fas fa-tasks"></i> Status
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="status-menu">
+                                <label><input type="checkbox" value="all" checked> All</label>
+                                <label><input type="checkbox" value="solved"> Solved</label>
+                                <label><input type="checkbox" value="in-progress"> In Progress</label>
+                                <label><input type="checkbox" value="not-started"> Not Started</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-table-container">
+                    <table class="problem-table">
+                        <thead>
+                            <tr>
+                                <th>Problem Name</th>
+                                <th>Category</th>
+                                <th>Difficulty</th>
+                                <th>Platform</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Sample problem rows -->
+                            <tr>
+                                <td>
+                                    <a href="https://leetcode.com/problems/two-sum/" target="_blank" class="problem-link">Two Sum</a>
+                                </td>
+                                <td>Array</td>
+                                <td><span class="difficulty easy">Easy</span></td>
+                                <td><span class="platform leetcode">LeetCode</span></td>
+                                <td>
+                                    <span class="status solved">Solved</span>
+                                </td>
+                                <td>
+                                    <div class="problem-actions">
+                                        <button class="action-btn status-toggle" data-status="solved">
+                                            <i class="fas fa-check-circle"></i>
+                                        </button>
+                                        <button class="action-btn add-notes" title="Add Notes">
+                                            <i class="fas fa-sticky-note"></i>
+                                        </button>
+                                        <button class="action-btn view-solution" title="View Solution">
+                                            <i class="fas fa-code"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" class="problem-link">Valid Parentheses</a>
+                                </td>
+                                <td>Stack</td>
+                                <td><span class="difficulty easy">Easy</span></td>
+                                <td><span class="platform leetcode">LeetCode</span></td>
+                                <td>
+                                    <span class="status in-progress">In Progress</span>
+                                </td>
+                                <td>
+                                    <div class="problem-actions">
+                                        <button class="action-btn status-toggle" data-status="in-progress">
+                                            <i class="fas fa-spinner"></i>
+                                        </button>
+                                        <button class="action-btn add-notes" title="Add Notes">
+                                            <i class="fas fa-sticky-note"></i>
+                                        </button>
+                                        <button class="action-btn view-solution" title="View Solution">
+                                            <i class="fas fa-code"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://practice.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1" target="_blank" class="problem-link">Kadane's Algorithm</a>
+                                </td>
+                                <td>Array</td>
+                                <td><span class="difficulty medium">Medium</span></td>
+                                <td><span class="platform gfg">GeeksForGeeks</span></td>
+                                <td>
+                                    <span class="status solved">Solved</span>
+                                </td>
+                                <td>
+                                    <div class="problem-actions">
+                                        <button class="action-btn status-toggle" data-status="solved">
+                                            <i class="fas fa-check-circle"></i>
+                                        </button>
+                                        <button class="action-btn add-notes" title="Add Notes">
+                                            <i class="fas fa-sticky-note"></i>
+                                        </button>
+                                        <button class="action-btn view-solution" title="View Solution">
+                                            <i class="fas fa-code"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://leetcode.com/problems/merge-k-sorted-lists/" target="_blank" class="problem-link">Merge K Sorted Lists</a>
+                                </td>
+                                <td>Linked List</td>
+                                <td><span class="difficulty hard">Hard</span></td>
+                                <td><span class="platform leetcode">LeetCode</span></td>
+                                <td>
+                                    <span class="status not-started">Not Started</span>
+                                </td>
+                                <td>
+                                    <div class="problem-actions">
+                                        <button class="action-btn status-toggle" data-status="not-started">
+                                            <i class="fas fa-circle"></i>
+                                        </button>
+                                        <button class="action-btn add-notes" title="Add Notes">
+                                            <i class="fas fa-sticky-note"></i>
+                                        </button>
+                                        <button class="action-btn view-solution" title="View Solution">
+                                            <i class="fas fa-code"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://www.codechef.com/problems/FLOW001" target="_blank" class="problem-link">Add Two Numbers</a>
+                                </td>
+                                <td>Basic</td>
+                                <td><span class="difficulty easy">Easy</span></td>
+                                <td><span class="platform codechef">CodeChef</span></td>
+                                <td>
+                                    <span class="status solved">Solved</span>
+                                </td>
+                                <td>
+                                    <div class="problem-actions">
+                                        <button class="action-btn status-toggle" data-status="solved">
+                                            <i class="fas fa-check-circle"></i>
+                                        </button>
+                                        <button class="action-btn add-notes" title="Add Notes">
+                                            <i class="fas fa-sticky-note"></i>
+                                        </button>
+                                        <button class="action-btn view-solution" title="View Solution">
+                                            <i class="fas fa-code"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://codeforces.com/problemset/problem/4/A" target="_blank" class="problem-link">Watermelon</a>
+                                </td>
+                                <td>Math</td>
+                                <td><span class="difficulty easy">Easy</span></td>
+                                <td><span class="platform codeforces">CodeForces</span></td>
+                                <td>
+                                    <span class="status solved">Solved</span>
+                                </td>
+                                <td>
+                                    <div class="problem-actions">
+                                        <button class="action-btn status-toggle" data-status="solved">
+                                            <i class="fas fa-check-circle"></i>
+                                        </button>
+                                        <button class="action-btn add-notes" title="Add Notes">
+                                            <i class="fas fa-sticky-note"></i>
+                                        </button>
+                                        <button class="action-btn view-solution" title="View Solution">
+                                            <i class="fas fa-code"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://leetcode.com/problems/lru-cache/" target="_blank" class="problem-link">LRU Cache</a>
+                                </td>
+                                <td>Design</td>
+                                <td><span class="difficulty medium">Medium</span></td>
+                                <td><span class="platform leetcode">LeetCode</span></td>
+                                <td>
+                                    <span class="status in-progress">In Progress</span>
+                                </td>
+                                <td>
+                                    <div class="problem-actions">
+                                        <button class="action-btn status-toggle" data-status="in-progress">
+                                            <i class="fas fa-spinner"></i>
+                                        </button>
+                                        <button class="action-btn add-notes" title="Add Notes">
+                                            <i class="fas fa-sticky-note"></i>
+                                        </button>
+                                        <button class="action-btn view-solution" title="View Solution">
+                                            <i class="fas fa-code"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="https://practice.geeksforgeeks.org/problems/minimum-spanning-tree/1" target="_blank" class="problem-link">Minimum Spanning Tree</a>
+                                </td>
+                                <td>Graph</td>
+                                <td><span class="difficulty medium">Medium</span></td>
+                                <td><span class="platform gfg">GeeksForGeeks</span></td>
+                                <td>
+                                    <span class="status not-started">Not Started</span>
+                                </td>
+                                <td>
+                                    <div class="problem-actions">
+                                        <button class="action-btn status-toggle" data-status="not-started">
+                                            <i class="fas fa-circle"></i>
+                                        </button>
+                                        <button class="action-btn add-notes" title="Add Notes">
+                                            <i class="fas fa-sticky-note"></i>
+                                        </button>
+                                        <button class="action-btn view-solution" title="View Solution">
+                                            <i class="fas fa-code"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">4</button>
+                    <button class="pagination-btn">5</button>
+                    <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Status Change Modal -->
+        <div class="modal" id="statusModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Update Problem Status</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Change status for <span id="problemName">Two Sum</span></p>
+                    <div class="status-options">
+                        <label class="status-option">
+                            <input type="radio" name="status" value="solved">
+                            <span class="status-icon solved"><i class="fas fa-check-circle"></i></span>
+                            <span class="status-text">Solved</span>
+                        </label>
+                        <label class="status-option">
+                            <input type="radio" name="status" value="in-progress">
+                            <span class="status-icon in-progress"><i class="fas fa-spinner"></i></span>
+                            <span class="status-text">In Progress</span>
+                        </label>
+                        <label class="status-option">
+                            <input type="radio" name="status" value="not-started">
+                            <span class="status-icon not-started"><i class="fas fa-circle"></i></span>
+                            <span class="status-text">Not Started</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="save-btn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notes Modal -->
+        <div class="modal" id="notesModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Problem Notes</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Notes for <span id="notesProblemName">Two Sum</span></p>
+                    <textarea id="problemNotes" placeholder="Add your notes here..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="save-btn">Save Notes</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3 class="footer-title">About PW IOI</h3>
+                <p>PW IOI is a comprehensive platform for students to track their progress, manage tasks, and collaborate with peers.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="task-manager.html">Task Manager</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="dsa-tracker.html">DSA Tracker</a></li>
+                    <li><a href="need-help.html">Need Help</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3 class="footer-title">Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Education St, Learning City</p>
+                <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
+                <p><i class="fas fa-envelope"></i> info@pwioi.edu</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 PW IOI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading overlay
+        window.addEventListener('load', function() {
+            document.getElementById('loadingOverlay').classList.add('hidden');
+        });
+
+        // Sidebar toggle functions
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('main').classList.toggle('expanded');
+        }
+
+        function toggleMobileSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+
+        function closeMobileSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+
+        // Profile navigation
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        // Login/Signup modals
+        function showLoginModal() {
+            // Implement login modal functionality
+            console.log('Show login modal');
+        }
+
+        function showSignupModal() {
+            // Implement signup modal functionality
+            console.log('Show signup modal');
+        }
+
+        // Logout function
+        function logout() {
+            // Implement logout functionality
+            console.log('Logging out...');
+            // Redirect to login page or show confirmation
+            // window.location.href = 'login.html';
+        }
+
+        // DSA Tracker specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Status toggle buttons
+            const statusToggleBtns = document.querySelectorAll('.status-toggle');
+            const statusModal = document.getElementById('statusModal');
+            const problemNameSpan = document.getElementById('problemName');
+            let currentProblemRow;
+
+            statusToggleBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    currentProblemRow = this.closest('tr');
+                    const problemName = currentProblemRow.querySelector('.problem-link').textContent;
+                    problemNameSpan.textContent = problemName;
+                    
+                    // Set the current status in the modal
+                    const currentStatus = this.getAttribute('data-status');
+                    document.querySelector(`input[name="status"][value="${currentStatus}"]`).checked = true;
+                    
+                    statusModal.style.display = 'flex';
+                });
+            });
+
+            // Close modal buttons
+            const closeButtons = document.querySelectorAll('.close-btn, .cancel-btn');
+            closeButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    statusModal.style.display = 'none';
+                    document.getElementById('notesModal').style.display = 'none';
+                });
+            });
+
+            // Save status changes
+            const saveStatusBtn = document.querySelector('#statusModal .save-btn');
+            saveStatusBtn.addEventListener('click', function() {
+                const selectedStatus = document.querySelector('input[name="status"]:checked').value;
+                
+                // Update the status in the table
+                const statusCell = currentProblemRow.querySelector('.status');
+                statusCell.className = `status ${selectedStatus}`;
+                statusCell.textContent = selectedStatus.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                
+                // Update the toggle button
+                const toggleBtn = currentProblemRow.querySelector('.status-toggle');
+                toggleBtn.setAttribute('data-status', selectedStatus);
+                
+                // Update the icon
+                const icon = toggleBtn.querySelector('i');
+                icon.className = selectedStatus === 'solved' ? 'fas fa-check-circle' : 
+                                selectedStatus === 'in-progress' ? 'fas fa-spinner' : 'fas fa-circle';
+                
+                statusModal.style.display = 'none';
+            });
+
+            // Notes functionality
+            const addNotesButtons = document.querySelectorAll('.add-notes');
+            const notesModal = document.getElementById('notesModal');
+            const notesProblemNameSpan = document.getElementById('notesProblemName');
+            const problemNotesTextarea = document.getElementById('problemNotes');
+            
+            addNotesButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const problemRow = this.closest('tr');
+                    const problemName = problemRow.querySelector('.problem-link').textContent;
+                    notesProblemNameSpan.textContent = problemName;
+                    
+                    // Load existing notes (in a real app, this would come from a database)
+                    problemNotesTextarea.value = localStorage.getItem(`notes_${problemName}`) || '';
+                    
+                    notesModal.style.display = 'flex';
+                });
+            });
+            
+            // Save notes
+            const saveNotesBtn = document.querySelector('#notesModal .save-btn');
+            saveNotesBtn.addEventListener('click', function() {
+                const problemName = notesProblemNameSpan.textContent;
+                const notes = problemNotesTextarea.value;
+                
+                // Save notes (in a real app, this would save to a database)
+                localStorage.setItem(`notes_${problemName}`, notes);
+                
+                notesModal.style.display = 'none';
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('problemSearch');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const rows = document.querySelectorAll('.problem-table tbody tr');
+                
+                rows.forEach(row => {
+                    const problemName = row.querySelector('.problem-link').textContent.toLowerCase();
+                    const category = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                    
+                    if (problemName.includes(searchTerm) || category.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+
+            // Filter dropdown toggle
+            const filterBtn = document.querySelector('.filter-btn');
+            const filterMenu = document.querySelector('.filter-menu');
+            
+            filterBtn.addEventListener('click', function() {
+                filterMenu.classList.toggle('show');
+            });
+            
+            // Status dropdown toggle
+            const statusBtn = document.querySelector('.status-btn');
+            const statusMenu = document.querySelector('.status-menu');
+            
+            statusBtn.addEventListener('click', function() {
+                statusMenu.classList.toggle('show');
+            });
+            
+            // Close dropdowns when clicking outside
+            window.addEventListener('click', function(e) {
+                if (!e.target.matches('.filter-btn') && !e.target.closest('.filter-menu')) {
+                    filterMenu.classList.remove('show');
+                }
+                
+                if (!e.target.matches('.status-btn') && !e.target.closest('.status-menu')) {
+                    statusMenu.classList.remove('show');
+                }
+            });
+        });
+    </script>
+
+    <footer class="site-footer footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+                <a href="#about">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toaster Container -->
+    <div class="toaster-container" id="toasterContainer"></div>
+</body>
+
+</html>

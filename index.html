@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="dashboard-enhancements.css">
     <style>
         /* Remove underline from social icons in the footer */
         .site-footer .social-icons a {
@@ -75,6 +76,7 @@
             <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
             <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
             <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
+            <a href="notes.html" class="nav-link" data-tooltip="Notes"><i class="fas fa-book"></i> <span>Notes</span></a>
             <div class="pinned-label">Pinned</div>
             <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
             <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
@@ -89,45 +91,295 @@
             <h1 class="welcome_tag">Welcome, Student!</h1>
         </div>
 
-        <div class="card-container">
-            <div class="student-card">
-                <div class="image-section">
-                    <div class="name">Suprakash Dhar</div>
-                </div>
-                <div class="semester-section">
-                    <div>
-                        <div style="font-size: 18px; font-weight: 400; opacity: 0.8;">Current</div>
-                        <div>Semester 1</div>
+        <!-- Student Overview Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2><i class="fas fa-user-graduate"></i> Student Overview</h2>
+            </div>
+            <div class="student-overview" style="grid-template-columns: 1fr;">
+                <div class="student-card" style="width: 100%;">
+                    <div class="image-section">
+                        <div class="name">Suprakash Dhar</div>
+                    </div>
+                    <div class="semester-section">
+                        <div>
+                            <div style="font-size: 18px; font-weight: 400; opacity: 0.8;">Current</div>
+                            <div>Semester 1</div>
+                        </div>
+                    </div>
+                    <div class="hover-section">
+                        <div class="hover-default">
+                            <i class="fas fa-info-circle" style="font-size: 24px; margin-bottom: 8px; display: block;"></i>
+                            Hover to view your semester details
+                        </div>
+                        <div class="hover-content">
+                            <p><i class="fas fa-id-card"></i> <strong>Student ID:</strong> PW2025_007</p>
+                            <p><i class="fas fa-graduation-cap"></i> <strong>Overall Grade:</strong> A</p>
+                            <p><i class="fas fa-chart-line"></i> <strong>Attendance:</strong> 92%</p>
+                            
+                            <div class="bar-label"><span><i class="fab fa-html5"></i> HTML</span><span>95%</span></div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 95%"></div>
+                            </div>
+                            
+                            <div class="bar-label"><span><i class="fab fa-css3-alt"></i> CSS</span><span>88%</span></div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 88%"></div>
+                            </div>
+                            
+                            <div class="bar-label"><span><i class="fas fa-code"></i> C Language</span><span>76%</span></div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 76%"></div>
+                            </div>
+                            
+                            <div class="bar-label"><span><i class="fas fa-comments"></i> Tech Comm.</span><span>82%</span></div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 82%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="hover-section">
-                    <div class="hover-default">
-                        <i class="fas fa-info-circle" style="font-size: 24px; margin-bottom: 8px; display: block;"></i>
-                        Hover to view your semester details
+            </div>
+            
+            <div class="student-stats" style="margin-top: 20px; grid-template-columns: repeat(4, 1fr);">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="stat-info">
+                        <h3>Overall Rank</h3>
+                        <p>7<span class="stat-subtitle">of 120</span></p>
                     </div>
-                    <div class="hover-content">
-                        <p><i class="fas fa-id-card"></i> <strong>Student ID:</strong> PW2025_007</p>
-                        <p><i class="fas fa-graduation-cap"></i> <strong>Overall Grade:</strong> A</p>
-                        <p><i class="fas fa-chart-line"></i> <strong>Attendance:</strong> 92%</p>
-                        
-                        <div class="bar-label"><span><i class="fab fa-html5"></i> HTML</span><span>95%</span></div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 95%"></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="stat-info">
+                        <h3>Attendance</h3>
+                        <p>92%<span class="stat-subtitle">This Month</span></p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-tasks"></i></div>
+                    <div class="stat-info">
+                        <h3>Tasks</h3>
+                        <p>12<span class="stat-subtitle">Pending</span></p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="stat-info">
+                        <h3>Certificates</h3>
+                        <p>3<span class="stat-subtitle">Earned</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-divider"></div>
+        
+        <!-- Semester Cards Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2><i class="fas fa-graduation-cap"></i> Semester Journey</h2>
+                <div class="section-actions">
+                    <button class="action-btn"><i class="fas fa-th"></i></button>
+                    <button class="action-btn"><i class="fas fa-list"></i></button>
+                </div>
+            </div>
+            <div class="semester-cards">
+                <div class="semester-card active">
+                    <div class="semester-header">
+                        <span class="semester-badge">Current</span>
+                        <h3>Semester 1</h3>
+                        <p class="semester-date">Aug 2023 - Dec 2023</p>
+                    </div>
+                    <div class="semester-body">
+                        <div class="semester-stats">
+                            <div class="sem-stat">
+                                <i class="fas fa-book"></i>
+                                <span>4 Courses</span>
+                            </div>
+                            <div class="sem-stat">
+                                <i class="fas fa-code"></i>
+                                <span>6 Projects</span>
+                            </div>
                         </div>
-                        
-                        <div class="bar-label"><span><i class="fab fa-css3-alt"></i> CSS</span><span>88%</span></div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 88%"></div>
+                        <div class="course-list">
+                            <div class="course-item">
+                                <span class="course-name">HTML & CSS Fundamentals</span>
+                                <span class="course-grade">A+</span>
+                            </div>
+                            <div class="course-item">
+                                <span class="course-name">C Programming</span>
+                                <span class="course-grade">B+</span>
+                            </div>
+                            <div class="course-item">
+                                <span class="course-name">Technical Communication</span>
+                                <span class="course-grade">A</span>
+                            </div>
+                            <div class="course-item">
+                                <span class="course-name">Computer Fundamentals</span>
+                                <span class="course-grade">A-</span>
+                            </div>
                         </div>
-                        
-                        <div class="bar-label"><span><i class="fas fa-code"></i> C Language</span><span>76%</span></div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 76%"></div>
+                        <div class="semester-progress">
+                            <div class="progress-label">Semester Progress</div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 45%">45%</div>
+                            </div>
                         </div>
-                        
-                        <div class="bar-label"><span><i class="fas fa-comments"></i> Tech Comm.</span><span>82%</span></div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 82%"></div>
+                    </div>
+                    <div class="semester-footer">
+                        <button class="sem-btn"><i class="fas fa-calendar"></i> Schedule</button>
+                        <button class="sem-btn"><i class="fas fa-file-alt"></i> Materials</button>
+                    </div>
+                </div>
+                
+                <div class="semester-card upcoming">
+                    <div class="semester-header">
+                        <span class="semester-badge upcoming">Upcoming</span>
+                        <h3>Semester 2</h3>
+                        <p class="semester-date">Jan 2024 - May 2024</p>
+                    </div>
+                    <div class="semester-body">
+                        <div class="semester-stats">
+                            <div class="sem-stat">
+                                <i class="fas fa-book"></i>
+                                <span>5 Courses</span>
+                            </div>
+                            <div class="sem-stat">
+                                <i class="fas fa-code"></i>
+                                <span>4 Projects</span>
+                            </div>
+                        </div>
+                        <div class="course-list">
+                            <div class="course-item upcoming">
+                                <span class="course-name">JavaScript Basics</span>
+                                <span class="course-grade">-</span>
+                            </div>
+                            <div class="course-item upcoming">
+                                <span class="course-name">Data Structures</span>
+                                <span class="course-grade">-</span>
+                            </div>
+                            <div class="course-item upcoming">
+                                <span class="course-name">Database Systems</span>
+                                <span class="course-grade">-</span>
+                            </div>
+                            <div class="course-item upcoming">
+                                <span class="course-name">Web Development</span>
+                                <span class="course-grade">-</span>
+                            </div>
+                        </div>
+                        <div class="semester-progress">
+                            <div class="progress-label">Starts in</div>
+                            <div class="countdown">45 days</div>
+                        </div>
+                    </div>
+                    <div class="semester-footer">
+                        <button class="sem-btn"><i class="fas fa-info-circle"></i> Preview</button>
+                        <button class="sem-btn"><i class="fas fa-bell"></i> Notify Me</button>
+                    </div>
+                </div>
+                
+                <div class="semester-card future">
+                    <div class="semester-header">
+                        <span class="semester-badge future">Future</span>
+                        <h3>Semester 3</h3>
+                        <p class="semester-date">Aug 2024 - Dec 2024</p>
+                    </div>
+                    <div class="semester-body">
+                        <div class="semester-stats">
+                            <div class="sem-stat">
+                                <i class="fas fa-book"></i>
+                                <span>5 Courses</span>
+                            </div>
+                            <div class="sem-stat">
+                                <i class="fas fa-code"></i>
+                                <span>3 Projects</span>
+                            </div>
+                        </div>
+                        <div class="course-preview">
+                            <p>Advanced programming concepts including React, Node.js, and full-stack development.</p>
+                        </div>
+                        <div class="semester-progress">
+                            <div class="progress-label">Starts in</div>
+                            <div class="countdown">240 days</div>
+                        </div>
+                    </div>
+                    <div class="semester-footer">
+                        <button class="sem-btn"><i class="fas fa-road"></i> Learning Path</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-divider"></div>
+        
+        <!-- Task Management Section -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2><i class="fas fa-tasks"></i> Task Management</h2>
+                <a href="task-manager.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="task-management">
+                <div class="quick-add-task">
+                    <h3>Add New Task</h3>
+                    <form id="quickAddTaskForm" class="quick-task-form">
+                        <div class="form-group">
+                            <input type="text" id="quickTaskTitle" placeholder="What do you need to do?" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <select id="quickTaskCategory">
+                                    <option value="">Select Category</option>
+                                    <option value="assignment">Assignment</option>
+                                    <option value="project">Project</option>
+                                    <option value="exam">Exam Prep</option>
+                                    <option value="reading">Reading</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select id="quickTaskPriority">
+                                    <option value="">Priority</option>
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="date" id="quickTaskDueDate">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="add-task-btn">
+                                    <i class="fas fa-plus"></i> Add Task
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="task-suggestions">
+                        <h4>Suggested Tasks</h4>
+                        <div class="suggestion-chips">
+                            <div class="suggestion-chip" onclick="fillSuggestedTask('Complete HTML assignment', 'assignment', 'high')">
+                                <i class="fab fa-html5"></i> Complete HTML assignment
+                            </div>
+                            <div class="suggestion-chip" onclick="fillSuggestedTask('Study for C exam', 'exam', 'high')">
+                                <i class="fas fa-code"></i> Study for C exam
+                            </div>
+                            <div class="suggestion-chip" onclick="fillSuggestedTask('Read Chapter 5', 'reading', 'medium')">
+                                <i class="fas fa-book"></i> Read Chapter 5
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recent-tasks">
+                    <h3>Recent Tasks</h3>
+                    <div class="task-list" id="recentTasksList">
+                        <!-- Tasks will be dynamically added here -->
+                        <div class="empty-tasks-message">
+                            <i class="fas fa-clipboard-list"></i>
+                            <p>No recent tasks. Add a new task to get started!</p>
                         </div>
                     </div>
                 </div>
@@ -168,7 +420,55 @@
     <!-- Toaster Container -->
     <div class="toaster-container" id="toasterContainer"></div>
     
+    <!-- Edit Task Modal -->
+    <div class="task-modal" id="editTaskModal">
+        <div class="task-modal-content">
+            <div class="task-modal-header">
+                <h3>Edit Task</h3>
+                <button class="close-modal" onclick="closeEditTaskModal()">&times;</button>
+            </div>
+            <form id="editTaskForm">
+                <input type="hidden" id="editTaskId">
+                <div class="form-group">
+                    <label for="editTaskTitle">Task Title</label>
+                    <input type="text" id="editTaskTitle" placeholder="What do you need to do?" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editTaskCategory">Category</label>
+                        <select id="editTaskCategory">
+                            <option value="">Select Category</option>
+                            <option value="assignment">Assignment</option>
+                            <option value="project">Project</option>
+                            <option value="exam">Exam Prep</option>
+                            <option value="reading">Reading</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editTaskPriority">Priority</label>
+                        <select id="editTaskPriority">
+                            <option value="">Priority</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editTaskDueDate">Due Date</label>
+                    <input type="date" id="editTaskDueDate">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeEditTaskModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
     <script src="index.js"></script>
+    <script src="dashboard-enhancements.js"></script>
 </body>
 
 </html>

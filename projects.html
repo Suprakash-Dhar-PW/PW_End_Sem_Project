@@ -59,6 +59,7 @@
             <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
             <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
             <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
+            <a href="notes.html" class="nav-link" data-tooltip="Notes"><i class="fas fa-book"></i> <span>Notes</span></a>
             <div class="pinned-label">Pinned</div>
             <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
             <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
@@ -84,14 +85,22 @@
                     <button class="filter-btn">IoT</button>
                 </div>
                 <div class="projects-actions">
-                    <div class="search-container">
-                        <input type="text" placeholder="Search projects..." class="project-search-input">
-                        <button class="search-btn"><i class="fas fa-search"></i></button>
-                    </div>
-                    <button class="projects-btn">
-                        <i class="fas fa-plus"></i> Add New Project
-                    </button>
+                <div class="search-container">
+                    <input type="text" placeholder="Search projects..." class="project-search-input">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
                 </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">My Projects</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="projectsToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <span class="toggle-label">Classmates</span>
+                </div>
+                <button class="projects-btn">
+                    <i class="fas fa-plus"></i> Add New Project
+                </button>
+            </div>
             </div>
 
             <div class="projects-stats">
@@ -412,14 +421,45 @@
     </div>
 
     <script>
+        // Sample data for classmates
+        const classmates = [
+            { id: 1, name: 'John Doe', batch: 'Batch 1', year: '2023', avatar: 'images/Supra_image.jpg', projects: 5 },
+            { id: 2, name: 'Jane Smith', batch: 'Batch 1', year: '2023', avatar: 'images/Supra_image.jpg', projects: 3 },
+            { id: 3, name: 'Alex Johnson', batch: 'Batch 2', year: '2023', avatar: 'images/Supra_image.jpg', projects: 7 },
+            { id: 4, name: 'Emily Brown', batch: 'Batch 2', year: '2023', avatar: 'images/Supra_image.jpg', projects: 2 },
+            { id: 5, name: 'Michael Wilson', batch: 'Batch 1', year: '2022', avatar: 'images/Supra_image.jpg', projects: 4 },
+            { id: 6, name: 'Sarah Davis', batch: 'Batch 2', year: '2022', avatar: 'images/Supra_image.jpg', projects: 6 }
+        ];
+
+        // Sample data for classmate projects
+        const classmateProjects = {
+            1: [
+                { title: 'E-Commerce Platform', description: 'A full-stack e-commerce solution with payment integration', status: 'completed', tech: ['React', 'Node.js', 'MongoDB'] },
+                { title: 'Weather App', description: 'Real-time weather forecasting application', status: 'completed', tech: ['JavaScript', 'Weather API'] },
+                { title: 'Task Manager', description: 'Productivity app for managing daily tasks', status: 'in-progress', tech: ['React', 'Firebase'] },
+                { title: 'Portfolio Website', description: 'Personal portfolio showcasing projects', status: 'completed', tech: ['HTML', 'CSS', 'JavaScript'] },
+                { title: 'Chat Application', description: 'Real-time messaging platform', status: 'planning', tech: ['Socket.io', 'Express', 'React'] }
+            ],
+            2: [
+                { title: 'Recipe Finder', description: 'App to discover recipes based on available ingredients', status: 'completed', tech: ['React', 'Food API'] },
+                { title: 'Budget Tracker', description: 'Personal finance management application', status: 'in-progress', tech: ['Vue.js', 'Firebase'] },
+                { title: 'Fitness Tracker', description: 'App to track workouts and fitness progress', status: 'completed', tech: ['React Native', 'Health API'] }
+            ],
+            // Add more projects for other classmates as needed
+        };
+
         // Show loading overlay
         document.addEventListener('DOMContentLoaded', function() {
             const loadingOverlay = document.getElementById('loadingOverlay');
+            const projectsToggle = document.getElementById('projectsToggle');
             
             // Simulate loading time
             setTimeout(function() {
                 loadingOverlay.classList.add('hidden');
             }, 800);
+
+            // Add event listener for toggle switch
+            projectsToggle.addEventListener('change', toggleProjectsView);
         });
 
         // Toggle sidebar
@@ -492,6 +532,158 @@
             });
         });
 
+        // Toggle between personal projects and classmates view
+        function toggleProjectsView() {
+            const projectsGrid = document.querySelector('.projects-grid');
+            const isClassmatesView = document.getElementById('projectsToggle').checked;
+            
+            if (isClassmatesView) {
+                // Show classmates view
+                showClassmatesView(projectsGrid);
+            } else {
+                // Show personal projects view
+                showPersonalProjectsView(projectsGrid);
+            }
+        }
+
+        // Display classmates as cards
+        function showClassmatesView(container) {
+            // Clear current content
+            container.innerHTML = '';
+            
+            // Group classmates by batch and year
+            const groupedClassmates = {};
+            classmates.forEach(classmate => {
+                const key = `${classmate.year}-${classmate.batch}`;
+                if (!groupedClassmates[key]) {
+                    groupedClassmates[key] = [];
+                }
+                groupedClassmates[key].push(classmate);
+            });
+            
+            // Create cards for each group
+            Object.keys(groupedClassmates).sort().forEach(key => {
+                const [year, batch] = key.split('-');
+                const classmatesInGroup = groupedClassmates[key];
+                
+                // Create group header
+                const groupHeader = document.createElement('div');
+                groupHeader.className = 'classmates-group-header';
+                groupHeader.innerHTML = `<h3>${year} - ${batch}</h3>`;
+                container.appendChild(groupHeader);
+                
+                // Create classmate cards
+                classmatesInGroup.forEach(classmate => {
+                    const card = document.createElement('div');
+                    card.className = 'classmate-card';
+                    card.dataset.classmateId = classmate.id;
+                    card.innerHTML = `
+                        <div class="classmate-avatar">
+                            <img src="${classmate.avatar}" alt="${classmate.name}">
+                        </div>
+                        <div class="classmate-info">
+                            <h3>${classmate.name}</h3>
+                            <p>${classmate.batch} | ${classmate.year}</p>
+                            <div class="classmate-projects-count">
+                                <i class="fas fa-code-branch"></i> ${classmate.projects} Projects
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Add click event to show classmate's projects
+                    card.addEventListener('click', function() {
+                        showClassmateProjects(classmate.id);
+                    });
+                    
+                    container.appendChild(card);
+                });
+            });
+            
+            // Add classmates view specific styles
+            container.classList.add('classmates-view');
+            container.classList.remove('projects-view');
+        }
+
+        // Display personal projects
+        function showPersonalProjectsView(container) {
+            // Remove classmates view specific styles
+            container.classList.remove('classmates-view');
+            container.classList.add('projects-view');
+            
+            // Restore original project cards (this would normally fetch from an API)
+            // For demo purposes, we'll just reload the page to restore the original HTML
+            location.reload();
+        }
+
+        // Show projects for a specific classmate
+        function showClassmateProjects(classmateId) {
+            const projectsGrid = document.querySelector('.projects-grid');
+            const classmate = classmates.find(c => c.id === classmateId);
+            const projects = classmateProjects[classmateId] || [];
+            
+            // Clear current content
+            projectsGrid.innerHTML = '';
+            
+            // Add back button
+            const backButton = document.createElement('button');
+            backButton.className = 'back-to-classmates-btn';
+            backButton.innerHTML = '<i class="fas fa-arrow-left"></i> Back to Classmates';
+            backButton.addEventListener('click', function() {
+                showClassmatesView(projectsGrid);
+            });
+            projectsGrid.appendChild(backButton);
+            
+            // Add classmate header
+            const classmateHeader = document.createElement('div');
+            classmateHeader.className = 'classmate-projects-header';
+            classmateHeader.innerHTML = `
+                <div class="classmate-profile">
+                    <img src="${classmate.avatar}" alt="${classmate.name}">
+                    <h2>${classmate.name}'s Projects</h2>
+                </div>
+            `;
+            projectsGrid.appendChild(classmateHeader);
+            
+            // Add projects
+            if (projects.length === 0) {
+                const noProjects = document.createElement('div');
+                noProjects.className = 'no-projects';
+                noProjects.textContent = 'No projects available';
+                projectsGrid.appendChild(noProjects);
+            } else {
+                projects.forEach(project => {
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
+                    card.innerHTML = `
+                        <div class="project-header">
+                            <div class="project-title">${project.title}</div>
+                            <div class="project-badge ${project.status}">${project.status.charAt(0).toUpperCase() + project.status.slice(1)}</div>
+                        </div>
+                        <div class="project-description">
+                            ${project.description}
+                        </div>
+                        <div class="project-tech-stack">
+                            ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-team">
+                                <img src="${classmate.avatar}" alt="${classmate.name}" title="${classmate.name}">
+                            </div>
+                            <div class="project-actions">
+                                <button class="project-action-btn"><i class="fas fa-eye"></i></button>
+                                <button class="project-action-btn"><i class="fas fa-code"></i></button>
+                                <button class="project-action-btn"><i class="fas fa-share-alt"></i></button>
+                            </div>
+                        </div>
+                    `;
+                    projectsGrid.appendChild(card);
+                });
+            }
+            
+            // Add classmate projects view specific styles
+            projectsGrid.classList.add('classmate-projects-view');
+        }
+
         // Pagination buttons
         const paginationButtons = document.querySelectorAll('.pagination-btn');
         paginationButtons.forEach(button => {
@@ -539,6 +731,39 @@
             event.target.reset();
         }
     </script>
+
+    <footer class="site-footer footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+                <a href="#about">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toaster Container -->
+    <div class="toaster-container" id="toasterContainer"></div>
 </body>
 
 </html>

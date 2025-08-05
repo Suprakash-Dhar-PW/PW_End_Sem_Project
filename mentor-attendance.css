@@ -121,15 +121,15 @@
 /* Attendance Stats Row */
 .attendance-stats-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
     margin-bottom: 24px;
     position: sticky;
     top: 20px;
     z-index: 10;
     justify-content: center;
     background-color: var(--dark-bg);
-    padding: 15px;
+    padding: 12px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
 }
@@ -140,11 +140,12 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 15px;
+    padding: 10px;
     background: var(--card-bg);
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
     transition: var(--transition);
+    height: 100px; /* Set a fixed height to make cards smaller */
 }
 
 .stat-card:hover {
@@ -153,20 +154,20 @@
 }
 
 .stat-icon {
-    font-size: 24px;
+    font-size: 20px;
     color: var(--primary-color);
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .stat-info h3 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--text-secondary);
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .stat-info p {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--primary-color);
 }

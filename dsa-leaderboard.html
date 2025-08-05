@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Leaderboard - PW IOI Platform</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="dsa-leaderboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/logo.png" alt="PW IOI Logo" class="logo">
+            <h2>PW IOI</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="task-manager.html"><i class="fas fa-tasks"></i> Task Manager</a></li>
+            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="mentor-attendance.html"><i class="fas fa-user-check"></i> Mentor Attendance</a></li>
+            <li><a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
+            <li><a href="job-portal.html"><i class="fas fa-briefcase"></i> Job Portal</a></li>
+            <li><a href="announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+            <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+            <li><a href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
+            <li><a href="dsa-tracker.html"><i class="fas fa-code"></i> DSA Tracker</a></li>
+            <li class="active"><a href="dsa-leaderboard.html"><i class="fas fa-trophy"></i> DSA Leaderboard</a></li>
+        </ul>
+        <div class="pinned-section">
+            <h3>Pinned</h3>
+            <ul class="pinned-menu">
+                <li><a href="portfolio.html"><i class="fas fa-user-circle"></i> Portfolio</a></li>
+                <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="leave-form.html"><i class="fas fa-calendar-minus"></i> Leave Form</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                <li><a href="need-help.html"><i class="fas fa-question-circle"></i> Need Help</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div class="top-header">
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="top-right-controls">
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="profile-icon">
+                    <img src="assets/profile.jpg" alt="Profile">
+                    <div class="profile-dropdown">
+                        <a href="profile.html"><i class="fas fa-user"></i> View Profile</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DSA Leaderboard Content -->
+        <div class="dsa-container">
+            <h1 class="page-title">DSA Leaderboard</h1>
+            
+            <!-- DSA Navigation Links -->
+            <div class="dsa-nav-links">
+                <a href="dsa-tracker.html" class="dsa-nav-link"><i class="fas fa-code"></i> DSA Tracker</a>
+                <a href="dsa-problem-import.html" class="dsa-nav-link"><i class="fas fa-file-import"></i> Import Problems</a>
+            </div>
+
+            <!-- Weekly Leaderboard -->
+            <div class="leaderboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-week"></i> Weekly Top Performers</h2>
+                    <div class="date-range">May 15 - May 21, 2023</div>
+                </div>
+                <div class="top-performers">
+                    <!-- Top 3 Weekly Performers -->
+                    <div class="podium-container">
+                        <!-- Second Place -->
+                        <div class="podium-item second-place">
+                            <div class="rank">2</div>
+                            <div class="avatar">
+                                <img src="assets/student2.jpg" alt="Student 2">
+                            </div>
+                            <div class="student-name">Priya Sharma</div>
+                            <div class="solved-count">42 problems</div>
+                            <div class="podium-platform second"></div>
+                        </div>
+                        <!-- First Place -->
+                        <div class="podium-item first-place">
+                            <div class="rank">1</div>
+                            <div class="avatar">
+                                <img src="assets/student1.jpg" alt="Student 1">
+                            </div>
+                            <div class="student-name">Rahul Verma</div>
+                            <div class="solved-count">48 problems</div>
+                            <div class="podium-platform first"></div>
+                        </div>
+                        <!-- Third Place -->
+                        <div class="podium-item third-place">
+                            <div class="rank">3</div>
+                            <div class="avatar">
+                                <img src="assets/student3.jpg" alt="Student 3">
+                            </div>
+                            <div class="student-name">Amit Kumar</div>
+                            <div class="solved-count">37 problems</div>
+                            <div class="podium-platform third"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Leaderboard -->
+            <div class="leaderboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-alt"></i> Monthly Top Performers</h2>
+                    <div class="date-range">May 2023</div>
+                </div>
+                <div class="leaderboard-table-container">
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Student</th>
+                                <th>Batch</th>
+                                <th>Problems Solved</th>
+                                <th>Streak</th>
+                                <th>Platforms</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 5 Monthly Performers -->
+                            <tr class="highlight-row">
+                                <td class="rank">1</td>
+                                <td class="student-info">
+                                    <img src="assets/student1.jpg" alt="Student 1">
+                                    <div>
+                                        <div class="student-name">Rahul Verma</div>
+                                        <div class="student-id">PW2023001</div>
+                                    </div>
+                                </td>
+                                <td>2023 Batch</td>
+                                <td class="problems-solved">187</td>
+                                <td class="streak">31 days <i class="fas fa-fire"></i></td>
+                                <td class="platforms">
+                                    <span class="platform leetcode">LeetCode</span>
+                                    <span class="platform gfg">GFG</span>
+                                    <span class="platform codeforces">Codeforces</span>
+                                </td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td class="rank">2</td>
+                                <td class="student-info">
+                                    <img src="assets/student2.jpg" alt="Student 2">
+                                    <div>
+                                        <div class="student-name">Priya Sharma</div>
+                                        <div class="student-id">PW2023015</div>
+                                    </div>
+                                </td>
+                                <td>2023 Batch</td>
+                                <td class="problems-solved">165</td>
+                                <td class="streak">28 days <i class="fas fa-fire"></i></td>
+                                <td class="platforms">
+                                    <span class="platform leetcode">LeetCode</span>
+                                    <span class="platform codechef">CodeChef</span>
+                                </td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td class="rank">3</td>
+                                <td class="student-info">
+                                    <img src="assets/student3.jpg" alt="Student 3">
+                                    <div>
+                                        <div class="student-name">Amit Kumar</div>
+                                        <div class="student-id">PW2023042</div>
+                                    </div>
+                                </td>
+                                <td>2023 Batch</td>
+                                <td class="problems-solved">152</td>
+                                <td class="streak">25 days <i class="fas fa-fire"></i></td>
+                                <td class="platforms">
+                                    <span class="platform gfg">GFG</span>
+                                    <span class="platform codeforces">Codeforces</span>
+                                </td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td class="rank">4</td>
+                                <td class="student-info">
+                                    <img src="assets/student4.jpg" alt="Student 4">
+                                    <div>
+                                        <div class="student-name">Neha Gupta</div>
+                                        <div class="student-id">PW2023078</div>
+                                    </div>
+                                </td>
+                                <td>2023 Batch</td>
+                                <td class="problems-solved">143</td>
+                                <td class="streak">22 days <i class="fas fa-fire"></i></td>
+                                <td class="platforms">
+                                    <span class="platform leetcode">LeetCode</span>
+                                    <span class="platform gfg">GFG</span>
+                                </td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td class="rank">5</td>
+                                <td class="student-info">
+                                    <img src="assets/student5.jpg" alt="Student 5">
+                                    <div>
+                                        <div class="student-name">Vikram Singh</div>
+                                        <div class="student-id">PW2023103</div>
+                                    </div>
+                                </td>
+                                <td>2023 Batch</td>
+                                <td class="problems-solved">138</td>
+                                <td class="streak">19 days <i class="fas fa-fire"></i></td>
+                                <td class="platforms">
+                                    <span class="platform codechef">CodeChef</span>
+                                    <span class="platform codeforces">Codeforces</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Overall Leaderboard -->
+            <div class="leaderboard-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-award"></i> All-Time Top Performers</h2>
+                    <div class="filter-controls">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search student...">
+                        </div>
+                        <div class="batch-filter">
+                            <select>
+                                <option value="all">All Batches</option>
+                                <option value="2023">2023 Batch</option>
+                                <option value="2022">2022 Batch</option>
+                                <option value="2021">2021 Batch</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="leaderboard-table-container">
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Student</th>
+                                <th>Batch</th>
+                                <th>Problems Solved</th>
+                                <th>Hard Problems</th>
+                                <th>Consistency</th>
+                                <th>Platforms</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 6 All-Time Performers -->
+                            <tr>
+                                <td class="rank">1</td>
+                                <td class="student-info">
+                                    <img src="assets/student1.jpg" alt="Student 1">
+                                    <div>
+                                        <div class="student-name">Rahul Verma</div>
+                                        <div class="student-id">PW2023001</div>
+                                    </div>
+                                </td>
+                                <td>2023 Batch</td>
+                                <td class="problems-solved">587</td>
+                                <td>142</td>
+                                <td class="consistency">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 95%;"></div>
+                                    </div>
+                                    <span>95%</span>
+                                </td>
+                                <td class="platforms">
+                                    <span class="platform leetcode">LeetCode</span>
+                                    <span class="platform gfg">GFG</span>
+                                    <span class="platform codeforces">Codeforces</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rank">2</td>
+                                <td class="student-info">
+                                    <img src="assets/student6.jpg" alt="Student 6">
+                                    <div>
+                                        <div class="student-name">Ananya Patel</div>
+                                        <div class="student-id">PW2022007</div>
+                                    </div>
+                                </td>
+                                <td>2022 Batch</td>
+                                <td class="problems-solved">562</td>
+                                <td>138</td>
+                                <td class="consistency">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 92%;"></div>
+                                    </div>
+                                    <span>92%</span>
+                                </td>
+                                <td class="platforms">
+                                    <span class="platform leetcode">LeetCode</span>
+                                    <span class="platform gfg">GFG</span>
+                                    <span class="platform codechef">CodeChef</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rank">3</td>
+                                <td class="student-info">
+                                    <img src="assets/student2.jpg" alt="Student 2">
+                                    <div>
+                                        <div class="student-name">Priya Sharma</div>
+                                        <div class="student-id">PW2023015</div>
+                                    </div>
+                                </td>
+                                <td>2023 Batch</td>
+                                <td class="problems-solved">543</td>
+                                <td>125</td>
+                                <td class="consistency">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 90%;"></div>
+                                    </div>
+                                    <span>90%</span>
+                                </td>
+                                <td class="platforms">
+                                    <span class="platform leetcode">LeetCode</span>
+                                    <span class="platform codechef">CodeChef</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rank">4</td>
+                                <td class="student-info">
+                                    <img src="assets/student7.jpg" alt="Student 7">
+                                    <div>
+                                        <div class="student-name">Rajat Kapoor</div>
+                                        <div class="student-id">PW2022031</div>
+                                    </div>
+                                </td>
+                                <td>2022 Batch</td>
+                                <td class="problems-solved">521</td>
+                                <td>118</td>
+                                <td class="consistency">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 88%;"></div>
+                                    </div>
+                                    <span>88%</span>
+                                </td>
+                                <td class="platforms">
+                                    <span class="platform gfg">GFG</span>
+                                    <span class="platform codeforces">Codeforces</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rank">5</td>
+                                <td class="student-info">
+                                    <img src="assets/student3.jpg" alt="Student 3">
+                                    <div>
+                                        <div class="student-name">Amit Kumar</div>
+                                        <div class="student-id">PW2023042</div>
+                                    </div>
+                                </td>
+                                <td>2023 Batch</td>
+                                <td class="problems-solved">498</td>
+                                <td>105</td>
+                                <td class="consistency">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 85%;"></div>
+                                    </div>
+                                    <span>85%</span>
+                                </td>
+                                <td class="platforms">
+                                    <span class="platform gfg">GFG</span>
+                                    <span class="platform codeforces">Codeforces</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="rank">6</td>
+                                <td class="student-info">
+                                    <img src="assets/student8.jpg" alt="Student 8">
+                                    <div>
+                                        <div class="student-name">Sneha Reddy</div>
+                                        <div class="student-id">PW2021019</div>
+                                    </div>
+                                </td>
+                                <td>2021 Batch</td>
+                                <td class="problems-solved">487</td>
+                                <td>102</td>
+                                <td class="consistency">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 82%;"></div>
+                                    </div>
+                                    <span>82%</span>
+                                </td>
+                                <td class="platforms">
+                                    <span class="platform leetcode">LeetCode</span>
+                                    <span class="platform codechef">CodeChef</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">4</button>
+                    <button class="pagination-btn">5</button>
+                    <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Your Performance -->
+            <div class="leaderboard-section your-performance">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-line"></i> Your Performance</h2>
+                </div>
+                <div class="performance-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Current Rank</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">423</div>
+                            <div class="stat-label">Problems Solved</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">18 days</div>
+                            <div class="stat-label">Current Streak</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">+3</div>
+                            <div class="stat-label">Rank Change (Weekly)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="performance-chart">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer footer">
+            <div class="footer-content">
+                <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+
+                <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                    <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                    <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                </form>
+
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#contact">Contact Support</a>
+                    <a href="#about">About Us</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Back to Top Button -->
+        <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+
+        <!-- Toaster Container -->
+        <div class="toaster-container" id="toasterContainer"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Profile Dropdown Toggle
+        document.querySelector('.profile-icon').addEventListener('click', function() {
+            document.querySelector('.profile-dropdown').classList.toggle('active');
+        });
+
+        // Performance Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            const performanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                    datasets: [{
+                        label: 'Problems Solved',
+                        data: [12, 19, 15, 25, 22, 30, 28, 35],
+                        backgroundColor: 'rgba(0, 255, 210, 0.2)',
+                        borderColor: '#00ffd2',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointBackgroundColor: '#00ffd2',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Newsletter submission handler
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            // Here you would typically send the email to your server
+            // For now, we'll just show a success message
+            showToaster('Thanks for subscribing!', 'success');
+            event.target.reset();
+        }
+
+        // Toaster notification function
+        function showToaster(message, type = 'info') {
+            const toaster = document.createElement('div');
+            toaster.className = `toaster ${type}`;
+            toaster.innerHTML = `
+                <div class="toaster-icon">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+                </div>
+                <div class="toaster-message">${message}</div>
+            `;
+            document.getElementById('toasterContainer').appendChild(toaster);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                toaster.classList.add('hide');
+                setTimeout(() => {
+                    toaster.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
