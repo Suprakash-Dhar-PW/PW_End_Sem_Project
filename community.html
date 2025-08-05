@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PW IOI - Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="community.css">
+    <style>
+        /* Remove underline from social icons in the footer */
+        .site-footer .social-icons a {
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+    <div class="top-right-controls">
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
+            </button>
+            <button class="signup-btn" onclick="showSignupModal()">
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
+            </button>
+        </div>
+        <div class="profile-icon" onclick="goToProfile()" title="View Profile">
+            <img src="images/Supra_image.jpg" alt="Profile" />
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="nav-section" role="navigation">
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="mentor-attendance.html" class="nav-link" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
+            <a href="projects.html" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="notes.html" class="nav-link" data-tooltip="Notes"><i class="fas fa-book"></i> <span>Notes</span></a>
+            <a href="dsa-tracker.html" class="nav-link" data-tooltip="DSA Tracker"><i class="fas fa-code"></i> <span>DSA Tracker</span></a>
+            <a href="dsa-leaderboard.html" class="nav-link" data-tooltip="DSA Leaderboard"><i class="fas fa-trophy"></i> <span>DSA Leaderboard</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="portfolio.html" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="community.html" class="nav-link active" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+            <a href="need-help.html" class="nav-link" data-tooltip="Need Help"><i class="fas fa-question-circle"></i> <span>Need Help</span></a>
+            <a href="settings.html" class="nav-link" data-tooltip="Settings"><i class="fas fa-cog"></i> <span>Settings</span></a>
+            <a href="#" class="nav-link" data-tooltip="Logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main">
+        <div class="community-container">
+            <h1 class="page-title">Community Chat</h1>
+
+            <div class="chat-container">
+                <!-- Sidebar with contacts/channels -->
+                <div class="chat-sidebar">
+                    <div class="chat-sidebar-header">
+                        <div class="search-container">
+                            <input type="text" placeholder="Search chats" id="searchChats">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <button class="new-chat-btn" onclick="showNewChatModal()" title="New Chat">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <div class="chat-tabs">
+                        <button class="chat-tab active" data-tab="channels">Channels</button>
+                        <button class="chat-tab" data-tab="direct">Direct Messages</button>
+                    </div>
+
+                    <div class="chat-list" id="channelsList">
+                        <div class="chat-category">Study Groups</div>
+                        <div class="chat-item active" data-chat-id="dsa-study">
+                            <div class="chat-avatar group">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">DSA Study Group</div>
+                                <div class="chat-last-message">Rahul: Anyone solved the DP problem?</div>
+                            </div>
+                            <div class="chat-meta">
+                                <div class="chat-time">10:45 AM</div>
+                                <div class="chat-badge">3</div>
+                            </div>
+                        </div>
+                        <div class="chat-item" data-chat-id="web-dev">
+                            <div class="chat-avatar group">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">Web Development</div>
+                                <div class="chat-last-message">Priya: Check out this React tutorial!</div>
+                            </div>
+                            <div class="chat-meta">
+                                <div class="chat-time">Yesterday</div>
+                            </div>
+                        </div>
+                        <div class="chat-item" data-chat-id="ml-ai">
+                            <div class="chat-avatar group">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">ML/AI Discussion</div>
+                                <div class="chat-last-message">Amit: Shared a new research paper</div>
+                            </div>
+                            <div class="chat-meta">
+                                <div class="chat-time">Yesterday</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-category">Batch Channels</div>
+                        <div class="chat-item" data-chat-id="batch-2023">
+                            <div class="chat-avatar group">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">Batch 2023</div>
+                                <div class="chat-last-message">Sneha: When is the next assignment due?</div>
+                            </div>
+                            <div class="chat-meta">
+                                <div class="chat-time">2 days ago</div>
+                            </div>
+                        </div>
+                        <div class="chat-item" data-chat-id="batch-2022">
+                            <div class="chat-avatar group">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">Batch 2022</div>
+                                <div class="chat-last-message">Vikram: Internship opportunities...</div>
+                            </div>
+                            <div class="chat-meta">
+                                <div class="chat-time">3 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-list hidden" id="directMessagesList">
+                        <div class="chat-item" data-chat-id="user-1">
+                            <div class="chat-avatar">
+                                <img src="images/Supra_image.jpg" alt="Rahul Sharma">
+                                <span class="status-indicator online"></span>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">Rahul Sharma</div>
+                                <div class="chat-last-message">Can you help with the assignment?</div>
+                            </div>
+                            <div class="chat-meta">
+                                <div class="chat-time">11:20 AM</div>
+                                <div class="chat-badge">1</div>
+                            </div>
+                        </div>
+                        <div class="chat-item" data-chat-id="user-2">
+                            <div class="chat-avatar">
+                                <img src="images/Supra_image.jpg" alt="Priya Patel">
+                                <span class="status-indicator away"></span>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">Priya Patel</div>
+                                <div class="chat-last-message">Thanks for sharing the notes!</div>
+                            </div>
+                            <div class="chat-meta">
+                                <div class="chat-time">Yesterday</div>
+                            </div>
+                        </div>
+                        <div class="chat-item" data-chat-id="user-3">
+                            <div class="chat-avatar">
+                                <img src="images/Supra_image.jpg" alt="Amit Kumar">
+                                <span class="status-indicator offline"></span>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">Amit Kumar</div>
+                                <div class="chat-last-message">Let's meet for the group study</div>
+                            </div>
+                            <div class="chat-meta">
+                                <div class="chat-time">Monday</div>
+                            </div>
+                        </div>
+                        <div class="chat-item" data-chat-id="user-4">
+                            <div class="chat-avatar">
+                                <img src="images/Supra_image.jpg" alt="Sneha Gupta">
+                                <span class="status-indicator online"></span>
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">Sneha Gupta</div>
+                                <div class="chat-last-message">Did you submit the project?</div>
+                            </div>
+                            <div class="chat-meta">
+                                <div class="chat-time">Tuesday</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main chat area -->
+                <div class="chat-main">
+                    <div class="chat-header">
+                        <div class="chat-header-info">
+                            <div class="chat-avatar group">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div>
+                                <div class="chat-name">DSA Study Group</div>
+                                <div class="chat-participants">42 participants</div>
+                            </div>
+                        </div>
+                        <div class="chat-header-actions">
+                            <button class="action-btn" title="Search in conversation">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="action-btn" title="Voice call">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                            <button class="action-btn" title="Video call">
+                                <i class="fas fa-video"></i>
+                            </button>
+                            <button class="action-btn" title="More options">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message-date-divider">Today</div>
+
+                        <div class="message-container">
+                            <div class="message-avatar">
+                                <img src="images/Supra_image.jpg" alt="Rahul">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-sender">Rahul Sharma <span class="message-time">10:15 AM</span></div>
+                                <div class="message-bubble">
+                                    <p>Hey everyone! Has anyone solved the dynamic programming problem from yesterday's lecture?</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message-container">
+                            <div class="message-avatar">
+                                <img src="images/Supra_image.jpg" alt="Priya">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-sender">Priya Patel <span class="message-time">10:18 AM</span></div>
+                                <div class="message-bubble">
+                                    <p>I'm still working on it. The recursive solution is easy but I'm having trouble with the memoization part.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message-container">
+                            <div class="message-avatar">
+                                <img src="images/Supra_image.jpg" alt="Amit">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-sender">Amit Kumar <span class="message-time">10:22 AM</span></div>
+                                <div class="message-bubble">
+                                    <p>I've solved it. Here's my approach:</p>
+                                    <pre class="code-block">function knapsack(weights, values, capacity) {
+  const n = weights.length;
+  const dp = Array(n + 1).fill().map(() => Array(capacity + 1).fill(0));
+  
+  for (let i = 1; i <= n; i++) {
+    for (let w = 0; w <= capacity; w++) {
+      if (weights[i-1] <= w) {
+        dp[i][w] = Math.max(
+          values[i-1] + dp[i-1][w-weights[i-1]],
+          dp[i-1][w]
+        );
+      } else {
+        dp[i][w] = dp[i-1][w];
+      }
+    }
+  }
+  
+  return dp[n][capacity];
+}</pre>
+                                </div>
+                                <div class="message-reactions">
+                                    <span class="reaction">👍 3</span>
+                                    <span class="reaction">🙏 2</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message-container">
+                            <div class="message-avatar">
+                                <img src="images/Supra_image.jpg" alt="Rahul">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-sender">Rahul Sharma <span class="message-time">10:30 AM</span></div>
+                                <div class="message-bubble">
+                                    <p>Thanks Amit! That's really helpful. Can you explain the time complexity of this solution?</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message-container">
+                            <div class="message-avatar">
+                                <img src="images/Supra_image.jpg" alt="Sneha">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-sender">Sneha Gupta <span class="message-time">10:35 AM</span></div>
+                                <div class="message-bubble">
+                                    <p>I think the time complexity is O(n*W) where n is the number of items and W is the capacity of the knapsack.</p>
+                                </div>
+                                <div class="message-reactions">
+                                    <span class="reaction">👍 1</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message-container">
+                            <div class="message-avatar">
+                                <img src="images/Supra_image.jpg" alt="Amit">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-sender">Amit Kumar <span class="message-time">10:40 AM</span></div>
+                                <div class="message-bubble">
+                                    <p>Exactly, Sneha! And the space complexity is also O(n*W) because of the 2D array we're using for memoization.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message-container">
+                            <div class="message-avatar">
+                                <img src="images/Supra_image.jpg" alt="Rahul">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-sender">Rahul Sharma <span class="message-time">10:45 AM</span></div>
+                                <div class="message-bubble">
+                                    <p>Anyone solved the follow-up problem with the space optimization to O(W)?</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message-typing">
+                            <div class="typing-indicator">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="typing-text">Vikram is typing...</div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <button class="attachment-btn" title="Attach file">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <div class="chat-input-container">
+                            <input type="text" id="messageInput" placeholder="Type a message" class="chat-input">
+                            <div class="input-actions">
+                                <button class="emoji-btn" title="Insert emoji">
+                                    <i class="far fa-smile"></i>
+                                </button>
+                                <button class="code-btn" title="Insert code">
+                                    <i class="fas fa-code"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="send-btn" title="Send message" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Info panel (right sidebar) -->
+                <div class="chat-info-panel">
+                    <div class="info-panel-header">
+                        <h3>Group Info</h3>
+                        <button class="close-info-panel" onclick="toggleInfoPanel()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="info-panel-content">
+                        <div class="group-details">
+                            <div class="group-avatar large">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h2>DSA Study Group</h2>
+                            <p class="group-description">A community for discussing Data Structures and Algorithms problems, solutions, and study strategies.</p>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Shared Files</h4>
+                            <div class="shared-files">
+                                <div class="shared-file">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <div class="file-info">
+                                        <div class="file-name">DSA_Cheat_Sheet.pdf</div>
+                                        <div class="file-meta">Shared by Amit • 2 days ago</div>
+                                    </div>
+                                    <button class="file-download-btn">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                                <div class="shared-file">
+                                    <i class="fas fa-file-code"></i>
+                                    <div class="file-info">
+                                        <div class="file-name">graph_algorithms.py</div>
+                                        <div class="file-meta">Shared by Priya • 1 week ago</div>
+                                    </div>
+                                    <button class="file-download-btn">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Participants (42)</h4>
+                            <div class="participants-list">
+                                <div class="participant">
+                                    <div class="participant-avatar">
+                                        <img src="images/Supra_image.jpg" alt="Rahul">
+                                        <span class="status-indicator online"></span>
+                                    </div>
+                                    <div class="participant-info">
+                                        <div class="participant-name">Rahul Sharma</div>
+                                        <div class="participant-role admin">Admin</div>
+                                    </div>
+                                </div>
+                                <div class="participant">
+                                    <div class="participant-avatar">
+                                        <img src="images/Supra_image.jpg" alt="Priya">
+                                        <span class="status-indicator away"></span>
+                                    </div>
+                                    <div class="participant-info">
+                                        <div class="participant-name">Priya Patel</div>
+                                        <div class="participant-role moderator">Moderator</div>
+                                    </div>
+                                </div>
+                                <div class="participant">
+                                    <div class="participant-avatar">
+                                        <img src="images/Supra_image.jpg" alt="Amit">
+                                        <span class="status-indicator online"></span>
+                                    </div>
+                                    <div class="participant-info">
+                                        <div class="participant-name">Amit Kumar</div>
+                                    </div>
+                                </div>
+                                <div class="participant">
+                                    <div class="participant-avatar">
+                                        <img src="images/Supra_image.jpg" alt="Sneha">
+                                        <span class="status-indicator online"></span>
+                                    </div>
+                                    <div class="participant-info">
+                                        <div class="participant-name">Sneha Gupta</div>
+                                    </div>
+                                </div>
+                                <div class="participant">
+                                    <div class="participant-avatar">
+                                        <img src="images/Supra_image.jpg" alt="Vikram">
+                                        <span class="status-indicator online"></span>
+                                    </div>
+                                    <div class="participant-info">
+                                        <div class="participant-name">Vikram Singh</div>
+                                    </div>
+                                </div>
+                                <div class="view-all-link">
+                                    <a href="#">View all participants</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Group Settings</h4>
+                            <div class="group-settings">
+                                <div class="setting-item">
+                                    <div class="setting-label">Mute Notifications</div>
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-label">Pin Group</div>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-label">Media Visibility</div>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-panel-actions">
+                            <button class="danger-btn">
+                                <i class="fas fa-sign-out-alt"></i> Leave Group
+                            </button>
+                            <button class="danger-btn">
+                                <i class="fas fa-flag"></i> Report Group
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+                <a href="#about">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toaster Container -->
+    <div class="toaster-container" id="toasterContainer"></div>
+
+    <!-- New Chat Modal -->
+    <div class="modal" id="newChatModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Start a New Conversation</h3>
+                <button class="modal-close" onclick="hideNewChatModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab active" data-tab="newDirect">Direct Message</button>
+                    <button class="tab" data-tab="newGroup">Create Group</button>
+                </div>
+
+                <div class="tab-content active" id="newDirectContent">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search for a student or mentor" id="searchUsers">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="users-list">
+                        <div class="user-item">
+                            <div class="user-avatar">
+                                <img src="images/Supra_image.jpg" alt="Vikram">
+                                <span class="status-indicator online"></span>
+                            </div>
+                            <div class="user-info">
+                                <div class="user-name">Vikram Singh</div>
+                                <div class="user-meta">Batch 2022 • Web Development</div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="user-avatar">
+                                <img src="images/Supra_image.jpg" alt="Neha">
+                                <span class="status-indicator away"></span>
+                            </div>
+                            <div class="user-info">
+                                <div class="user-name">Neha Verma</div>
+                                <div class="user-meta">Batch 2021 • Angular Developer</div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="user-avatar">
+                                <img src="images/Supra_image.jpg" alt="Rajesh">
+                                <span class="status-indicator offline"></span>
+                            </div>
+                            <div class="user-info">
+                                <div class="user-name">Rajesh Khanna</div>
+                                <div class="user-meta">Batch 2023 • C++ Developer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="newGroupContent">
+                    <form id="createGroupForm">
+                        <div class="form-group">
+                            <label for="groupName">Group Name</label>
+                            <input type="text" id="groupName" placeholder="Enter group name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="groupDescription">Description</label>
+                            <textarea id="groupDescription" placeholder="What's this group about?" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Add Participants</label>
+                            <div class="search-container">
+                                <input type="text" placeholder="Search for participants" id="searchParticipants">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="selected-participants" id="selectedParticipants">
+                                <!-- Selected participants will appear here -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel-btn" onclick="hideNewChatModal()">Cancel</button>
+                <button class="primary-btn" id="createChatBtn">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Loading overlay
+        window.addEventListener('load', function() {
+            document.getElementById('loadingOverlay').classList.add('hidden');
+        });
+
+        // Sidebar toggle functions
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('main').classList.toggle('expanded');
+        }
+
+        function toggleMobileSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+
+        function closeMobileSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+
+        // Profile navigation
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        // Login/Signup modals
+        function showLoginModal() {
+            // Implement login modal functionality
+            console.log('Show login modal');
+        }
+
+        function showSignupModal() {
+            // Implement signup modal functionality
+            console.log('Show signup modal');
+        }
+
+        // Chat tab switching
+        document.querySelectorAll('.chat-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all chat lists
+                document.querySelectorAll('.chat-list').forEach(list => list.classList.add('hidden'));
+                
+                // Show the corresponding chat list
+                const tabType = this.getAttribute('data-tab');
+                if (tabType === 'channels') {
+                    document.getElementById('channelsList').classList.remove('hidden');
+                } else if (tabType === 'direct') {
+                    document.getElementById('directMessagesList').classList.remove('hidden');
+                }
+            });
+        });
+
+        // Chat item selection
+        document.querySelectorAll('.chat-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all chat items
+                document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
+                // Add active class to clicked item
+                this.classList.add('active');
+                
+                // Here you would typically load the chat history for the selected chat
+                const chatId = this.getAttribute('data-chat-id');
+                console.log(`Selected chat: ${chatId}`);
+                
+                // For demo purposes, we'll just update the chat header
+                updateChatHeader(chatId);
+            });
+        });
+
+        // Update chat header based on selected chat
+        function updateChatHeader(chatId) {
+            const chatHeader = document.querySelector('.chat-header-info');
+            let headerHTML = '';
+            
+            if (chatId === 'dsa-study') {
+                headerHTML = `
+                    <div class="chat-avatar group">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div>
+                        <div class="chat-name">DSA Study Group</div>
+                        <div class="chat-participants">42 participants</div>
+                    </div>
+                `;
+            } else if (chatId === 'web-dev') {
+                headerHTML = `
+                    <div class="chat-avatar group">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div>
+                        <div class="chat-name">Web Development</div>
+                        <div class="chat-participants">28 participants</div>
+                    </div>
+                `;
+            } else if (chatId === 'user-1') {
+                headerHTML = `
+                    <div class="chat-avatar">
+                        <img src="images/Supra_image.jpg" alt="Rahul Sharma">
+                        <span class="status-indicator online"></span>
+                    </div>
+                    <div>
+                        <div class="chat-name">Rahul Sharma</div>
+                        <div class="chat-status">Online</div>
+                    </div>
+                `;
+            }
+            
+            if (headerHTML) {
+                chatHeader.innerHTML = headerHTML;
+            }
+        }
+
+        // Toggle info panel
+        function toggleInfoPanel() {
+            document.querySelector('.chat-info-panel').classList.toggle('open');
+            document.querySelector('.chat-main').classList.toggle('info-panel-open');
+        }
+
+        // Send message function
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (message) {
+                // Create a new message element
+                const messageContainer = document.createElement('div');
+                messageContainer.className = 'message-container own-message';
+                
+                const currentTime = new Date();
+                const hours = currentTime.getHours();
+                const minutes = currentTime.getMinutes();
+                const formattedTime = `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${hours >= 12 ? 'PM' : 'AM'}`;
+                
+                messageContainer.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-sender">You <span class="message-time">${formattedTime}</span></div>
+                        <div class="message-bubble">
+                            <p>${message}</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Add the message to the chat
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.appendChild(messageContainer);
+                
+                // Clear the input field
+                messageInput.value = '';
+                
+                // Scroll to the bottom of the chat
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        // Allow sending message with Enter key
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // New chat modal functions
+        function showNewChatModal() {
+            document.getElementById('newChatModal').classList.add('show');
+        }
+
+        function hideNewChatModal() {
+            document.getElementById('newChatModal').classList.remove('show');
+        }
+
+        // Modal tab switching
+        document.querySelectorAll('.modal .tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.modal .tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all tab content
+                document.querySelectorAll('.modal .tab-content').forEach(content => content.classList.remove('active'));
+                
+                // Show the corresponding tab content
+                const tabType = this.getAttribute('data-tab');
+                if (tabType === 'newDirect') {
+                    document.getElementById('newDirectContent').classList.add('active');
+                } else if (tabType === 'newGroup') {
+                    document.getElementById('newGroupContent').classList.add('active');
+                }
+            });
+        });
+
+        // Create chat button
+        document.getElementById('createChatBtn').addEventListener('click', function() {
+            const activeTab = document.querySelector('.modal .tab.active').getAttribute('data-tab');
+            
+            if (activeTab === 'newDirect') {
+                const selectedUser = document.querySelector('.users-list .user-item.selected');
+                if (selectedUser) {
+                    console.log(`Starting direct message with: ${selectedUser.querySelector('.user-name').textContent}`);
+                    hideNewChatModal();
+                    showToaster('Direct message created successfully!', 'success');
+                } else {
+                    showToaster('Please select a user to message', 'error');
+                }
+            } else if (activeTab === 'newGroup') {
+                const groupName = document.getElementById('groupName').value.trim();
+                if (groupName) {
+                    console.log(`Creating group: ${groupName}`);
+                    hideNewChatModal();
+                    showToaster('Group created successfully!', 'success');
+                } else {
+                    showToaster('Please enter a group name', 'error');
+                }
+            }
+        });
+
+        // Make user items selectable
+        document.querySelectorAll('.users-list .user-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.users-list .user-item').forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Newsletter submit handler
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            // Here you would typically send this to your backend
+            console.log(`Newsletter signup: ${email}`);
+            event.target.reset();
+            showToaster('Thank you for subscribing to our newsletter!', 'success');
+        }
+
+        // Toaster notification function
+        function showToaster(message, type = 'info') {
+            const toaster = document.createElement('div');
+            toaster.className = `toaster ${type}`;
+            toaster.innerHTML = `
+                <div class="toaster-icon">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                </div>
+                <div class="toaster-message">${message}</div>
+                <button class="toaster-close" onclick="this.parentElement.remove()">&times;</button>
+            `;
+            document.getElementById('toasterContainer').appendChild(toaster);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (toaster.parentElement) {
+                    toaster.classList.add('hide');
+                    setTimeout(() => toaster.remove(), 300);
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

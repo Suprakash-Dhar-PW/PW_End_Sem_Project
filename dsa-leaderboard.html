@@ -2,71 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>DSA Leaderboard - PW IOI Platform</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="dsa-leaderboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="dsa-leaderboard.css">
 </head>
 <body>
-    <!-- Sidebar Navigation -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <img src="assets/logo.png" alt="PW IOI Logo" class="logo">
-            <h2>PW IOI</h2>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+    <!-- Top Right Controls -->
+    <div class="top-right-controls">
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
+            </button>
+            <button class="signup-btn" onclick="showSignupModal()">
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
+            </button>
         </div>
-        <ul class="sidebar-menu">
-            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="task-manager.html"><i class="fas fa-tasks"></i> Task Manager</a></li>
-            <li><a href="attendance.html"><i class="fas fa-calendar-check"></i> Attendance</a></li>
-            <li><a href="mentor-attendance.html"><i class="fas fa-user-check"></i> Mentor Attendance</a></li>
-            <li><a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
-            <li><a href="job-portal.html"><i class="fas fa-briefcase"></i> Job Portal</a></li>
-            <li><a href="announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a></li>
-            <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
-            <li><a href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
-            <li><a href="dsa-tracker.html"><i class="fas fa-code"></i> DSA Tracker</a></li>
-            <li class="active"><a href="dsa-leaderboard.html"><i class="fas fa-trophy"></i> DSA Leaderboard</a></li>
-        </ul>
-        <div class="pinned-section">
-            <h3>Pinned</h3>
-            <ul class="pinned-menu">
-                <li><a href="portfolio.html"><i class="fas fa-user-circle"></i> Portfolio</a></li>
-                <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
-                <li><a href="leave-form.html"><i class="fas fa-calendar-minus"></i> Leave Form</a></li>
-                <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
-                <li><a href="need-help.html"><i class="fas fa-question-circle"></i> Need Help</a></li>
-            </ul>
+        <div class="profile-icon" onclick="goToProfile()" title="View Profile">
+            <img src="images/Supra_image.jpg" alt="Profile" />
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Top Header -->
-        <div class="top-header">
-            <button class="mobile-menu-toggle">
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
                 <i class="fas fa-bars"></i>
             </button>
-            <div class="top-right-controls">
-                <div class="notification-icon">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
-                </div>
-                <div class="profile-icon">
-                    <img src="assets/profile.jpg" alt="Profile">
-                    <div class="profile-dropdown">
-                        <a href="profile.html"><i class="fas fa-user"></i> View Profile</a>
-                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
-                        <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                    </div>
-                </div>
-            </div>
         </div>
+        <nav class="nav-section" role="navigation">
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="mentor-attendance.html" class="nav-link" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
+            <a href="projects.html" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
+            <a href="notes.html" class="nav-link" data-tooltip="Notes"><i class="fas fa-book"></i> <span>Notes</span></a>
+            <a href="dsa-tracker.html" class="nav-link" data-tooltip="DSA Tracker"><i class="fas fa-code"></i> <span>DSA Tracker</span></a>
+            <a href="dsa-leaderboard.html" class="nav-link active" data-tooltip="DSA Leaderboard"><i class="fas fa-trophy"></i> <span>DSA Leaderboard</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="portfolio.html" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+            <a href="need-help.html" class="nav-link" data-tooltip="Need Help"><i class="fas fa-question-circle"></i> <span>Need Help</span></a>
+            <a href="settings.html" class="nav-link" data-tooltip="Settings"><i class="fas fa-cog"></i> <span>Settings</span></a>
+            <a href="#" class="nav-link" data-tooltip="Logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+        </nav>
+    </div>
 
-        <!-- DSA Leaderboard Content -->
+    <!-- Main Content -->
+    <main class="main-content">
         <div class="dsa-container">
-            <h1 class="page-title">DSA Leaderboard</h1>
+            <h1 class="page-title" style="text-align: center;">DSA Leaderboard</h1>
             
             <!-- DSA Navigation Links -->
             <div class="dsa-nav-links">
@@ -203,7 +207,7 @@
                                 <td class="streak">22 days <i class="fas fa-fire"></i></td>
                                 <td class="platforms">
                                     <span class="platform leetcode">LeetCode</span>
-                                    <span class="platform gfg">GFG</span>
+                                    <span class="platform hackerrank">HackerRank</span>
                                 </td>
                             </tr>
                             <tr class="highlight-row">
@@ -212,40 +216,29 @@
                                     <img src="assets/student5.jpg" alt="Student 5">
                                     <div>
                                         <div class="student-name">Vikram Singh</div>
-                                        <div class="student-id">PW2023103</div>
+                                        <div class="student-id">PW2023056</div>
                                     </div>
                                 </td>
                                 <td>2023 Batch</td>
                                 <td class="problems-solved">138</td>
                                 <td class="streak">19 days <i class="fas fa-fire"></i></td>
                                 <td class="platforms">
+                                    <span class="platform gfg">GFG</span>
                                     <span class="platform codechef">CodeChef</span>
-                                    <span class="platform codeforces">Codeforces</span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <div class="view-more-container">
+                    <button class="view-more-btn">View Full Leaderboard</button>
+                </div>
             </div>
 
-            <!-- Overall Leaderboard -->
+            <!-- All-Time Leaderboard -->
             <div class="leaderboard-section">
                 <div class="section-header">
-                    <h2><i class="fas fa-award"></i> All-Time Top Performers</h2>
-                    <div class="filter-controls">
-                        <div class="search-box">
-                            <i class="fas fa-search"></i>
-                            <input type="text" placeholder="Search student...">
-                        </div>
-                        <div class="batch-filter">
-                            <select>
-                                <option value="all">All Batches</option>
-                                <option value="2023">2023 Batch</option>
-                                <option value="2022">2022 Batch</option>
-                                <option value="2021">2021 Batch</option>
-                            </select>
-                        </div>
-                    </div>
+                    <h2><i class="fas fa-crown"></i> All-Time Top Performers</h2>
                 </div>
                 <div class="leaderboard-table-container">
                     <table class="leaderboard-table">
@@ -255,31 +248,24 @@
                                 <th>Student</th>
                                 <th>Batch</th>
                                 <th>Problems Solved</th>
-                                <th>Hard Problems</th>
-                                <th>Consistency</th>
+                                <th>Max Streak</th>
                                 <th>Platforms</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Top 6 All-Time Performers -->
+                            <!-- Top 5 All-Time Performers -->
                             <tr>
                                 <td class="rank">1</td>
                                 <td class="student-info">
-                                    <img src="assets/student1.jpg" alt="Student 1">
+                                    <img src="assets/student6.jpg" alt="Student 6">
                                     <div>
-                                        <div class="student-name">Rahul Verma</div>
-                                        <div class="student-id">PW2023001</div>
+                                        <div class="student-name">Arjun Reddy</div>
+                                        <div class="student-id">PW2022007</div>
                                     </div>
                                 </td>
-                                <td>2023 Batch</td>
-                                <td class="problems-solved">587</td>
-                                <td>142</td>
-                                <td class="consistency">
-                                    <div class="progress-bar">
-                                        <div class="progress" style="width: 95%;"></div>
-                                    </div>
-                                    <span>95%</span>
-                                </td>
+                                <td>2022 Batch</td>
+                                <td class="problems-solved">842</td>
+                                <td class="streak">78 days</td>
                                 <td class="platforms">
                                     <span class="platform leetcode">LeetCode</span>
                                     <span class="platform gfg">GFG</span>
@@ -289,68 +275,51 @@
                             <tr>
                                 <td class="rank">2</td>
                                 <td class="student-info">
-                                    <img src="assets/student6.jpg" alt="Student 6">
+                                    <img src="assets/student7.jpg" alt="Student 7">
                                     <div>
-                                        <div class="student-name">Ananya Patel</div>
-                                        <div class="student-id">PW2022007</div>
+                                        <div class="student-name">Sneha Patel</div>
+                                        <div class="student-id">PW2022015</div>
                                     </div>
                                 </td>
                                 <td>2022 Batch</td>
-                                <td class="problems-solved">562</td>
-                                <td>138</td>
-                                <td class="consistency">
-                                    <div class="progress-bar">
-                                        <div class="progress" style="width: 92%;"></div>
-                                    </div>
-                                    <span>92%</span>
-                                </td>
+                                <td class="problems-solved">789</td>
+                                <td class="streak">65 days</td>
                                 <td class="platforms">
                                     <span class="platform leetcode">LeetCode</span>
-                                    <span class="platform gfg">GFG</span>
                                     <span class="platform codechef">CodeChef</span>
+                                    <span class="platform hackerrank">HackerRank</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="rank">3</td>
                                 <td class="student-info">
-                                    <img src="assets/student2.jpg" alt="Student 2">
+                                    <img src="assets/student1.jpg" alt="Student 1">
                                     <div>
-                                        <div class="student-name">Priya Sharma</div>
-                                        <div class="student-id">PW2023015</div>
+                                        <div class="student-name">Rahul Verma</div>
+                                        <div class="student-id">PW2023001</div>
                                     </div>
                                 </td>
                                 <td>2023 Batch</td>
-                                <td class="problems-solved">543</td>
-                                <td>125</td>
-                                <td class="consistency">
-                                    <div class="progress-bar">
-                                        <div class="progress" style="width: 90%;"></div>
-                                    </div>
-                                    <span>90%</span>
-                                </td>
+                                <td class="problems-solved">756</td>
+                                <td class="streak">52 days</td>
                                 <td class="platforms">
                                     <span class="platform leetcode">LeetCode</span>
-                                    <span class="platform codechef">CodeChef</span>
+                                    <span class="platform gfg">GFG</span>
+                                    <span class="platform codeforces">Codeforces</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="rank">4</td>
                                 <td class="student-info">
-                                    <img src="assets/student7.jpg" alt="Student 7">
+                                    <img src="assets/student8.jpg" alt="Student 8">
                                     <div>
-                                        <div class="student-name">Rajat Kapoor</div>
+                                        <div class="student-name">Karan Malhotra</div>
                                         <div class="student-id">PW2022031</div>
                                     </div>
                                 </td>
                                 <td>2022 Batch</td>
-                                <td class="problems-solved">521</td>
-                                <td>118</td>
-                                <td class="consistency">
-                                    <div class="progress-bar">
-                                        <div class="progress" style="width: 88%;"></div>
-                                    </div>
-                                    <span>88%</span>
-                                </td>
+                                <td class="problems-solved">712</td>
+                                <td class="streak">49 days</td>
                                 <td class="platforms">
                                     <span class="platform gfg">GFG</span>
                                     <span class="platform codeforces">Codeforces</span>
@@ -359,44 +328,15 @@
                             <tr>
                                 <td class="rank">5</td>
                                 <td class="student-info">
-                                    <img src="assets/student3.jpg" alt="Student 3">
+                                    <img src="assets/student2.jpg" alt="Student 2">
                                     <div>
-                                        <div class="student-name">Amit Kumar</div>
-                                        <div class="student-id">PW2023042</div>
+                                        <div class="student-name">Priya Sharma</div>
+                                        <div class="student-id">PW2023015</div>
                                     </div>
                                 </td>
                                 <td>2023 Batch</td>
-                                <td class="problems-solved">498</td>
-                                <td>105</td>
-                                <td class="consistency">
-                                    <div class="progress-bar">
-                                        <div class="progress" style="width: 85%;"></div>
-                                    </div>
-                                    <span>85%</span>
-                                </td>
-                                <td class="platforms">
-                                    <span class="platform gfg">GFG</span>
-                                    <span class="platform codeforces">Codeforces</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="rank">6</td>
-                                <td class="student-info">
-                                    <img src="assets/student8.jpg" alt="Student 8">
-                                    <div>
-                                        <div class="student-name">Sneha Reddy</div>
-                                        <div class="student-id">PW2021019</div>
-                                    </div>
-                                </td>
-                                <td>2021 Batch</td>
-                                <td class="problems-solved">487</td>
-                                <td>102</td>
-                                <td class="consistency">
-                                    <div class="progress-bar">
-                                        <div class="progress" style="width: 82%;"></div>
-                                    </div>
-                                    <span>82%</span>
-                                </td>
+                                <td class="problems-solved">685</td>
+                                <td class="streak">45 days</td>
                                 <td class="platforms">
                                     <span class="platform leetcode">LeetCode</span>
                                     <span class="platform codechef">CodeChef</span>
@@ -405,170 +345,118 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="pagination">
-                    <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
-                    <button class="pagination-btn active">1</button>
-                    <button class="pagination-btn">2</button>
-                    <button class="pagination-btn">3</button>
-                    <button class="pagination-btn">4</button>
-                    <button class="pagination-btn">5</button>
-                    <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
-
-            <!-- Your Performance -->
-            <div class="leaderboard-section your-performance">
-                <div class="section-header">
-                    <h2><i class="fas fa-chart-line"></i> Your Performance</h2>
-                </div>
-                <div class="performance-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value">12</div>
-                            <div class="stat-label">Current Rank</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value">423</div>
-                            <div class="stat-label">Problems Solved</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value">18 days</div>
-                            <div class="stat-label">Current Streak</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-arrow-up"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value">+3</div>
-                            <div class="stat-label">Rank Change (Weekly)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="performance-chart">
-                    <canvas id="performanceChart"></canvas>
+                <div class="view-more-container">
+                    <button class="view-more-btn">View Full Leaderboard</button>
                 </div>
             </div>
         </div>
+    </main>
 
-        <!-- Footer -->
-        <footer class="site-footer footer">
-            <div class="footer-content">
-                <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="back-to-top" onclick="scrollToTop()" title="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-                <div class="social-icons">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <!-- Toaster Container for Notifications -->
+    <div id="toasterContainer" class="toaster-container"></div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>PW IOI</h4>
+                    <p>Empowering students with cutting-edge tech education and career opportunities.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
-
-                <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
-                    <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
-                    <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
-                </form>
-
-                <div class="footer-links">
-                    <a href="#privacy">Privacy Policy</a>
-                    <a href="#terms">Terms of Service</a>
-                    <a href="#contact">Contact Support</a>
-                    <a href="#about">About Us</a>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Dashboard</a></li>
+                        <li><a href="dsa-tracker.html">DSA Tracker</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="job-portal.html">Job Portal</a></li>
+                        <li><a href="community.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Learning Paths</a></li>
+                        <li><a href="#">Interview Prep</a></li>
+                        <li><a href="#">Coding Challenges</a></li>
+                        <li><a href="#">Tech Blogs</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to our newsletter for the latest updates</p>
+                    <form id="newsletterForm" onsubmit="handleNewsletterSubmit(event)">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
                 </div>
             </div>
-        </footer>
+            <div class="footer-bottom">
+                <p>&copy; 2023 PW IOI. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-        <!-- Back to Top Button -->
-        <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
-            <i class="fas fa-chevron-up"></i>
-        </button>
-
-        <!-- Toaster Container -->
-        <div class="toaster-container" id="toasterContainer"></div>
-    </div>
-
-    <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('active');
-        });
+        // Sidebar toggle functions
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('main').classList.toggle('expanded');
+        }
 
-        // Profile Dropdown Toggle
-        document.querySelector('.profile-icon').addEventListener('click', function() {
-            document.querySelector('.profile-dropdown').classList.toggle('active');
-        });
+        function toggleMobileSidebar() {
+            document.getElementById('sidebar').classList.toggle('mobile-open');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
 
-        // Performance Chart
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('performanceChart').getContext('2d');
-            const performanceChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
-                    datasets: [{
-                        label: 'Problems Solved',
-                        data: [12, 19, 15, 25, 22, 30, 28, 35],
-                        backgroundColor: 'rgba(0, 255, 210, 0.2)',
-                        borderColor: '#00ffd2',
-                        borderWidth: 2,
-                        tension: 0.4,
-                        pointBackgroundColor: '#00ffd2',
-                        pointBorderColor: '#fff',
-                        pointBorderWidth: 2,
-                        pointRadius: 5,
-                        pointHoverRadius: 7
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            }
-                        }
-                    }
-                }
-            });
-        });
+        function closeMobileSidebar() {
+            document.getElementById('sidebar').classList.remove('mobile-open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
 
-        // Scroll to top function
+        // Profile navigation
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        // Login/Signup modals
+        function showLoginModal() {
+            // Implement login modal functionality
+            console.log('Show login modal');
+        }
+
+        function showSignupModal() {
+            // Implement signup modal functionality
+            console.log('Show signup modal');
+        }
+
+        // Logout function
+        function logout() {
+            // Implement logout functionality
+            console.log('Logging out...');
+            // Redirect to login page or show confirmation
+            // window.location.href = 'login.html';
+        }
+
+        // Back to top functionality
         function scrollToTop() {
             window.scrollTo({
                 top: 0,
@@ -576,14 +464,23 @@
             });
         }
 
-        // Newsletter submission handler
+        // Show back to top button when scrolling down
+        window.addEventListener('scroll', function() {
+            var backToTopBtn = document.getElementById('backToTopBtn');
+            if (window.pageYOffset > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        // Newsletter form submission
         function handleNewsletterSubmit(event) {
             event.preventDefault();
             const email = event.target.querySelector('input[type="email"]').value;
-            // Here you would typically send the email to your server
-            // For now, we'll just show a success message
-            showToaster('Thanks for subscribing!', 'success');
+            console.log(`Newsletter subscription for: ${email}`);
             event.target.reset();
+            showToaster('Success! You\'ve been added to our newsletter.', 'success');
         }
 
         // Toaster notification function
@@ -592,20 +489,28 @@
             toaster.className = `toaster ${type}`;
             toaster.innerHTML = `
                 <div class="toaster-icon">
-                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
                 </div>
                 <div class="toaster-message">${message}</div>
+                <button class="toaster-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
             `;
             document.getElementById('toasterContainer').appendChild(toaster);
             
-            // Auto remove after 3 seconds
+            // Auto remove after 5 seconds
             setTimeout(() => {
-                toaster.classList.add('hide');
-                setTimeout(() => {
-                    toaster.remove();
-                }, 300);
-            }, 3000);
+                if (toaster.parentElement) {
+                    toaster.classList.add('hide');
+                    setTimeout(() => toaster.remove(), 300);
+                }
+            }, 5000);
         }
+
+        // Hide loading overlay when page is loaded
+        window.addEventListener('load', function() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        });
     </script>
 </body>
 </html>

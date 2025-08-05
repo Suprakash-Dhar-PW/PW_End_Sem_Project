@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PW IOI - Student Portfolios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="portfolio.css">
+    <style>
+        /* Remove underline from social icons in the footer */
+        .site-footer .social-icons a {
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Mobile Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+    <div class="top-right-controls">
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
+            </button>
+            <button class="signup-btn" onclick="showSignupModal()">
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
+            </button>
+        </div>
+        <div class="profile-icon" onclick="goToProfile()" title="View Profile">
+            <img src="images/Supra_image.jpg" alt="Profile" />
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo" id="sidebar-logo">PW IOI</div>
+            <button class="toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav class="nav-section" role="navigation">
+            <a href="index.html" class="nav-link" data-tooltip="Dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="task-manager.html" class="nav-link" data-tooltip="Task Manager"><i class="fas fa-tasks"></i> <span>Task Manager</span></a>
+            <a href="attendance.html" class="nav-link" data-tooltip="Attendance"><i class="fas fa-calendar-check"></i> <span>Attendance</span></a>
+            <a href="mentor-attendance.html" class="nav-link" data-tooltip="Mentor Attendance"><i class="fas fa-user-check"></i> <span>Mentor Attendance</span></a>
+            <a href="projects.html" class="nav-link" data-tooltip="Projects"><i class="fas fa-project-diagram"></i> <span>Projects</span></a>
+            <a href="job-portal.html" class="nav-link" data-tooltip="Job Portal"><i class="fas fa-briefcase"></i> <span>Job Portal</span></a>
+            <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
+            <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
+            <a href="notes.html" class="nav-link" data-tooltip="Notes"><i class="fas fa-book"></i> <span>Notes</span></a>
+            <a href="dsa-tracker.html" class="nav-link" data-tooltip="DSA Tracker"><i class="fas fa-code"></i> <span>DSA Tracker</span></a>
+            <a href="dsa-leaderboard.html" class="nav-link" data-tooltip="DSA Leaderboard"><i class="fas fa-trophy"></i> <span>DSA Leaderboard</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="portfolio.html" class="nav-link active" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+            <a href="need-help.html" class="nav-link" data-tooltip="Need Help"><i class="fas fa-question-circle"></i> <span>Need Help</span></a>
+            <a href="settings.html" class="nav-link" data-tooltip="Settings"><i class="fas fa-cog"></i> <span>Settings</span></a>
+            <a href="#" class="nav-link" data-tooltip="Logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main">
+        <div class="portfolio-container">
+            <h1 class="page-title">Student Portfolios</h1>
+
+            <!-- Filter Controls -->
+            <div class="portfolio-filters">
+                <div class="filter-group">
+                    <label for="batchFilter">Batch:</label>
+                    <select id="batchFilter" onchange="filterPortfolios()">
+                        <option value="all">All Batches</option>
+                        <option value="2023">Batch 2023</option>
+                        <option value="2022">Batch 2022</option>
+                        <option value="2021">Batch 2021</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="yearFilter">Year:</label>
+                    <select id="yearFilter" onchange="filterPortfolios()">
+                        <option value="all">All Years</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="searchFilter">Search:</label>
+                    <div class="search-input">
+                        <input type="text" id="searchFilter" placeholder="Search by name or skills" oninput="filterPortfolios()">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Cards Container -->
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- Portfolio cards will be dynamically generated here -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer footer">
+        <div class="footer-content">
+            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+                <a href="#about">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toaster Container -->
+    <div class="toaster-container" id="toasterContainer"></div>
+
+    <script>
+        // Loading overlay
+        window.addEventListener('load', function() {
+            document.getElementById('loadingOverlay').classList.add('hidden');
+            initPortfolios();
+        });
+
+        // Sidebar toggle functions
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            document.getElementById('main').classList.toggle('expanded');
+        }
+
+        function toggleMobileSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+
+        function closeMobileSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+
+        // Profile navigation
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        // Login/Signup modals
+        function showLoginModal() {
+            // Implement login modal functionality
+            console.log('Show login modal');
+        }
+
+        function showSignupModal() {
+            // Implement signup modal functionality
+            console.log('Show signup modal');
+        }
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Newsletter submit handler
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            // Here you would typically send this to your backend
+            console.log(`Newsletter signup: ${email}`);
+            event.target.reset();
+            showToaster('Thank you for subscribing to our newsletter!', 'success');
+        }
+
+        // Toaster notification function
+        function showToaster(message, type = 'info') {
+            const toaster = document.createElement('div');
+            toaster.className = `toaster ${type}`;
+            toaster.innerHTML = `
+                <div class="toaster-icon">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                </div>
+                <div class="toaster-message">${message}</div>
+                <button class="toaster-close" onclick="this.parentElement.remove()">&times;</button>
+            `;
+            document.getElementById('toasterContainer').appendChild(toaster);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (toaster.parentElement) {
+                    toaster.classList.add('hide');
+                    setTimeout(() => toaster.remove(), 300);
+                }
+            }, 5000);
+        }
+
+        // Sample portfolio data
+        const portfolioData = [
+            {
+                id: 1,
+                name: "Rahul Sharma",
+                batch: "2023",
+                year: "1",
+                image: "images/Supra_image.jpg",
+                skills: ["HTML", "CSS", "JavaScript"],
+                portfolioUrl: "https://rahul-portfolio.example.com",
+                githubUrl: "https://github.com/rahul-sharma",
+                linkedinUrl: "https://linkedin.com/in/rahul-sharma"
+            },
+            {
+                id: 2,
+                name: "Priya Patel",
+                batch: "2022",
+                year: "2",
+                image: "images/Supra_image.jpg",
+                skills: ["React", "Node.js", "MongoDB"],
+                portfolioUrl: "https://priya-portfolio.example.com",
+                githubUrl: "https://github.com/priya-patel",
+                linkedinUrl: "https://linkedin.com/in/priya-patel"
+            },
+            {
+                id: 3,
+                name: "Amit Kumar",
+                batch: "2021",
+                year: "3",
+                image: "images/Supra_image.jpg",
+                skills: ["Python", "Django", "PostgreSQL"],
+                portfolioUrl: "https://amit-portfolio.example.com",
+                githubUrl: "https://github.com/amit-kumar",
+                linkedinUrl: "https://linkedin.com/in/amit-kumar"
+            },
+            {
+                id: 4,
+                name: "Sneha Gupta",
+                batch: "2023",
+                year: "1",
+                image: "images/Supra_image.jpg",
+                skills: ["UI/UX", "Figma", "Adobe XD"],
+                portfolioUrl: "https://sneha-portfolio.example.com",
+                githubUrl: "https://github.com/sneha-gupta",
+                linkedinUrl: "https://linkedin.com/in/sneha-gupta"
+            },
+            {
+                id: 5,
+                name: "Vikram Singh",
+                batch: "2022",
+                year: "2",
+                image: "images/Supra_image.jpg",
+                skills: ["Java", "Spring Boot", "MySQL"],
+                portfolioUrl: "https://vikram-portfolio.example.com",
+                githubUrl: "https://github.com/vikram-singh",
+                linkedinUrl: "https://linkedin.com/in/vikram-singh"
+            },
+            {
+                id: 6,
+                name: "Neha Verma",
+                batch: "2021",
+                year: "3",
+                image: "images/Supra_image.jpg",
+                skills: ["Angular", "TypeScript", "Firebase"],
+                portfolioUrl: "https://neha-portfolio.example.com",
+                githubUrl: "https://github.com/neha-verma",
+                linkedinUrl: "https://linkedin.com/in/neha-verma"
+            },
+            {
+                id: 7,
+                name: "Rajesh Khanna",
+                batch: "2023",
+                year: "1",
+                image: "images/Supra_image.jpg",
+                skills: ["C++", "Data Structures", "Algorithms"],
+                portfolioUrl: "https://rajesh-portfolio.example.com",
+                githubUrl: "https://github.com/rajesh-khanna",
+                linkedinUrl: "https://linkedin.com/in/rajesh-khanna"
+            },
+            {
+                id: 8,
+                name: "Ananya Desai",
+                batch: "2022",
+                year: "2",
+                image: "images/Supra_image.jpg",
+                skills: ["Vue.js", "Express.js", "AWS"],
+                portfolioUrl: "https://ananya-portfolio.example.com",
+                githubUrl: "https://github.com/ananya-desai",
+                linkedinUrl: "https://linkedin.com/in/ananya-desai"
+            },
+            {
+                id: 9,
+                name: "Karan Malhotra",
+                batch: "2021",
+                year: "4",
+                image: "images/Supra_image.jpg",
+                skills: ["Flutter", "Dart", "Firebase"],
+                portfolioUrl: "https://karan-portfolio.example.com",
+                githubUrl: "https://github.com/karan-malhotra",
+                linkedinUrl: "https://linkedin.com/in/karan-malhotra"
+            },
+            {
+                id: 10,
+                name: "Pooja Reddy",
+                batch: "2023",
+                year: "1",
+                image: "images/Supra_image.jpg",
+                skills: ["HTML", "CSS", "Bootstrap"],
+                portfolioUrl: "https://pooja-portfolio.example.com",
+                githubUrl: "https://github.com/pooja-reddy",
+                linkedinUrl: "https://linkedin.com/in/pooja-reddy"
+            },
+            {
+                id: 11,
+                name: "Arjun Nair",
+                batch: "2022",
+                year: "3",
+                image: "images/Supra_image.jpg",
+                skills: ["Ruby", "Rails", "PostgreSQL"],
+                portfolioUrl: "https://arjun-portfolio.example.com",
+                githubUrl: "https://github.com/arjun-nair",
+                linkedinUrl: "https://linkedin.com/in/arjun-nair"
+            },
+            {
+                id: 12,
+                name: "Meera Joshi",
+                batch: "2021",
+                year: "4",
+                image: "images/Supra_image.jpg",
+                skills: ["DevOps", "Docker", "Kubernetes"],
+                portfolioUrl: "https://meera-portfolio.example.com",
+                githubUrl: "https://github.com/meera-joshi",
+                linkedinUrl: "https://linkedin.com/in/meera-joshi"
+            }
+        ];
+
+        // Initialize portfolios
+        function initPortfolios() {
+            renderPortfolios(portfolioData);
+        }
+
+        // Render portfolio cards
+        function renderPortfolios(portfolios) {
+            const portfolioGrid = document.getElementById('portfolioGrid');
+            portfolioGrid.innerHTML = '';
+
+            if (portfolios.length === 0) {
+                portfolioGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>No portfolios match your search criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            portfolios.forEach(portfolio => {
+                const card = document.createElement('div');
+                card.className = 'portfolio-card';
+                card.innerHTML = `
+                    <div class="portfolio-image">
+                        <img src="${portfolio.image}" alt="${portfolio.name}">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>${portfolio.name}</h3>
+                        <div class="portfolio-meta">
+                            <span class="batch">Batch ${portfolio.batch}</span>
+                            <span class="year">${portfolio.year}${getOrdinalSuffix(portfolio.year)} Year</span>
+                        </div>
+                        <div class="portfolio-skills">
+                            ${portfolio.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                        </div>
+                        <div class="portfolio-links">
+                            <a href="${portfolio.portfolioUrl}" target="_blank" class="portfolio-link" title="View Portfolio">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                            <a href="${portfolio.githubUrl}" target="_blank" class="github-link" title="GitHub Profile">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="${portfolio.linkedinUrl}" target="_blank" class="linkedin-link" title="LinkedIn Profile">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                portfolioGrid.appendChild(card);
+            });
+        }
+
+        // Filter portfolios based on selected criteria
+        function filterPortfolios() {
+            const batchFilter = document.getElementById('batchFilter').value;
+            const yearFilter = document.getElementById('yearFilter').value;
+            const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
+
+            const filteredPortfolios = portfolioData.filter(portfolio => {
+                // Filter by batch
+                const batchMatch = batchFilter === 'all' || portfolio.batch === batchFilter;
+                
+                // Filter by year
+                const yearMatch = yearFilter === 'all' || portfolio.year === yearFilter;
+                
+                // Filter by search term (name or skills)
+                const searchMatch = portfolio.name.toLowerCase().includes(searchFilter) || 
+                                   portfolio.skills.some(skill => skill.toLowerCase().includes(searchFilter));
+                
+                return batchMatch && yearMatch && searchMatch;
+            });
+
+            renderPortfolios(filteredPortfolios);
+        }
+
+        // Helper function to get ordinal suffix for numbers
+        function getOrdinalSuffix(num) {
+            const number = parseInt(num);
+            if (isNaN(number)) return '';
+            
+            if (number === 1) return 'st';
+            if (number === 2) return 'nd';
+            if (number === 3) return 'rd';
+            return 'th';
+        }
+    </script>
+</body>
+</html>

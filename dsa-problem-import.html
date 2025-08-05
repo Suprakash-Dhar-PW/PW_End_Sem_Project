@@ -9,13 +9,216 @@
     <link rel="stylesheet" href="dsa-tracker.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Import specific styles */
+        /* Import Container Styles */
         .import-container {
             background: var(--card-bg);
             border-radius: var(--border-radius);
             border: 1px solid var(--border-color);
-            padding: 20px;
+            padding: 25px;
             margin-bottom: 30px;
+        }
+        
+        /* Footer Styles */
+        .site-footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+        
+        .newsletter-form button {
+            padding: 10px 15px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            border: none;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-form button:hover {
+            background: var(--secondary-color);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: var(--transition);
+            z-index: 100;
+        }
+        
+        .back-to-top:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+        
+        /* Toaster Container */
+        .toaster-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .toaster {
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 300px;
+            max-width: 400px;
+            animation: slideIn 0.3s ease forwards;
+        }
+        
+        .toaster.success {
+            border-left-color: #4CAF50;
+        }
+        
+        .toaster.error {
+            border-left-color: #F44336;
+        }
+        
+        .toaster.info {
+            border-left-color: #2196F3;
+        }
+        
+        .toaster-icon {
+            font-size: 20px;
+        }
+        
+        .toaster.success .toaster-icon {
+            color: #4CAF50;
+        }
+        
+        .toaster.error .toaster-icon {
+            color: #F44336;
+        }
+        
+        .toaster.info .toaster-icon {
+            color: #2196F3;
+        }
+        
+        .toaster-message {
+            flex: 1;
+        }
+        
+        .toaster-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .toaster.hide {
+            animation: slideOut 0.3s ease forwards;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
         }
 
         .import-header {
@@ -102,12 +305,12 @@
 
         .file-upload-text {
             margin-bottom: 10px;
-            color: var(--text-secondary);
+            color: #000000;
         }
 
         .file-upload-formats {
             font-size: 12px;
-            color: var(--text-muted);
+            color: #000000;
         }
 
         .file-input {
@@ -332,12 +535,16 @@
 
     <!-- Top Right Controls -->
     <div class="top-right-controls">
-        <div class="auth-controls">
-            <button class="login-btn" onclick="showLoginModal()">Login</button>
-            <button class="signup-btn" onclick="showSignupModal()">Sign Up</button>
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="showLoginModal()">
+                <i class="fas fa-sign-in-alt"></i> <span class="btn-text">Login</span>
+            </button>
+            <button class="signup-btn" onclick="showSignupModal()">
+                <i class="fas fa-user-plus"></i> <span class="btn-text">Sign Up</span>
+            </button>
         </div>
-        <div class="profile-icon" onclick="goToProfile()">
-            <img src="assets/profile-placeholder.jpg" alt="Profile">
+        <div class="profile-icon" onclick="goToProfile()" title="View Profile">
+            <img src="images/Supra_image.jpg" alt="Profile" />
         </div>
     </div>
 
@@ -358,21 +565,23 @@
             <a href="announcements.html" class="nav-link" data-tooltip="Announcements"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a>
             <a href="community-events.html" class="nav-link" data-tooltip="Community Events"><i class="fas fa-calendar-day"></i> <span>Community Events</span></a>
             <a href="notes.html" class="nav-link" data-tooltip="Notes"><i class="fas fa-book"></i> <span>Notes</span></a>
-            <div class="pinned-label">Pinned</div>
-            <a href="#portfolio" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
-            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
-            <a href="community-events.html" class="nav-link" data-tooltip="Events"><i class="fas fa-calendar"></i> <span>Events</span></a>
-            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
-            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
             <a href="dsa-tracker.html" class="nav-link" data-tooltip="DSA Tracker"><i class="fas fa-code"></i> <span>DSA Tracker</span></a>
             <a href="dsa-leaderboard.html" class="nav-link" data-tooltip="DSA Leaderboard"><i class="fas fa-trophy"></i> <span>DSA Leaderboard</span></a>
+            <div class="pinned-label">Pinned</div>
+            <a href="portfolio.html" class="nav-link" data-tooltip="Portfolio"><i class="fas fa-user"></i> <span>Portfolio</span></a>
+            <a href="community.html" class="nav-link" data-tooltip="Community"><i class="fas fa-users"></i> <span>Community</span></a>
+            <a href="leave-form.html" class="nav-link" data-tooltip="Leave Form"><i class="fas fa-file-alt"></i> <span>Leave Form</span></a>
+            <a href="gallery.html" class="nav-link" data-tooltip="Gallery"><i class="fas fa-images"></i> <span>Gallery</span></a>
+            <a href="need-help.html" class="nav-link" data-tooltip="Need Help"><i class="fas fa-question-circle"></i> <span>Need Help</span></a>
+            <a href="settings.html" class="nav-link" data-tooltip="Settings"><i class="fas fa-cog"></i> <span>Settings</span></a>
+            <a href="#" class="nav-link" data-tooltip="Logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
         </nav>
     </div>
 
     <!-- Main Content -->
     <main class="main-content">
         <div class="dsa-container">
-            <h1 class="page-title">DSA Problem Import</h1>
+            <h1 class="page-title" style="text-align: center; color: black;">DSA Problem Import</h1>
 
             <div class="import-container">
                 <div class="import-header">
@@ -408,8 +617,8 @@
                     <div class="file-upload-icon">
                         <i class="fas fa-cloud-upload-alt"></i>
                     </div>
-                    <div class="file-upload-text">Drag & drop your file here or click to browse</div>
-                    <div class="file-upload-formats">Supported formats: .xlsx, .xls, .csv</div>
+                    <div class="file-upload-text" style="color: black;">Drag & drop your file here or click to browse</div>
+                    <div class="file-upload-formats" style="color: black;">Supported formats: .xlsx, .xls, .csv</div>
                     <input type="file" id="fileInput" class="file-input" accept=".xlsx,.xls,.csv">
                 </div>
 
@@ -519,17 +728,84 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="site-footer footer">
         <div class="footer-content">
-            <p>&copy; 2023 PW Pro. All rights reserved.</p>
+            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+                <a href="#about">About Us</a>
+            </div>
         </div>
     </footer>
+
+    <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toaster Container -->
+    <div class="toaster-container" id="toasterContainer"></div>
 
     <script>
         // Loading overlay
         window.addEventListener('load', function() {
             document.getElementById('loadingOverlay').classList.add('hidden');
         });
+        
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Newsletter submit handler
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            // Here you would typically send this to your backend
+            console.log(`Newsletter signup: ${email}`);
+            event.target.reset();
+            showToaster('Thank you for subscribing to our newsletter!', 'success');
+        }
+        
+        // Toaster notification function
+        function showToaster(message, type = 'info') {
+            const toaster = document.createElement('div');
+            toaster.className = `toaster ${type}`;
+            toaster.innerHTML = `
+                <div class="toaster-icon">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                </div>
+                <div class="toaster-message">${message}</div>
+                <button class="toaster-close" onclick="this.parentElement.remove()">&times;</button>
+            `;
+            document.getElementById('toasterContainer').appendChild(toaster);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (toaster.parentElement) {
+                    toaster.classList.add('hide');
+                    setTimeout(() => toaster.remove(), 300);
+                }
+            }, 5000);
+        }
 
         // Sidebar toggle functions
         function toggleSidebar() {
