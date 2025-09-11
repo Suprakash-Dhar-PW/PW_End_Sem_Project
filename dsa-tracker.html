@@ -519,46 +519,39 @@
     </main>
 
     <!-- Footer -->
-    <footer class="site-footer">
+    <footer class="site-footer footer">
         <div class="footer-content">
-            <div class="footer-section about">
-                <h3 class="footer-title">About PW IOI</h3>
-                <p>PW IOI is a comprehensive platform for students to track their progress, manage tasks, and collaborate with peers.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
             </div>
-            <div class="footer-section links">
-                <h3 class="footer-title">Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Dashboard</a></li>
-                    <li><a href="task-manager.html">Task Manager</a></li>
-                    <li><a href="attendance.html">Attendance</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="dsa-tracker.html">DSA Tracker</a></li>
-                    <li><a href="need-help.html">Need Help</a></li>
-                </ul>
+
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+            </form>
+
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact Support</a>
+                <a href="#about">About Us</a>
             </div>
-            <div class="footer-section contact">
-                <h3 class="footer-title">Contact Us</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 123 Education St, Learning City</p>
-                <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
-                <p><i class="fas fa-envelope"></i> info@pwioi.edu</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 PW IOI. All rights reserved.</p>
         </div>
     </footer>
 
+    <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="common.js"></script>
+    <script src="dsa-tracker.js"></script>
     <script>
-        // Loading overlay
-        window.addEventListener('load', function() {
-            document.getElementById('loadingOverlay').classList.add('hidden');
-        });
 
         // Sidebar toggle functions
         function toggleSidebar() {
@@ -730,39 +723,6 @@
             });
         });
     </script>
-
-    <footer class="site-footer footer">
-        <div class="footer-content">
-            <p>&copy; 2025 PW IOI. All rights reserved. | Empowering the next generation of developers.</p>
-
-            <div class="social-icons">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            </div>
-
-            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
-                <input type="email" placeholder="Enter your email for updates" required aria-label="Email for newsletter" />
-                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
-            </form>
-
-            <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
-                <a href="#contact">Contact Support</a>
-                <a href="#about">About Us</a>
-            </div>
-        </div>
-    </footer>
-
-    <button onclick="scrollToTop()" class="back-to-top" aria-label="Back to top" title="Back to top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <!-- Toaster Container -->
-    <div class="toaster-container" id="toasterContainer"></div>
 </body>
 
 </html>

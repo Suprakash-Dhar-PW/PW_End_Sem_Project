@@ -44,7 +44,7 @@
             <h2>Welcome Back</h2>
             <p class="subtitle">Sign in to continue your learning journey</p>
             
-            <form onsubmit="return validate()" class="login-form">
+            <form onsubmit="return validate(event)" class="login-form">
                 <div class="input-group">
                     <div class="input-wrapper">
                         <i class="fas fa-envelope input-icon"></i>
@@ -161,56 +161,143 @@
         }, 4000);
     }
 
-    // Enhanced Validation
-    function validate() {
-        let valid = true;
+    // // Enhanced Validation
+    // function validate() {
+    //     let valid = true;
 
-        // Reset previous errors
-        emailError.textContent = "";
-        pwdError.textContent = "";
-        email.classList.remove("input-error");
-        pwd.classList.remove("input-error");
+    //     // Reset previous errors
+    //     emailError.textContent = "";
+    //     pwdError.textContent = "";
+    //     email.classList.remove("input-error");
+    //     pwd.classList.remove("input-error");
 
-        // Email validation
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email.value)) {
-            emailError.textContent = "Please enter a valid email address.";
-            email.classList.add("input-error");
-            valid = false;
-        }
+    //     // Email validation
+    //     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //     if (!emailPattern.test(email.value)) {
+    //         emailError.textContent = "Please enter a valid email address.";
+    //         email.classList.add("input-error");
+    //         valid = false;
+    //     }
 
-        // Password validation
-        const password = pwd.value;
-        const hasUppercase = /[A-Z]/.test(password);
-        const hasNumber = /[0-9]/.test(password);
-        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    //     // Password validation
+    //     const password = pwd.value;
+    //     const hasUppercase = /[A-Z]/.test(password);
+    //     const hasNumber = /[0-9]/.test(password);
+    //     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-        if (!hasUppercase || !hasNumber || !hasSpecialChar || password.length < 8) {
-            pwdError.textContent = "Password must be at least 8 characters and include an uppercase letter, a number, and a special character.";
-            pwd.classList.add("input-error");
-            valid = false;
-        }
+    //     if (!hasUppercase || !hasNumber || !hasSpecialChar || password.length < 8) {
+    //         pwdError.textContent = "Password must be at least 8 characters and include an uppercase letter, a number, and a special character.";
+    //         pwd.classList.add("input-error");
+    //         valid = false;
+    //     }
 
-        if (valid) {
-            // Show loading state
-            loginBtn.classList.add('loading');
-            btnText.style.opacity = '0';
-            btnLoader.style.display = 'flex';
+    //     if (valid) {
+    //         // Show loading state
+    //         loginBtn.classList.add('loading');
+    //         btnText.style.opacity = '0';
+    //         btnLoader.style.display = 'flex';
             
-            // Simulate login process
-            setTimeout(() => {
+    //         // Simulate login process
+    //         setTimeout(() => {
+    //             showNotification('Login successful! Redirecting...', 'success');
+    //             setTimeout(() => {
+    //                 window.location.href = "index.html";
+    //             }, 1500);
+    //         }, 2000);
+            
+    //         return false;
+    //     } else {
+    //         showNotification('Please fix the errors above', 'error');
+    //     }
+    //     return valid;
+    // }
+
+    // In your login.html <script> tag
+
+async function validate(event) {
+    event.preventDefault();
+    let valid = true;
+
+    // Reset previous errors for a clean slate
+    emailError.textContent = "";
+    pwdError.textContent = "";
+    email.classList.remove("input-error");
+    pwd.classList.remove("input-error");
+
+    // --- Step 1: Front-end validation ---
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email.value)) {
+        emailError.textContent = "Please enter a valid email address.";
+        email.classList.add("input-error");
+        valid = false;
+    }
+
+    // Password validation
+    const password = pwd.value;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (!hasUppercase || !hasNumber || !hasSpecialChar || password.length < 8) {
+        pwdError.textContent = "Password must be at least 8 characters and include an uppercase letter, a number, and a special character.";
+        pwd.classList.add("input-error");
+        valid = false;
+    }
+
+    // --- Step 2: If front-end validation passes, contact the server ---
+    if (valid) {
+        // Show loading state on the button
+        loginBtn.classList.add('loading');
+        btnText.style.opacity = '0';
+        btnLoader.style.display = 'flex';
+
+        try {
+            // 🔗 Point this to your Flask server's address
+            const response = await fetch('http://localhost:5000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email.value,
+                    password: pwd.value
+                })
+            });
+
+            const result = await response.json(); // Get the JSON response from the server
+
+            // 🧠 Handle the server's response
+            if (response.ok) { // response.ok is true if status is 200-299
                 showNotification('Login successful! Redirecting...', 'success');
                 setTimeout(() => {
-                    window.location.href = "index.html";
+                    window.location.href = "index.html"; // Redirect on success
                 }, 1500);
-            }, 2000);
-            
-            return false;
-        } else {
-            showNotification('Please fix the errors above', 'error');
+            } else {
+                // Show the error message sent from the server (e.g., "Invalid email or password.")
+                showNotification(result.message, 'error');
+                loginBtn.classList.remove('loading'); // Stop the loading animation
+                btnText.style.opacity = '1';          // This line was added
+                btnLoader.style.display = 'none';     // This line was added
+            }
+
+        } catch (error) {
+            // This catches network errors (e.g., server is not running)
+            console.error("Fetch Error:", error);
+            showNotification('Could not connect to the server. Please try again.', 'error');
+            loginBtn.classList.remove('loading'); // Stop the loading animation
+            btnText.style.opacity = '1';          // This line was added
+            btnLoader.style.display = 'none';     // This line was added
         }
-        return valid;
+
+    } else {
+        // If front-end validation fails, show a general error notification
+        showNotification('Please fix the errors above', 'error');
     }
+
+    // Prevent the default HTML form submission behavior
+    return false;
+}
 
     // Live password validation and strength
     pwd.addEventListener("input", function () {

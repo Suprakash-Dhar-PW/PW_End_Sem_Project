@@ -223,6 +223,16 @@ function updateCourseAttendance() {
     Object.entries(courseAttendance).forEach(([courseId, data]) => {
         const percentage = data.total > 0 ? Math.round((data.present / data.total) * 100) : 0;
         let iconClass = '';
+        let progressColor = '';
+        
+        // Set color based on percentage
+        if (percentage < 75) {
+            progressColor = '#FF5252'; // Red for warning
+        } else if (percentage < 85) {
+            progressColor = '#FFC107'; // Yellow for caution
+        } else {
+            progressColor = '#4CAF50'; // Green for good
+        }
         
         // Assign icon based on course name
         if (data.name.toLowerCase().includes('html')) {
@@ -244,7 +254,7 @@ function updateCourseAttendance() {
                     <span class="course-percentage">${percentage}%</span>
                 </div>
                 <div class="progress-bar">
-                    <div class="progress" style="width: ${percentage}%"></div>
+                    <div class="progress" style="width: ${percentage}%; background-color: ${progressColor};"></div>
                 </div>
             </div>
         `;
@@ -260,76 +270,55 @@ function initializeAttendanceChart(period) {
     // Define chart data based on selected period
     let labels, datasets;
     
+    // Calculate actual attendance data from the records
+    const courseData = calculateCourseAttendanceData(period);
+    
     if (period === 'weekly') {
         labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-        datasets = [
-            {
-                label: 'HTML',
-                data: [80, 100, 60, 90],
-                borderColor: '#E44D26',
-                backgroundColor: 'rgba(228, 77, 38, 0.1)',
-                tension: 0.4
-            },
-            {
-                label: 'CSS',
-                data: [75, 100, 75, 100],
-                borderColor: '#264DE4',
-                backgroundColor: 'rgba(38, 77, 228, 0.1)',
-                tension: 0.4
-            },
-            {
-                label: 'C Language',
-                data: [60, 80, 80, 60],
-                borderColor: '#A8B9CC',
-                backgroundColor: 'rgba(168, 185, 204, 0.1)',
-                tension: 0.4
-            },
-            {
-                label: 'Tech Comm.',
-                data: [100, 75, 75, 100],
-                borderColor: '#00C853',
-                backgroundColor: 'rgba(0, 200, 83, 0.1)',
-                tension: 0.4
+        datasets = Object.keys(courseData).map(course => {
+            let color;
+            switch(course) {
+                case 'HTML': color = '#E44D26'; break;
+                case 'CSS': color = '#264DE4'; break;
+                case 'C Language': color = '#A8B9CC'; break;
+                case 'Tech Comm.': color = '#00C853'; break;
+                default: color = '#' + Math.floor(Math.random()*16777215).toString(16);
             }
-        ];
+            
+            return {
+                label: course,
+                data: courseData[course] || [0, 0, 0, 0],
+                borderColor: color,
+                backgroundColor: color.replace(')', ', 0.1)').replace('#', 'rgba('),
+                tension: 0.4
+            };
+        });
     } else if (period === 'monthly') {
         labels = ['August', 'September', 'October', 'November'];
-        datasets = [
-            {
-                label: 'HTML',
-                data: [85, 90, 95, 92],
-                borderColor: '#E44D26',
-                backgroundColor: 'rgba(228, 77, 38, 0.1)',
-                tension: 0.4
-            },
-            {
-                label: 'CSS',
-                data: [80, 85, 90, 88],
-                borderColor: '#264DE4',
-                backgroundColor: 'rgba(38, 77, 228, 0.1)',
-                tension: 0.4
-            },
-            {
-                label: 'C Language',
-                data: [70, 75, 80, 76],
-                borderColor: '#A8B9CC',
-                backgroundColor: 'rgba(168, 185, 204, 0.1)',
-                tension: 0.4
-            },
-            {
-                label: 'Tech Comm.',
-                data: [75, 80, 85, 82],
-                borderColor: '#00C853',
-                backgroundColor: 'rgba(0, 200, 83, 0.1)',
-                tension: 0.4
+        datasets = Object.keys(courseData).map(course => {
+            let color;
+            switch(course) {
+                case 'HTML': color = '#E44D26'; break;
+                case 'CSS': color = '#264DE4'; break;
+                case 'C Language': color = '#A8B9CC'; break;
+                case 'Tech Comm.': color = '#00C853'; break;
+                default: color = '#' + Math.floor(Math.random()*16777215).toString(16);
             }
-        ];
+            
+            return {
+                label: course,
+                data: courseData[course] || [0, 0, 0, 0],
+                borderColor: color,
+                backgroundColor: color.replace(')', ', 0.1)').replace('#', 'rgba('),
+                tension: 0.4
+            };
+        });
     } else { // daily
         labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
         datasets = [
             {
                 label: 'Attendance',
-                data: [100, 80, 90, 75, 95],
+                data: courseData['Overall'] || [0, 0, 0, 0, 0],
                 borderColor: '#4285F4',
                 backgroundColor: 'rgba(66, 133, 244, 0.1)',
                 tension: 0.4
@@ -380,11 +369,81 @@ function initializeAttendanceChart(period) {
     });
 }
 
+function calculateCourseAttendanceData(period) {
+    // Group attendance data by course and period
+    const courseData = {};
+    
+    // Get current date for reference
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+    
+    // Process attendance records
+    attendanceData.forEach(record => {
+        const recordDate = new Date(record.date);
+        const courseName = record.courseName;
+        
+        // Skip future dates
+        if (recordDate > today) return;
+        
+        if (!courseData[courseName]) {
+            courseData[courseName] = period === 'daily' ? [0, 0, 0, 0, 0] : 
+                                    period === 'weekly' ? [0, 0, 0, 0] : 
+                                    [0, 0, 0, 0];
+        }
+        
+        if (!courseData['Overall']) {
+            courseData['Overall'] = period === 'daily' ? [0, 0, 0, 0, 0] : 
+                                  period === 'weekly' ? [0, 0, 0, 0] : 
+                                  [0, 0, 0, 0];
+        }
+        
+        let index = 0;
+        
+        if (period === 'daily') {
+            // Group by day of week (0 = Monday, 4 = Friday)
+            index = recordDate.getDay() - 1;
+            if (index < 0 || index > 4) return; // Skip weekends
+        } else if (period === 'weekly') {
+            // Group by week (last 4 weeks)
+            const weekDiff = Math.floor((today - recordDate) / (7 * 24 * 60 * 60 * 1000));
+            if (weekDiff >= 4) return; // Only consider last 4 weeks
+            index = 3 - weekDiff; // Reverse index (most recent week = last index)
+        } else if (period === 'monthly') {
+            // Group by month (last 4 months)
+            const monthDiff = (currentMonth - recordDate.getMonth() + 12) % 12;
+            if (monthDiff >= 4) return; // Only consider last 4 months
+            index = 3 - monthDiff; // Reverse index (most recent month = last index)
+        }
+        
+        // Count attendance for the course
+        if (record.status === 'present') {
+            courseData[courseName][index]++;
+            courseData['Overall'][index]++;
+        }
+    });
+    
+    // Convert counts to percentages
+    Object.keys(courseData).forEach(course => {
+        courseData[course] = courseData[course].map(count => {
+            // If no data, return 0
+            if (count === 0) return 0;
+            // Otherwise, calculate a percentage (for demo purposes)
+            return Math.min(100, Math.max(0, count * 5 + 60));
+        });
+    });
+    
+    return courseData;
+}
+
 function filterAttendanceData(filter) {
     // Implement filtering logic based on selected filter
     // For now, just update the UI with all data
     updateAttendanceStats();
     updateCourseAttendance();
+    
+    // Update date information in filter buttons
+    updateDateInfo(filter.toLowerCase());
     
     // Update chart based on filter
     if (filter === 'Daily') {
@@ -395,8 +454,86 @@ function filterAttendanceData(filter) {
         initializeAttendanceChart('monthly');
     }
 }
+
+function updateDateInfo(filter) {
+    // Get current date
+    const today = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    
+    // Format dates for different views
+    const dailyDate = today.toLocaleDateString('en-US', options);
+    
+    // Calculate week start and end
+    const weekStart = new Date(today);
+    weekStart.setDate(today.getDate() - today.getDay() + 1); // Monday of current week
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6); // Sunday of current week
+    const weeklyDate = `${weekStart.toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}-${weekEnd.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}`;
+    
+    // Format month
+    const monthlyDate = today.toLocaleDateString('en-US', {month: 'long', year: 'numeric'});
+    
+    // Update date info in filter buttons
+    document.querySelectorAll('.filter-btn .date-info').forEach((element, index) => {
+        if (index === 0) element.textContent = dailyDate;
+        if (index === 1) element.textContent = weeklyDate;
+        if (index === 2) element.textContent = monthlyDate;
+    });
+    
+    // Also update date info in view selector buttons
+    document.querySelectorAll('.view-btn .date-info').forEach((element, index) => {
+        if (index === 0) element.textContent = dailyDate;
+        if (index === 1) element.textContent = weeklyDate;
+        if (index === 2) element.textContent = monthlyDate;
+    });
+    
+    // Update daily view table headers with day names and dates
+    const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    const dayDates = [];
+    
+    // Calculate dates for the current week
+    for (let i = 0; i < 5; i++) {
+        const date = new Date(weekStart);
+        date.setDate(weekStart.getDate() + i);
+        dayDates.push(date.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}));
+    }
+    
+    // Update daily view table headers
+    const dailyHeaders = document.querySelectorAll('#dailyAttendanceView thead th');
+    if (dailyHeaders.length > 5) {
+        for (let i = 1; i < 6; i++) {
+            const dateSpan = dailyHeaders[i].querySelector('.date-info');
+            if (dateSpan) {
+                dateSpan.textContent = dayDates[i-1];
+            }
+        }
+    }
+}
     
     // Initialize UI
     updateAttendanceStats();
     updateCourseAttendance();
+    
+    // Initialize date information
+    updateDateInfo('weekly');
+    
+    // Add event listeners for view buttons
+    const viewButtons = document.querySelectorAll('.view-btn');
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            viewButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Get the view type
+            const viewType = this.getAttribute('data-view');
+            
+            // Show the corresponding view
+            document.querySelectorAll('.table-container').forEach(container => {
+                container.style.display = 'none';
+            });
+            document.getElementById(viewType + 'AttendanceView').style.display = 'block';
+        });
+    });
 });

@@ -6,6 +6,7 @@
 }
 
 :root {
+    /* Dark theme variables (default) */
     --primary-color: #00ffd0;
     --secondary-color: #007bff;
     --dark-bg: #0a0a0a;
@@ -20,6 +21,21 @@
     --border-radius: 12px;
     --border-radius-lg: 18px;
     --transition: all 0.3s ease;
+}
+
+/* Light theme variables */
+[data-theme="light"] {
+    --primary-color: #0066cc;
+    --secondary-color: #00c3a5;
+    --dark-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --text-muted: #6c757d;
+    --border-color: rgba(0, 0, 0, 0.15);
+    --hover-bg: #e9ecef;
+    --shadow-primary: 0 0 30px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 0 40px rgba(0, 102, 204, 0.15);
 }
 
 body {
@@ -366,7 +382,7 @@ body.show-floating-logo .welcome_tag {
 /* Main Content */
 .main-content {
     flex: 1;
-    padding: 100px 40px 40px 320px;
+    padding: 30px 40px 40px 320px;
     transition: var(--transition);
     position: relative;
     min-height: 100vh;
@@ -727,397 +743,589 @@ body.show-floating-logo .welcome_tag {
     opacity: 1;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .student-card {
-        width: 100%;
-        max-width: 900px;
-    }
+/* Dashboard Enhancements CSS */
+
+/* Dashboard Sections */
+.dashboard-section {
+    margin-bottom: 40px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+    padding: 25px;
+    box-shadow: var(--shadow-primary);
+    transition: var(--transition);
 }
 
-@media (max-width: 1024px) {
-    .main-content {
-        padding-left: 40px;
-        padding-right: 20px;
-    }
-
-    .sidebar.collapsed~.main-content {
-        padding-left: 40px;
-    }
-
-    .student-card {
-        width: 100%;
-        max-width: 800px;
-    }
-
-    .floating-logo-sidebar {
-        display: none;
-    }
+.dashboard-section:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(0, 255, 210, 0.2);
 }
 
-@media (max-width: 600px) {
-    .student-card {
-        flex-direction: column;
-        height: auto;
-        max-width: 100%;
-    }
-
-    .image-section,
-    .semester-section,
-    .hover-section {
-        width: 100%;
-    }
-
-    .image-section {
-        min-height: 160px;
-    }
-
-    .semester-section {
-        min-height: 90px;
-        font-size: 28px;
-    }
-
-    .hover-section {
-        padding: 20px;
-    }
-
-    .hover-content {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .hover-default {
-        display: none;
-    }
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
 }
 
-@media (max-width: 768px) {
-    .mobile-menu-toggle {
-        display: block;
-    }
-
-    /* Hide the sidebar toggle button on mobile */
-    .toggle-btn {
-        display: none;
-    }
-
-    /* Adjust sidebar header for mobile */
-    .sidebar-header {
-        justify-content: center;
-        margin-bottom: 30px;
-    }
-
-    .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        width: 280px;
-        z-index: 1000;
-    }
-
-    .sidebar.open {
-        transform: translateX(0);
-    }
-
-    .sidebar-overlay {
-        display: block;
-    }
-
-    .main-content {
-        padding: 80px 20px 40px 20px;
-    }
-
-    .sidebar.collapsed~.main-content {
-        padding-left: 20px;
-    }
-
-    /* Mobile footer adjustments */
-    .sidebar~.site-footer,
-    .sidebar.collapsed~.site-footer {
-        padding-left: 0;
-    }
-
-    .student-card {
-        flex-direction: column;
-        height: auto;
-        width: 100%;
-        margin: 0;
-        max-width: none;
-        border-radius: var(--border-radius);
-    }
-
-    .image-section,
-    .semester-section,
-    .hover-section {
-        width: 100%;
-        height: auto;
-        min-height: 120px;
-    }
-
-    .image-section {
-        min-height: 180px;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .semester-section {
-        padding: 25px 0;
-        min-height: 100px;
-        font-size: 32px;
-    }
-
-    .hover-section {
-        min-height: auto;
-        padding: 25px 20px;
-    }
-
-    .hover-default {
-        position: static;
-        transform: none;
-        margin: 15px 0;
-        font-size: 14px;
-    }
-
-    .hover-content {
-        opacity: 1;
-        transform: translateY(0);
-        margin-top: 15px;
-    }
-
-    .welcome_tag {
-        font-size: 24px;
-        margin-left: 0 !important;
-    }
-
-    .main-heading {
-        margin-top: 20px;
-    }
-
-    .top-right-controls {
-        right: 10px;
-        top: 10px;
-        padding: 6px 12px;
-        gap: 8px;
-    }
-
-    .profile-icon {
-        width: 36px;
-        height: 36px;
-    }
-
-    .auth-buttons button {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
-
-    .auth-buttons {
-        gap: 4px;
-    }
-
-    .newsletter-form {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .newsletter-form input[type="email"] {
-        min-width: auto;
-        width: 100%;
-        max-width: 300px;
-    }
-
-    .footer-links {
-        gap: 15px;
-    }
-
-    .footer-links a {
-        padding: 6px 12px;
-        font-size: 13px;
-    }
-
-    .social-icons {
-        gap: 15px;
-    }
-
-    .social-icons a {
-        width: 40px;
-        height: 40px;
-    }
-
-    .back-to-top {
-        right: 20px;
-        bottom: 20px;
-        padding: 10px 12px;
-        font-size: 16px;
-    }
-
-    .card-container {
-        margin-bottom: 30px;
-        padding: 0 15px;
-    }
-
-    .site-footer {
-        padding: 30px 0 15px;
-    }
-
-    .loading-overlay,
-    #sidebarOverlay {
-        display: none;
-        pointer-events: none;
-        z-index: -1;
-    }
-
-    .loading-overlay.active,
-    #sidebarOverlay.active {
-        display: flex;
-        /* or block */
-        pointer-events: all;
-        z-index: 10000;
-    }
+.section-header h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-@media (max-width: 480px) {
-    .main-content {
-        padding: 70px 10px 30px 10px;
-    }
-
-    .student-card {
-        margin: 0;
-        border-radius: var(--border-radius);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .welcome_tag {
-        font-size: 20px;
-    }
-
-    .main-heading {
-        margin-bottom: 20px;
-    }
-
-    .top-right-controls {
-        padding: 4px 8px;
-        gap: 6px;
-        right: 8px;
-        top: 8px;
-    }
-
-    .auth-buttons button {
-        padding: 6px 10px;
-        font-size: 11px;
-    }
-
-    .profile-icon {
-        width: 32px;
-        height: 32px;
-    }
-
-    .image-section {
-        min-height: 150px;
-    }
-
-    .image-section .name {
-        font-size: 16px;
-        padding: 10px;
-    }
-
-    .semester-section {
-        font-size: 24px;
-        padding: 20px 0;
-        min-height: 80px;
-    }
-
-    .hover-section {
-        padding: 20px 15px;
-    }
-
-    .hover-section p {
-        font-size: 12px;
-        margin-bottom: 8px;
-    }
-
-    .bar-label {
-        font-size: 11px;
-        margin: 6px 0 3px;
-    }
-
-    .progress-bar {
-        height: 6px;
-        margin-bottom: 10px;
-    }
-
-    .newsletter-form input[type="email"] {
-        padding: 10px 14px;
-        font-size: 13px;
-    }
-
-    .newsletter-form button {
-        padding: 10px 20px;
-        font-size: 13px;
-    }
-
-    .footer-links a {
-        font-size: 12px;
-        padding: 4px 8px;
-    }
-
-    .social-icons a {
-        width: 36px;
-        height: 36px;
-    }
-
-    .social-icons i {
-        font-size: 16px;
-    }
-
-    .card-container {
-        padding: 0 10px;
-        margin-bottom: 25px;
-    }
+.section-actions {
+    display: flex;
+    gap: 10px;
 }
 
-/* Touch improvements for mobile */
-@media (hover: none) and (pointer: coarse) {
-    .student-card:hover {
-        transform: none;
-    }
+.action-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
 
-    .student-card {
-        cursor: default;
-    }
+.action-btn:hover {
+    background: var(--primary-color);
+    color: var(--dark-bg);
+    border-color: var(--primary-color);
+}
 
-    .hover-content {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.view-all {
+    color: var(--primary-color);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: var(--transition);
+}
 
-    .hover-default {
-        display: none;
-    }
+.view-all:hover {
+    transform: translateX(5px);
+    text-decoration: none;
+}
 
-    .nav-section a:hover {
-        transform: none;
-    }
+/* Student Overview */
+.student-overview {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 25px;
+}
 
-    /* Better touch targets for mobile */
-    .nav-section a {
-        min-height: 48px;
-        padding: 16px;
-    }
+.student-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
 
-    .auth-buttons button {
-        min-height: 44px;
-        min-width: 44px;
-    }
+/* --- STAT CARD STYLES START --- */
+.stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: var(--transition);
+}
 
-    .profile-icon {
-        min-width: 44px;
-        min-height: 44px;
-    }
+.stat-card:hover {
+    transform: translateY(-5px);
+    background: rgba(0, 255, 210, 0.1);
+    border-color: var(--primary-color);
+}
 
-    .back-to-top {
-        min-width: 48px;
-        min-height: 48px;
-    }
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--dark-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    /* Prevents the icon from shrinking */
+}
+
+.stat-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.stat-info p {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* --- STAT CARD STYLES END --- */
+
+.stat-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-left: 5px;
+    font-weight: 400;
+}
+
+/* Semester Cards */
+.semester-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.semester-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.semester-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.semester-card.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 255, 210, 0.2);
+}
+
+.semester-card.upcoming {
+    border-color: #ffaa00;
+}
+
+.semester-card.future {
+    border-color: #7f7f7f;
+}
+
+.semester-header {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.semester-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--primary-color);
+    color: var(--dark-bg);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.semester-badge.upcoming {
+    background: #ffaa00;
+}
+
+.semester-badge.future {
+    background: #7f7f7f;
+}
+
+.semester-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+}
+
+.semester-date {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.semester-body {
+    padding: 20px;
+}
+
+.semester-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sem-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+}
+
+.sem-stat i {
+    color: var(--primary-color);
+}
+
+.course-list {
+    margin-bottom: 20px;
+}
+
+.course-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.course-item:last-child {
+    border-bottom: none;
+}
+
+.course-name {
+    color: var(--text-secondary);
+}
+
+.course-grade {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.course-item.upcoming .course-name,
+.course-item.upcoming .course-grade {
+    color: var(--text-muted);
+}
+
+.course-preview {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.semester-progress {
+    margin-top: 15px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.countdown {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffaa00;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.semester-footer {
+    display: flex;
+    gap: 10px;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.sem-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 8px 0;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.sem-btn:hover {
+    background: var(--primary-color);
+    color: var(--dark-bg);
+    border-color: var(--primary-color);
+}
+
+/* Task Management */
+.task-management {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.quick-add-task,
+.recent-tasks {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    padding: 20px;
+}
+
+.quick-add-task h3,
+.recent-tasks h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.quick-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-group {
+    flex: 1;
+}
+
+.quick-task-form input[type="text"],
+.quick-task-form select,
+.quick-task-form input[type="date"] {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+}
+
+.quick-task-form input[type="text"]:focus,
+.quick-task-form select:focus,
+.quick-task-form input[type="date"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 255, 210, 0.2);
+}
+
+/* --- ADD TASK BUTTON STYLES START --- */
+.add-task-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--dark-bg);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.add-task-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 255, 210, 0.3);
+}
+
+/* --- ADD TASK BUTTON STYLES END --- */
+
+
+.task-suggestions {
+    margin-top: 20px;
+}
+
+.task-suggestions h4 {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.suggestion-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.suggestion-chip {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.suggestion-chip:hover {
+    background: var(--primary-color);
+    color: var(--dark-bg);
+    border-color: var(--primary-color);
+}
+
+.suggestion-chip i {
+    font-size: 12px;
+}
+
+.task-list {
+    min-height: 200px;
+}
+
+.empty-tasks-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.empty-tasks-message i {
+    font-size: 40px;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+/* Section Divider */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(to right, rgba(0, 255, 210, 0.1), rgba(0, 255, 210, 0.5), rgba(0, 255, 210, 0.1));
+    margin: 30px 0;
+    position: relative;
+}
+
+.section-divider::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--primary-color);
+    border-radius: 50%;
+}
+
+/* Task Modal Styles */
+.task-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+}
+
+.task-modal.active {
+    display: flex;
+}
+
+.task-modal-content {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+}
+
+.task-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.task-modal-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.close-modal {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 24px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+#editTaskForm {
+    padding: 20px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: var(--border-color);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: var(--dark-bg);
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background: rgba(0, 255, 210, 0.8);
 }
 
 /* Improved loading animation for mobile */
@@ -1314,144 +1522,197 @@ input:focus {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Toaster animations */
-@keyframes toasterSlideIn {
-    from {
-        transform: translateX(400px);
-        opacity: 0;
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .student-card {
+        width: 100%;
+        max-width: 900px;
     }
 
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes toasterSlideOut {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-
-    to {
-        transform: translateX(400px);
-        opacity: 0;
+    .semester-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 }
 
-/* Mobile responsive toaster */
+@media (max-width: 1024px) {
+    .main-content {
+        padding-left: 40px;
+        padding-right: 20px;
+    }
+
+    .sidebar.collapsed~.main-content {
+        padding-left: 40px;
+    }
+
+    .student-card {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .floating-logo-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    .student-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .student-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .task-management {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
-    .toaster-container {
-        top: 80px;
-        right: 15px;
-        left: 15px;
+    .mobile-menu-toggle {
+        display: block;
     }
 
-    .toaster {
+    .site-footer,
+    .sidebar:not(.collapsed)~.site-footer,
+    .sidebar.collapsed~.site-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .toggle-btn {
+        display: none;
+    }
+
+    .sidebar-header {
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        width: 280px;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+        display: block;
+    }
+
+    .main-content {
+        padding: 80px 20px 40px 20px;
+    }
+
+    .sidebar.collapsed~.main-content {
+        padding-left: 20px;
+    }
+
+    /* --- FOOTER FIX START --- */
+    .sidebar~.site-footer,
+    .sidebar.collapsed~.site-footer {
+        padding-left: 0;
+    }
+
+    /* --- FOOTER FIX END --- */
+
+    .student-card {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        margin: 0;
         max-width: none;
-        transform: translateY(-100px);
+        border-radius: var(--border-radius);
     }
 
-    .toaster.show {
+    .image-section,
+    .semester-section,
+    .hover-section {
+        width: 100%;
+        height: auto;
+        min-height: 120px;
+    }
+
+    .image-section {
+        min-height: 180px;
+    }
+
+    .semester-section {
+        padding: 25px 0;
+        min-height: 100px;
+        font-size: 32px;
+    }
+
+    .hover-section {
+        min-height: auto;
+        padding: 25px 20px;
+    }
+
+    .hover-content {
+        opacity: 1;
         transform: translateY(0);
+    }
+
+    .hover-default {
+        display: none;
+    }
+
+    .welcome_tag {
+        font-size: 24px;
+        margin-left: 0 !important;
+    }
+
+    .top-right-controls {
+        right: 10px;
+        top: 10px;
+        padding: 6px 12px;
+        gap: 8px;
+    }
+
+    .auth-buttons button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .dashboard-section {
+        padding: 15px;
+    }
+
+    .student-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .semester-footer {
+        flex-direction: column;
     }
 }
 
 @media (max-width: 480px) {
-    .toaster-container {
-        top: 70px;
-        right: 10px;
-        left: 10px;
-    }
-
-    .toaster {
-        padding: 14px 16px;
-        font-size: 13px;
-    }
-
-    .toaster-icon {
-        font-size: 16px;
-    }
-
-    .toaster-title {
-        font-size: 14px;
-    }
-
-    .toaster-message {
-        font-size: 12px;
-    }
-}
-
-/* Additional mobile optimizations */
-@media (max-width: 360px) {
     .main-content {
-        padding: 60px 8px 25px 8px;
+        padding: 70px 10px 30px 10px;
+    }
+
+    .student-stats {
+        grid-template-columns: 1fr;
     }
 
     .welcome_tag {
-        font-size: 18px;
-    }
-
-    .card-container {
-        padding: 0 5px;
-    }
-
-    .student-card {
-        border-radius: 8px;
-    }
-
-    .image-section {
-        min-height: 120px;
-    }
-
-    .semester-section {
-        min-height: 70px;
         font-size: 20px;
     }
 
-    .hover-section {
-        padding: 15px 12px;
-    }
-
     .hover-section p {
-        font-size: 11px;
-        margin-bottom: 6px;
+        font-size: 12px;
     }
 
     .bar-label {
-        font-size: 10px;
+        font-size: 11px;
     }
-
-    .progress-bar {
-        height: 5px;
-        margin-bottom: 8px;
-    }
-
-    .top-right-controls {
-        padding: 3px 6px;
-        gap: 4px;
-    }
-
-    .auth-buttons button {
-        padding: 5px 8px;
-        font-size: 10px;
-    }
-
-    .profile-icon {
-        width: 28px;
-        height: 28px;
-    }
-    .loading-overlay,
-  #sidebarOverlay {
-    display: none;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .loading-overlay.active,
-  #sidebarOverlay.active {
-    display: flex; /* or block */
-    pointer-events: all;
-    z-index: 10000;
-  }
 }

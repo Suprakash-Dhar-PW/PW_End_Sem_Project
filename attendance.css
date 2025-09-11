@@ -295,6 +295,67 @@
     border-color: rgba(0, 255, 210, 0.3);
 }
 
+/* Progress Bar Styles */
+.attendance-progress {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.progress-bar .progress {
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 4px;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Course Attendance Summary Styles */
+.course-attendance {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.course-attendance:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(0, 255, 210, 0.3);
+}
+
+.course-item {
+    margin-bottom: 15px;
+}
+
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.course-name {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.course-percentage {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
 .view-selector {
     display: flex;
     margin-bottom: 15px;

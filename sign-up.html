@@ -186,75 +186,181 @@ passwordInput.addEventListener("input", () => {
 });
 
 // Form validation
-function validateSignUp(event) {
-  event.preventDefault();
+// function validateSignUp(event) {
+//   event.preventDefault();
 
-  let isValid = true;
+//   let isValid = true;
 
-  const fullName = document.getElementById("fullName");
-  const username = document.getElementById("username");
-  const contact = document.getElementById("contact");
-  const password = document.getElementById("password");
-  const confirmPassword = document.getElementById("confirmPassword");
-  const agreeTerms = document.getElementById("agreeTerms");
+//   const fullName = document.getElementById("fullName");
+//   const username = document.getElementById("username");
+//   const contact = document.getElementById("contact");
+//   const password = document.getElementById("password");
+//   const confirmPassword = document.getElementById("confirmPassword");
+//   const agreeTerms = document.getElementById("agreeTerms");
 
-  const fullNameError = document.getElementById("fullNameError");
-  const usernameError = document.getElementById("usernameError");
-  const contactError = document.getElementById("contactError");
-  const passwordError = document.getElementById("passwordError");
-  const confirmPasswordError = document.getElementById("confirmPasswordError");
+//   const fullNameError = document.getElementById("fullNameError");
+//   const usernameError = document.getElementById("usernameError");
+//   const contactError = document.getElementById("contactError");
+//   const passwordError = document.getElementById("passwordError");
+//   const confirmPasswordError = document.getElementById("confirmPasswordError");
 
-  // Reset errors
-  fullNameError.textContent = "";
-  usernameError.textContent = "";
-  contactError.textContent = "";
-  passwordError.textContent = "";
-  confirmPasswordError.textContent = "";
+//   // Reset errors
+//   fullNameError.textContent = "";
+//   usernameError.textContent = "";
+//   contactError.textContent = "";
+//   passwordError.textContent = "";
+//   confirmPasswordError.textContent = "";
 
-  if (fullName.value.trim() === "") {
-    fullNameError.textContent = "Full name is required.";
-    isValid = false;
-  }
+//   if (fullName.value.trim() === "") {
+//     fullNameError.textContent = "Full name is required.";
+//     isValid = false;
+//   }
 
-  if (username.value.trim() === "") {
-    usernameError.textContent = "Username is required.";
-    isValid = false;
-  }
+//   if (username.value.trim() === "") {
+//     usernameError.textContent = "Username is required.";
+//     isValid = false;
+//   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const phoneRegex = /^[0-9]{10}$/;
-  if (!emailRegex.test(contact.value.trim()) && !phoneRegex.test(contact.value.trim())) {
-    contactError.textContent = "Enter a valid email or 10-digit mobile number.";
-    isValid = false;
-  }
+//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   const phoneRegex = /^[0-9]{10}$/;
+//   if (!emailRegex.test(contact.value.trim()) && !phoneRegex.test(contact.value.trim())) {
+//     contactError.textContent = "Enter a valid email or 10-digit mobile number.";
+//     isValid = false;
+//   }
 
-  if (password.value.length < 6) {
-    passwordError.textContent = "Password must be at least 6 characters.";
-    isValid = false;
-  }
+//   if (password.value.length < 6) {
+//     passwordError.textContent = "Password must be at least 6 characters.";
+//     isValid = false;
+//   }
 
-  if (password.value !== confirmPassword.value) {
-    confirmPasswordError.textContent = "Passwords do not match.";
-    isValid = false;
-  }
+//   if (password.value !== confirmPassword.value) {
+//     confirmPasswordError.textContent = "Passwords do not match.";
+//     isValid = false;
+//   }
 
-  if (!agreeTerms.checked) {
-    showNotification("Please agree to the terms and conditions.", "error");
-    isValid = false;
-  }
+//   if (!agreeTerms.checked) {
+//     showNotification("Please agree to the terms and conditions.", "error");
+//     isValid = false;
+//   }
 
-  if (isValid) {
-    document.getElementById("btnLoader").style.display = "flex";
-    setTimeout(() => {
-      document.getElementById("btnLoader").style.display = "none";
-      showNotification("Account created successfully!", "success");
-      document.querySelector("form").reset();
-      strengthFill.style.width = "0%";
-      strengthText.textContent = "Password strength";
-    }, 1500);
-  }
+//   if (isValid) {
+//     document.getElementById("btnLoader").style.display = "flex";
+//     setTimeout(() => {
+//       document.getElementById("btnLoader").style.display = "none";
+//       showNotification("Account created successfully!", "success");
+//       document.querySelector("form").reset();
+//       strengthFill.style.width = "0%";
+//       strengthText.textContent = "Password strength";
+//     }, 1500);
+//   }
 
-  return false;
+//   return false;
+// }
+
+// Form validation for the sign-up page
+async function validateSignUp(event) {
+    event.preventDefault();
+
+    let isValid = true;
+
+    // --- Get form elements ---
+    const fullName = document.getElementById("fullName");
+    const username = document.getElementById("username");
+    const contact = document.getElementById("contact");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const agreeTerms = document.getElementById("agreeTerms");
+
+    // --- Get error message elements ---
+    const fullNameError = document.getElementById("fullNameError");
+    const usernameError = document.getElementById("usernameError");
+    const contactError = document.getElementById("contactError");
+    const passwordError = document.getElementById("passwordError");
+    const confirmPasswordError = document.getElementById("confirmPasswordError");
+
+    // --- Reset errors ---
+    fullNameError.textContent = "";
+    usernameError.textContent = "";
+    contactError.textContent = "";
+    passwordError.textContent = "";
+    confirmPasswordError.textContent = "";
+
+    // --- Front-end validation ---
+    if (fullName.value.trim() === "") {
+        fullNameError.textContent = "Full name is required.";
+        isValid = false;
+    }
+
+    if (username.value.trim() === "") {
+        usernameError.textContent = "Username is required.";
+        isValid = false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!emailRegex.test(contact.value.trim()) && !phoneRegex.test(contact.value.trim())) {
+        contactError.textContent = "Enter a valid email or 10-digit mobile number.";
+        isValid = false;
+    }
+
+    if (password.value.length < 6) {
+        passwordError.textContent = "Password must be at least 6 characters.";
+        isValid = false;
+    }
+
+    if (password.value !== confirmPassword.value) {
+        confirmPasswordError.textContent = "Passwords do not match.";
+        isValid = false;
+    }
+
+    if (!agreeTerms.checked) {
+        showNotification("Please agree to the terms and conditions.", "error");
+        isValid = false;
+    }
+
+    // --- If validation passes, contact the server ---
+    if (isValid) {
+        document.getElementById("signupBtn").classList.add('loading');
+        document.getElementById("btnLoader").style.display = "flex";
+
+        try {
+            const response = await fetch('http://localhost:5000/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fullName: fullName.value,
+                    username: username.value,
+                    contact: contact.value,
+                    password: password.value
+                })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                showNotification(result.message, 'success');
+                // Redirect to login page after successful sign-up
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 2000);
+            } else {
+                // Show error from server (e.g., "account already exists")
+                showNotification(result.message, 'error');
+            }
+
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            showNotification('Could not connect to the server.', 'error');
+        } finally {
+            // Always remove loading state
+            document.getElementById("signupBtn").classList.remove('loading');
+            document.getElementById("btnLoader").style.display = "none";
+        }
+    }
+
+    return false;
 }
 
 // Notification system

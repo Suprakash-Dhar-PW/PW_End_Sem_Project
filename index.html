@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="dashboard-enhancements.css">
     <style>
         /* Remove underline from social icons in the footer */
         .site-footer .social-icons a {
@@ -17,25 +16,26 @@
 
 
         @media (max-width: 768px) {
-  .loading-overlay,
-  #sidebarOverlay {
-    display: none;
-    pointer-events: none;
-    z-index: -1;
-  }
+            .loading-overlay,
+            #sidebarOverlay {
+                display: none;
+                pointer-events: none;
+                z-index: -1;
+            }
 
-  .loading-overlay.active,
-  #sidebarOverlay.active {
-    display: flex; /* or block */
-    pointer-events: all;
-    z-index: 10000;
-  }
+            .loading-overlay.active,
+            #sidebarOverlay.active {
+                display: flex; /* or block */
+                pointer-events: all;
+                z-index: 10000;
+            }
 
         }
     </style>
 </head>
 
 <body>
+    
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loader"></div>
     </div>
@@ -95,7 +95,6 @@
             <h1 class="welcome_tag">Welcome, Student!</h1>
         </div>
 
-        <!-- Student Overview Section -->
         <div class="dashboard-section">
             <div class="section-header">
                 <h2><i class="fas fa-user-graduate"></i> Student Overview</h2>
@@ -145,7 +144,7 @@
                 </div>
             </div>
             
-            <div class="student-stats" style="margin-top: 20px; grid-template-columns: repeat(4, 1fr);">
+            <div class="student-stats" style="margin-top: 20px;">
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-trophy"></i></div>
                     <div class="stat-info">
@@ -179,7 +178,6 @@
         
         <div class="section-divider"></div>
         
-        <!-- Semester Cards Section -->
         <div class="dashboard-section">
             <div class="section-header">
                 <h2><i class="fas fa-graduation-cap"></i> Semester Journey</h2>
@@ -317,7 +315,6 @@
         
         <div class="section-divider"></div>
         
-        <!-- Task Management Section -->
         <div class="dashboard-section">
             <div class="section-header">
                 <h2><i class="fas fa-tasks"></i> Task Management</h2>
@@ -380,7 +377,6 @@
                 <div class="recent-tasks">
                     <h3>Recent Tasks</h3>
                     <div class="task-list" id="recentTasksList">
-                        <!-- Tasks will be dynamically added here -->
                         <div class="empty-tasks-message">
                             <i class="fas fa-clipboard-list"></i>
                             <p>No recent tasks. Add a new task to get started!</p>
@@ -421,10 +417,8 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Toaster Container -->
     <div class="toaster-container" id="toasterContainer"></div>
     
-    <!-- Edit Task Modal -->
     <div class="task-modal" id="editTaskModal">
         <div class="task-modal-content">
             <div class="task-modal-header">
@@ -471,8 +465,8 @@
         </div>
     </div>
     
+    <script src="common.js"></script>
     <script src="index.js"></script>
-    <script src="dashboard-enhancements.js"></script>
 </body>
 
 </html>
